@@ -1,17 +1,21 @@
 package Core;
 
+import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by AdrianM on 6/18/15.
  */
 public class Main {
 
-    public static final String[] VALID_FLAGS = {"--full", "--front", "--config"}; // make set?
+    public static final Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList("--full", "--front", "--config"));
 
     public static void main(String[] args) {
 
@@ -29,10 +33,10 @@ public class Main {
             url = args[0];
             flags = Arrays.copyOfRange(args, 1, args.length);
 
-            if (Utils.validateArgs(url, flags)) {
+            if (Utils.validateFlags(flags)) {
                 WebDriver driver = new ChromeDriver();
                 url = Utils.formatURL(url);
-                driver.get(url); // find out what does and does not cause an error here
+                driver.get(url);
 
                 for (String flag : flags) {
                 }
