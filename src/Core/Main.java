@@ -24,29 +24,30 @@ public class Main {
         File chromedriver = new File("/Users/AdrianM/Google Drive/CodingProjects/JavaProjects/goto/chromedriver");
         System.setProperty("webdriver.chrome.driver", chromedriver.getAbsolutePath());
 
-        String url;
-        String[] flags;
-        String invalidArgMessage = "Invalid argument(s). Use the '--help' flag for help.";
 
-
-        if (args.length > 0) {
-            url = args[0];
-            flags = Arrays.copyOfRange(args, 1, args.length);
-
-            if (Utils.validateFlags(flags)) {
-                WebDriver driver = new ChromeDriver();
-                url = Utils.formatURL(url);
-                driver.get(url);
-
-                for (String flag : flags) {
-                }
-
-            } else {
-                System.out.println(invalidArgMessage);
-            }
-        } else {
-            System.out.println(invalidArgMessage);
-        }
+//        String url;
+//        String[] flags;
+//        String invalidArgMessage = "Invalid argument(s). Use the '--help' flag for help.";
+//
+//
+//        if (args.length > 0) {
+//            url = args[0];
+//            flags = Arrays.copyOfRange(args, 1, args.length);
+//
+//            if (Utils.validateFlags(flags)) {
+//                WebDriver driver = new ChromeDriver();
+//                url = Utils.formatURL(url);
+//                driver.get(url);
+//
+//                for (String flag : flags) {
+//                }
+//
+//            } else {
+//                System.out.println(invalidArgMessage);
+//            }
+//        } else {
+//            System.out.println(invalidArgMessage);
+//        }
 
 
 

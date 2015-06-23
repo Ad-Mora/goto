@@ -5,9 +5,32 @@ package Core;
  */
 public class Utils {
 
-    // only needs to ensure that the url begins with http:// or https://
+    // needs to ensure that the url begins with http:// or https://
+    // adds a .com to the end of the url if a suffix is not specified
     public static String formatURL(String url) {
-        return null;
+
+        String tempURL = url;
+        String prefix = "";
+        String suffix = "";
+
+        if (tempURL.startsWith("http://") || tempURL.startsWith("https://")) {
+            String[] tempArr = tempURL.split("://", 1);
+            prefix += tempArr[0] + "www.";
+            tempURL = tempArr[1];
+        } else {
+            prefix += "http://www.";
+        }
+
+        if (tempURL.startsWith("www.")) {
+            tempURL = tempURL.split("www.", 1)[1];
+        }
+
+        if (!tempURL.contains(".")) {
+            suffix = ".com";
+        }
+
+        return prefix + tempURL + suffix;
+
     }
 
     public static boolean validateFlags(String[] flags) {
