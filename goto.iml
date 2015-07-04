@@ -4,9 +4,23 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/libs" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/testLibs" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs/Selenium-2.46.0/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/Selenium-2.46.0/libs" recursive="false" />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Selenium-2.46" level="project" />
+    <orderEntry type="library" name="JUnit" level="project" />
   </component>
 </module>

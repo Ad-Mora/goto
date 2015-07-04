@@ -1,9 +1,13 @@
-package Core;
+package Utils;
+
+import Core.Main;
+
+import java.util.Set;
 
 /**
- * Created by AdrianM on 6/20/15.
+ * Created by AdrianM on 6/28/15.
  */
-public class Utils {
+public class StringUtils {
 
     // needs to ensure that the url begins with http:// or https://
     // adds a .com to the end of the url if a suffix is not specified
@@ -30,10 +34,9 @@ public class Utils {
         }
 
         return prefix + tempURL + suffix;
-
     }
 
-    public static boolean validateFlags(String[] flags) {
+    public static boolean validateFlags(Set<String> flags) {
         for (String flag : flags) {
             if (!Main.VALID_FLAGS.contains(flag)) {
                 return false;
