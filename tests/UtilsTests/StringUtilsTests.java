@@ -259,15 +259,6 @@ public class StringUtilsTests {
     }
 
     @Test
-    public void testValidateFlagsOneValidFull() {
-        Set<String> flags = new HashSet<String>();
-        flags.add("--full");
-        boolean desiredOutput = true;
-
-        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
-    }
-
-    @Test
     public void testValidateFlagsOneValidFront() {
         Set<String> flags = new HashSet<String>();
         flags.add("--front");
@@ -281,7 +272,7 @@ public class StringUtilsTests {
         Set<String> flags = new HashSet<String>();
         flags.add("--help");
         flags.add("--max");
-        flags.add("--full");
+        flags.add("--front");
         boolean desiredOutput = true;
 
         assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);

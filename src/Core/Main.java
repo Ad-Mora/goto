@@ -1,10 +1,15 @@
 package Core;
 
+import Utils.ChromeDriverUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import Utils.ArgUtils;
@@ -14,9 +19,10 @@ import Utils.ArgUtils;
  */
 public class Main {
 
-    public static final Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList("--max", "--full", "--front", "--help"));
+    public static final Set<String> VALID_FLAGS =
+            new HashSet<String>(Arrays.asList("--max", "--front", "--help"));
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException, IOException {
 
         File chromedriver = new File("/Users/AdrianM/Google Drive/CodingProjects/JavaProjects/goto/chromedriver");
         System.setProperty("webdriver.chrome.driver", chromedriver.getAbsolutePath());
@@ -28,39 +34,26 @@ public class Main {
         if (args.length > 0) {
 
             url = ArgUtils.formatURL(args[0]);
-
             String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
             flags = new HashSet<String>(Arrays.asList(flagsArr));
 
             if (ArgUtils.validateFlags(flags)) {
 
-                if (flags.contains("--help")) {
+                if (flags.contains("--help") || url.equals(ArgUtils.formatURL("--help"))) {
                     System.out.println(Help.getHelp());
                     return;
                 }
 
+                WebDriver driver = new ChromeDriver();
                 for (String flag : flags) {
 
-                    // maximized window
                     if (flag.equals("--max")) {
-
-                    } else if (flag.equals("--full")) {
-
+                        ChromeDriverUtils.maximizeChromeWindow(driver);
                     } else if (flag.equals("--front")) {
-
-                    } else if (flag.equals("--help")) {
-
+                        ChromeDriverUtils.bringWindowToFront(driver);
                     }
                 }
-
-                System.out.println("Valid"); // marker; delete later
-
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--start-maximized");
-                options.addArguments("user-data-dir=/Users/AdrianM/Library/Application Support/Google/Chrome/");
-
-                WebDriver driver = new ChromeDriver(options);
-
+                driver.get(url);
             } else {
                 System.out.println(invalidArgMessage);
             }
