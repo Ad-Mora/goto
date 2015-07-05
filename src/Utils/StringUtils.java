@@ -12,25 +12,26 @@ public class StringUtils {
     // needs to ensure that the url begins with http:// or https://
     // adds a .com to the end of the url if a suffix is not specified
     public static String formatURL(String url) {
-
+        
         String tempURL = url;
-        String prefix = "";
+        String prefix = "http://";
         String suffix = "";
 
         if (tempURL.startsWith("http://") || tempURL.startsWith("https://")) {
-            String[] tempArr = tempURL.split("://", 1);
-            prefix += tempArr[0] + "www.";
+            String[] tempArr = tempURL.split("://");
+            prefix = tempArr[0] + "://";
             tempURL = tempArr[1];
-        } else {
-            prefix += "http://www.";
         }
 
         if (tempURL.startsWith("www.")) {
-            tempURL = tempURL.split("www.", 1)[1];
+            tempURL = tempURL.split("www.")[1];
         }
+        prefix += "www.";
 
         if (!tempURL.contains(".")) {
             suffix = ".com";
+        } else if (tempURL.endsWith(".")) {
+            suffix = "com";
         }
 
         return prefix + tempURL + suffix;
