@@ -1,7 +1,11 @@
 package UtilsTests;
 
-import Utils.StringUtils;
+import Utils.ArgUtils;
 import org.junit.Test;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -35,7 +39,7 @@ public class StringUtilsTests {
 
     flags:
     - Empty set
-    - One valid flag
+    - One valid flag (test different valid flags)
     - Multiple valid flags
     - One invalid flag
     - Multiple invalid flags
@@ -43,7 +47,6 @@ public class StringUtilsTests {
     - One valid flag, multiple invalid flags
     - Multiple valid flags, one invalid flag
     - Multiple valid flags, multiple invalid flags
-
      */
 
     // formatURL tests
@@ -54,7 +57,7 @@ public class StringUtilsTests {
         String prefix = "";
         String suffix = "";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -65,7 +68,7 @@ public class StringUtilsTests {
         String prefix = "http://";
         String suffix = "";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -77,7 +80,7 @@ public class StringUtilsTests {
         String prefix = "https://";
         String suffix = "";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "https://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -89,7 +92,7 @@ public class StringUtilsTests {
         String prefix = "www.";
         String suffix = "";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -101,7 +104,7 @@ public class StringUtilsTests {
         String prefix = "http://www.";
         String suffix = "";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -113,7 +116,7 @@ public class StringUtilsTests {
         String prefix = "https://www.";
         String suffix = "";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "https://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -125,7 +128,7 @@ public class StringUtilsTests {
         String prefix = "";
         String suffix = ".com";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -137,7 +140,7 @@ public class StringUtilsTests {
         String prefix = "";
         String suffix = ".org";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.org";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -149,7 +152,7 @@ public class StringUtilsTests {
         String prefix = "";
         String suffix = ".";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -161,7 +164,7 @@ public class StringUtilsTests {
         String prefix = "";
         String suffix = ".co.uk";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.co.uk";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -173,7 +176,7 @@ public class StringUtilsTests {
         String prefix = "http://";
         String suffix = ".com";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -185,7 +188,7 @@ public class StringUtilsTests {
         String prefix = "https://";
         String suffix = ".com";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "https://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -197,7 +200,7 @@ public class StringUtilsTests {
         String prefix = "www.";
         String suffix = ".com";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -209,7 +212,7 @@ public class StringUtilsTests {
         String prefix = "http://www.";
         String suffix = ".com";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "http://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
@@ -221,12 +224,136 @@ public class StringUtilsTests {
         String prefix = "https://www.";
         String suffix = ".com";
         String url = prefix + name + suffix;
-        String formattedURL = StringUtils.formatURL(url);
+        String formattedURL = ArgUtils.formatURL(url);
         String desiredOutput = "https://www.google.com";
 
         assertTrue(formattedURL.equals(desiredOutput));
     }
 
     // validateFlags tests
+
+    @Test
+    public void testValidateFlagsEmptySet() {
+        Set<String> flags = new HashSet<String>();
+        boolean desiredOutput = true;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneValidHelp() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--help");
+        boolean desiredOutput = true;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneValidMax() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--max");
+        boolean desiredOutput = true;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneValidFull() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--full");
+        boolean desiredOutput = true;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneValidFront() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--front");
+        boolean desiredOutput = true;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsMultipleValid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--help");
+        flags.add("--max");
+        flags.add("--full");
+        boolean desiredOutput = true;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneInvalid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("front");
+        boolean desiredOutput = false;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsMultipleInvalid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("front");
+        flags.add("--");
+        flags.add("--bad");
+        boolean desiredOutput = false;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneValidOneInvalid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--help");
+        flags.add("--bad");
+        boolean desiredOutput = false;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsOneValidMultipleInvalid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--front");
+        flags.add("front");
+        flags.add("--bad");
+        flags.add("-f");
+        boolean desiredOutput = false;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsMultipleValidOneInvalid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--help");
+        flags.add("--front");
+        flags.add("--max");
+        flags.add("--bad");
+        boolean desiredOutput = false;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
+    @Test
+    public void testValidateFlagsMultipleValidMultipleInvaid() {
+        Set<String> flags = new HashSet<String>();
+        flags.add("--help");
+        flags.add("--front");
+        flags.add("--max");
+        flags.add("--bad");
+        flags.add("front");
+        flags.add("-f");
+        boolean desiredOutput = false;
+
+        assertTrue(ArgUtils.validateFlags(flags) == desiredOutput);
+    }
+
 
 }

@@ -7,15 +7,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
 import java.util.*;
 
-import Utils.ChromeDriverUtils;
-import Utils.StringUtils;
+import Utils.ArgUtils;
 
 /**
  * Created by AdrianM on 6/18/15.
  */
 public class Main {
 
-    public static final Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList("--max,", "--full", "--front", "--help"));
+    public static final Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList("--max", "--full", "--front", "--help"));
 
     public static void main(String[] args) {
 
@@ -28,12 +27,12 @@ public class Main {
 
         if (args.length > 0) {
 
-            url = StringUtils.formatURL(args[0]);
+            url = ArgUtils.formatURL(args[0]);
 
             String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
             flags = new HashSet<String>(Arrays.asList(flagsArr));
 
-            if (StringUtils.validateFlags(flags)) {
+            if (ArgUtils.validateFlags(flags)) {
 
                 if (flags.contains("--help")) {
                     System.out.println(Help.getHelp());

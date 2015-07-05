@@ -7,12 +7,12 @@ import java.util.Set;
 /**
  * Created by AdrianM on 6/28/15.
  */
-public class StringUtils {
+public class ArgUtils {
 
     // needs to ensure that the url begins with http:// or https://
     // adds a .com to the end of the url if a suffix is not specified
     public static String formatURL(String url) {
-        
+
         String tempURL = url;
         String prefix = "http://";
         String suffix = "";
