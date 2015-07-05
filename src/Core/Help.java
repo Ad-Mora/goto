@@ -3,8 +3,20 @@ package Core;
 /**
  * Created by AdrianM on 7/4/15.
  */
+
+/**
+ * This class provides methods that output messages to aid the user. These include messages to alert the user of
+ * invalid arguments, and messages to give the user information about usage of this program.
+ */
 public class Help {
 
+    /**
+     * This method is called explicitly by the user. Provides information on the program itself,
+     * on how to structure a command, and on the possible flags.
+     *
+     * @return A message containing information about this program, including basic usage and a list of all the
+     * possible flags and their descriptions.
+     */
     public static String getHelp() {
         String helpString = "\n";
         helpString += "Welcome to goto. This is a command line program that enables a user to browse the web from " +
@@ -21,12 +33,22 @@ public class Help {
 
         helpString += "Possible optional flags are as follows:\n\n";
 
-        helpString += "--max: Open browser at maximize to fit the screen\n\n";
+        helpString += Main.MAX_FLAG + ": Open browser at maximize to fit the screen\n\n";
 
-        helpString += "--front: Bring the browser to the front of the screen (make the browser the active window)\n\n";
+        helpString += Main.FRONT_FLAG + ": Bring the browser to the front of the screen (make the browser the active window)\n\n";
 
-        helpString += "--help: Get help with goto (see this information again)\n";
+        helpString += Main.HELP_FLAG + ": Get help with goto (see this information again)\n";
 
         return helpString;
+    }
+
+    /**
+     * This method is called when a user either enters an invalid argument, or enters no arguments at all. Shows the
+     * user an invalid argument message.
+     *
+     * @return A message saying that the argument(s) (or lack of) are invalid. Also suggests usage of the help flag.
+     */
+    public static String getInvalidArgMessage() {
+        return "\nInvalid argument(s). Use the '" + Main.HELP_FLAG + "' flag for help.";
     }
 }
