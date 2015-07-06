@@ -5,7 +5,7 @@ package Core;
  */
 
 /**
- * This class provides methods that output messages to aid the user. These include messages to alert the user of
+ * This class provides functions that output messages to aid the user. These include messages to alert the user of
  * invalid arguments, and messages to give the user information about usage of this program.
  */
 public class Help {

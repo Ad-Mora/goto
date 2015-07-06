@@ -16,11 +16,18 @@ import Utils.ArgUtils;
  */
 
 /**
- * This class controls the main flow of the program, and contains the overall architecture. The WebDriver is launched
- * from here. Arguments are also passed in through here, and are parsed using helper classes. The browser that is
- * opened is configured accordingly with the arguments passed in. The passing in of one or more invalid arguments
- * disallows the launching of the browser, and an invalid input message is output. The optional flags are also set
- * here, as constants.
+ * This class and enclosed main method control the main flow of the program, and contain the overall architecture.
+ * The WebDriver is launched from here. Arguments are also passed in through here, and are parsed using helper classes.
+ *
+ * It is assumed that every element in the args array is an individual argument, rather than there being only one item
+ * in the args array containing a single String of all the arguments.
+ *
+ * The very first argument passed in is treated as the URL argument, and every subsequent space separated argument is
+ * treated as a flag.
+ *
+ * The browser that is opened is configured accordingly with the arguments passed in. The passing in of one or more
+ * invalid arguments disallows the launching of the browser, and an invalid input message is output.
+ * The optional flags are also set here, as constants.
  */
 public class Main {
 

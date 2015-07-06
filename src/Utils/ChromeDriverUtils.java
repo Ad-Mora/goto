@@ -8,8 +8,19 @@ import java.awt.*;
 /**
  * Created by AdrianM on 6/28/15.
  */
+
+/**
+ * This class contains helper functions that modify the driver's characteristics, such as the size of the browser,
+ * or whether or not the browser is brought to the front of the screen as the active window.
+ */
 public class ChromeDriverUtils {
 
+    /**
+     * This function takes in a driver and maximizes its corresponding browser window to fit the dimensions
+     * of the current screen.
+     *
+     * @param driver An instance of a Selenium WebDriver.
+     */
     public static void maximizeChromeWindow(WebDriver driver) {
 
         java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -23,6 +34,11 @@ public class ChromeDriverUtils {
         driver.manage().window().setPosition(targetPosition);
     }
 
+    /**
+     * This function takes in a driver and brings its browser to the front of the screen, making it the active window.
+     *
+     * @param driver An instance of a Selenium WebDriver.
+     */
     public static void bringWindowToFront(WebDriver driver) {
 
         ((JavascriptExecutor) driver).executeScript("window.focus();");
