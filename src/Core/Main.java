@@ -1,11 +1,9 @@
 package Core;
 
-import Utils.ChromeDriverUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
@@ -31,17 +29,11 @@ import Utils.ArgUtils;
  */
 public class Main {
 
-    // Flags
-    public static final String MAX_FLAG = "--max";
-    public static final String FRONT_FLAG = "--front";
-    public static final String HELP_FLAG = "--help";
-    public static final Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList(MAX_FLAG, FRONT_FLAG, HELP_FLAG));
+    public static String HELP_FLAG = "--help";
+    public static String BOOKMARK_FLAG = "--bookmark";
+    public static Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList(HELP_FLAG, BOOKMARK_FLAG));
 
     public static void main(String[] args) throws URISyntaxException, IOException {
-
-        // Necessary setup for ChromeDriver to function
-        File chromedriver = new File("/Users/AdrianM/Google Drive/CodingProjects/JavaProjects/goto/chromedriver");
-        System.setProperty("webdriver.chrome.driver", chromedriver.getAbsolutePath());
 
         String url;
         Set<String> flags;
@@ -52,23 +44,17 @@ public class Main {
             flags = new HashSet<String>(Arrays.asList(flagsArr));
 
             if (ArgUtils.validateFlags(flags)) {
-                // If the help flag is given at any point, do not start the driver and instead show the help message
+                // If the help flag is given at any point, do not start the browser and instead show the help message
                 if (flags.contains(HELP_FLAG) || url.equals(ArgUtils.formatURL(HELP_FLAG))) {
                     System.out.println(Help.getHelp());
                     return;
                 }
-
-                // The browser is actually started upon initialization
-                WebDriver driver = new ChromeDriver();
-                for (String flag : flags) {
-
-                    if (flag.equals(MAX_FLAG)) {
-                        ChromeDriverUtils.maximizeChromeWindow(driver);
-                    } else if (flag.equals(FRONT_FLAG)) {
-                        ChromeDriverUtils.bringWindowToFront(driver);
-                    }
+                if (flags.contains(BOOKMARK_FLAG)) {
+                    Bookmark.bookmark(url);
                 }
-                driver.get(url);
+
+                Desktop.getDesktop().browse(new URI(url));
+
             } else {
                 System.out.println(Help.getInvalidArgMessage());
             }

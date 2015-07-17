@@ -20,7 +20,6 @@
         <jarDirectory url="file://$MODULE_DIR$/Selenium-2.46.0/libs" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Selenium-2.46" level="project" />
     <orderEntry type="library" name="JUnit" level="project" />
   </component>
 </module>

@@ -33,10 +33,6 @@ public class Help {
 
         helpString += "Possible optional flags are as follows:\n\n";
 
-        helpString += Main.MAX_FLAG + ": Open browser at maximize to fit the screen\n\n";
-
-        helpString += Main.FRONT_FLAG + ": Bring the browser to the front of the screen (make the browser the active window)\n\n";
-
         helpString += Main.HELP_FLAG + ": Get help with goto (see this information again)\n";
 
         return helpString;
