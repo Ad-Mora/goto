@@ -47,4 +47,8 @@ public class Help {
     public static String getInvalidArgMessage() {
         return "\nInvalid argument(s). Use the '" + Main.HELP_FLAG + "' flag for help.";
     }
+
+    public static String getNoBookmarkAliasMessage() {
+        return "";
+    }
 }

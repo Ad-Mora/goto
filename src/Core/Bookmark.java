@@ -5,7 +5,11 @@ package Core;
  */
 public class Bookmark {
 
-    public static void bookmark(String url) {
+    public static String settingsLocation = "";
+
+    public static void bookmark(String url, String alias) {
+
+
 
     }
 }

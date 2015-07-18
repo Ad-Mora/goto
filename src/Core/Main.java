@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.List;
 
 import Utils.ArgUtils;
 
@@ -36,28 +37,35 @@ public class Main {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
         String url;
-        Set<String> flags;
+        String bookmarkAlias;
+        List<String> flags;
 
         if (args.length > 0) {
             url = ArgUtils.formatURL(args[0]);
             String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
-            flags = new HashSet<String>(Arrays.asList(flagsArr));
+            flags = Arrays.asList(flagsArr);
 
-            if (ArgUtils.validateFlags(flags)) {
-                // If the help flag is given at any point, do not start the browser and instead show the help message
-                if (flags.contains(HELP_FLAG) || url.equals(ArgUtils.formatURL(HELP_FLAG))) {
-                    System.out.println(Help.getHelp());
-                    return;
-                }
-                if (flags.contains(BOOKMARK_FLAG)) {
-                    Bookmark.bookmark(url);
-                }
-
-                Desktop.getDesktop().browse(new URI(url));
-
-            } else {
-                System.out.println(Help.getInvalidArgMessage());
+            // If the help flag is given at any point, do not start the browser and instead show the help message
+            if (flags.contains(HELP_FLAG) || url.equals(ArgUtils.formatURL(HELP_FLAG))) {
+                System.out.println(Help.getHelp());
+                return;
             }
+
+            // Cycle through all other flags
+            for (int i = 0; i < flags.size(); i++) {
+                if (flags.get(i).equals(BOOKMARK_FLAG)) {
+                    if (i < flags.size()) {
+                        bookmarkAlias = flags.get(i+1);
+                        Bookmark.bookmark(url, bookmarkAlias);
+                    } else {
+                        System.out.println(Help.getNoBookmarkAliasMessage());
+                    }
+                }
+            }
+
+            // Open up the default browser at the given location
+            Desktop.getDesktop().browse(new URI(url));
+
         } else {
             System.out.println(Help.getInvalidArgMessage());
         }
