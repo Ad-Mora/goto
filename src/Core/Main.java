@@ -1,14 +1,14 @@
 package Core;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.List;
 
 import Utils.ArgUtils;
+import com.sun.org.apache.xpath.internal.Arg;
 
 /**
  * Created by AdrianM on 6/18/15.
@@ -37,11 +37,18 @@ public class Main {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
         String url;
+        String unformattedURL;
         String bookmarkAlias;
         List<String> flags;
 
         if (args.length > 0) {
-            url = ArgUtils.formatURL(args[0]);
+
+            unformattedURL = args[0];
+            url = Bookmark.getURLFromAlias(unformattedURL);
+            if (url == null) {
+                url = ArgUtils.formatURL(unformattedURL);
+            }
+
             String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
             flags = Arrays.asList(flagsArr);
 
@@ -56,7 +63,7 @@ public class Main {
                 if (flags.get(i).equals(BOOKMARK_FLAG)) {
                     if (i < flags.size()) {
                         bookmarkAlias = flags.get(i+1);
-                        Bookmark.bookmark(url, bookmarkAlias);
+                        Bookmark.bookmark(bookmarkAlias, url);
                     } else {
                         System.out.println(Help.getNoBookmarkAliasMessage());
                     }
