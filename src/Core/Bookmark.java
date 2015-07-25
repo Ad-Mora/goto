@@ -9,15 +9,10 @@ import java.util.Map;
  */
 public class Bookmark {
 
-    public static final String SETTINGS_LOCATION = "~";
-    public static final String FOLDER_NAME = ".config";
-    public static final String FILE_NAME = "gotoconfig";
-    public static final String FILE_PATH = SETTINGS_LOCATION + "/" + FOLDER_NAME + "/" + FILE_NAME;
-
     public static void bookmark(String alias, String url) {
 
-        String folderPath = SETTINGS_LOCATION + "/" + FOLDER_NAME;
-        String filePath = folderPath + "/" + FILE_NAME;
+        String folderPath = Main.SETTINGS_LOCATION + "/" + Main.FOLDER_NAME;
+        String filePath = folderPath + "/" + Main.FILE_NAME;
         File folder = new File(folderPath);
         File file = new File(filePath);
 
@@ -93,7 +88,7 @@ public class Bookmark {
     }
 
     public static String getURLFromAlias(String alias) {
-        Map<String, String> aliasesToURLs = getFileData(new File(FILE_PATH));
+        Map<String, String> aliasesToURLs = getFileData(new File(Main.FILE_PATH));
         return aliasesToURLs.get(alias);
     }
 
