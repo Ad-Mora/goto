@@ -13,12 +13,33 @@ import java.io.IOException;
  */
 
 /*
- * Testing strategy:
+ * Testing outline:
  *
- * public static void bookmark(File gotoConfigFolder, File configFile, String alias, String url)
+ * public static void bookmark(File configFile, String alias, String url)
+ *
+ * configFile:
+ *
+ * - configFile does not exist, parent directory exists
+ * - configFile does not exist, parent directory does not exist
+ * - configFile is empty
+ * - configFile contains some existing bookmarks
+ * - configFile contains invalidly formatted data
+ *
+ * alias:
+ *
+ * - Alias does not exist in file
+ * - Alias exists in file
+ * - Alias contains newline character
+ *
+ * url:
+ *
+ * - URL does not exist in file
+ * - URL exists in file
  *
  *
  * public static void createOrUpdateBookmark(File configFile, String alias, String url)
+ *
+ * -
  *
  * public static Map<String, String> getFileData(File configFile)
  *

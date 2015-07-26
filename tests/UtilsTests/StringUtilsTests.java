@@ -11,43 +11,48 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by AdrianM on 6/28/15.
  */
+
+/*
+ * Testing outline:
+ *
+ *  String formatURL(String url):
+ *
+ *  url:
+ *  - Name, no prefixes or suffixes
+ *  - Name and http prefix
+ *  - Name and https prefix
+ *  - Name and www prefix
+ *  - Name and http and www prefix
+ *  - Name and https and www prefix
+ *  - Name and .com suffix
+ *  - Name and non .com suffix
+ *  - Name and suffix with two dots
+ *  - Name, http prefix, and .com suffix
+ *  - Name, https prefix, and .com suffix
+ *  - Name, www prefix, and .com suffix
+ *  - Name, http and www prefix, and .com suffix
+ *  - Name, https and www prefix, and .com suffix
+ *  - Name, and dot at end
+ *
+ *  boolean validateFlags(Set<String> flags):
+ *
+ *  flags:
+ *  - Empty set
+ *  - One valid flag (test different valid flags)
+ *  - Multiple valid flags
+ *  - One invalid flag
+ *  - Multiple invalid flags
+ *  - One valid flag, one invalid flag
+ *  - One valid flag, multiple invalid flags
+ *  - Multiple valid flags, one invalid flag
+ *  - Multiple valid flags, multiple invalid flags
+ *
+ *
+ */
+
 public class StringUtilsTests {
 
-    /*
-    Testing outline:
 
-    String formatURL(String url):
-
-    url:
-    - Name, no prefixes or suffixes
-    - Name and http prefix
-    - Name and https prefix
-    - Name and www prefix
-    - Name and http and www prefix
-    - Name and https and www prefix
-    - Name and .com suffix
-    - Name and non .com suffix
-    - Name and suffix with two dots
-    - Name, http prefix, and .com suffix
-    - Name, https prefix, and .com suffix
-    - Name, www prefix, and .com suffix
-    - Name, http and www prefix, and .com suffix
-    - Name, https and www prefix, and .com suffix
-    - Name, and dot at end
-
-    boolean validateFlags(Set<String> flags):
-
-    flags:
-    - Empty set
-    - One valid flag (test different valid flags)
-    - Multiple valid flags
-    - One invalid flag
-    - Multiple invalid flags
-    - One valid flag, one invalid flag
-    - One valid flag, multiple invalid flags
-    - Multiple valid flags, one invalid flag
-    - Multiple valid flags, multiple invalid flags
-     */
 
     // formatURL tests
 
@@ -333,7 +338,7 @@ public class StringUtilsTests {
     }
 
     @Test
-    public void testValidateFlagsMultipleValidMultipleInvaid() {
+    public void testValidateFlagsMultipleValidMultipleInvalid() {
         Set<String> flags = new HashSet<String>();
         flags.add("--help");
         flags.add("--front");

@@ -11,12 +11,8 @@ public class Bookmark {
 
     public static void bookmark(File configFile, String alias, String url) {
 
-        File gotoConfigFolder = configFile.getParentFile();
-
-        // Check if parent directory exists
-        if (gotoConfigFolder != null) {
-            gotoConfigFolder.mkdirs();
-        }
+        File gotoConfigFolder = configFile.getParentFile().getAbsoluteFile();
+        gotoConfigFolder.mkdirs();
 
         try {
             configFile.createNewFile();
