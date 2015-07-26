@@ -7,11 +7,28 @@ import org.junit.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Created by AdrianM on 7/19/15.
+ */
+
+/*
+ * Testing strategy:
+ *
+ * public static void bookmark(File gotoConfigFolder, File configFile, String alias, String url)
+ *
+ *
+ * public static void createOrUpdateBookmark(File configFile, String alias, String url)
+ *
+ * public static Map<String, String> getFileData(File configFile)
+ *
+ * public static void updateBookmark(File configFile, Map<String, String> aliasesToURLs)
+ *
+ * public static void createBookmark(File configFile, String alias, String url)
+ *
+ * public static String getURLFromAlias(File configFile, String alias)
+ *
+ *
  */
 public class BookmarkTests {
 

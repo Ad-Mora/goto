@@ -9,35 +9,38 @@ import java.util.Map;
  */
 public class Bookmark {
 
-    public static void bookmark(String alias, String url) {
+    public static void bookmark(File configFile, String alias, String url) {
 
-        File folder = new File(Main.GOTO_CONFIG_FOLDER_PATH);
-        File file = new File(Main.CONFIG_FILE_PATH);
+        File gotoConfigFolder = configFile.getParentFile();
 
-        folder.mkdirs();
+        // Check if parent directory exists
+        if (gotoConfigFolder != null) {
+            gotoConfigFolder.mkdirs();
+        }
+
         try {
-            file.createNewFile();
+            configFile.createNewFile();
         } catch(IOException ex) {
             System.out.println("Error creating file");
         }
-        Bookmark.createOrUpdateBookmark(file, alias, url);
+        Bookmark.createOrUpdateBookmark(configFile, alias, url);
     }
 
-    public static void createOrUpdateBookmark(File file, String alias, String url) {
+    public static void createOrUpdateBookmark(File configFile, String alias, String url) {
 
-        Map<String, String> aliasesToURLs = getFileData(file);
+        Map<String, String> aliasesToURLs = getConfigFileData(configFile);
 
         if (aliasesToURLs.containsKey(alias)) {
-            updateBookmark(file, aliasesToURLs);
+            updateBookmark(configFile, aliasesToURLs);
         } else {
-            createBookmark(file, alias, url);
+            createBookmark(configFile, alias, url);
         }
     }
 
-    public static Map<String, String> getFileData(File file) {
+    public static Map<String, String> getConfigFileData(File configFile) {
         Map<String, String> aliasesToURLs = new HashMap<String, String>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(configFile));
             String line = null;
 
             while ((line = reader.readLine()) != null) {
@@ -85,8 +88,8 @@ public class Bookmark {
         }
     }
 
-    public static String getURLFromAlias(String alias) {
-        Map<String, String> aliasesToURLs = getFileData(new File(Main.CONFIG_FILE_PATH));
+    public static String getURLFromAlias(File configFile, String alias) {
+        Map<String, String> aliasesToURLs = getConfigFileData(configFile);
         return aliasesToURLs.get(alias);
     }
 

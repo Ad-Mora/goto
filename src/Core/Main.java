@@ -33,8 +33,8 @@ public class Main {
 
     // Config file location
     public static final String HOME_PATH = System.getProperty("user.home");
-    public static final String GOTO_CONFIG_FOLDER_PATH = HOME_PATH + "/.config/gotoconfig";
-    public static final String CONFIG_FILE_PATH = GOTO_CONFIG_FOLDER_PATH + "/config";
+    public static final String GOTO_CONFIG_FOLDER_PATH = HOME_PATH + File.separator + ".config/gotoconfig";
+    public static final String CONFIG_FILE_PATH = GOTO_CONFIG_FOLDER_PATH + File.separator + "config";
 
     // Flags
     public static final String HELP_FLAG = "--help";
@@ -51,52 +51,53 @@ public class Main {
 //        configFile.createNewFile();
 
 
+        String url;
+        String unformattedURL;
+        String bookmarkAlias;
+        List<String> flags;
+        File configFile = new File(CONFIG_FILE_PATH);
+        File configFolder = new File(GOTO_CONFIG_FOLDER_PATH);
 
-//        String url;
-//        String unformattedURL;
-//        String bookmarkAlias;
-//        List<String> flags;
-//
-//        if (args.length > 0) {
-//
-//            unformattedURL = args[0];
-//            url = Bookmark.getURLFromAlias(unformattedURL);
-//            if (url == null) {
-//                url = ArgUtils.formatURL(unformattedURL);
-//            }
-//
-//            String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
-//            flags = Arrays.asList(flagsArr);
-//
-//            if (url.equals(ArgUtils.formatURL(HELP_FLAG))) {
-//
-//            } else if (url.equals(ArgUtils.formatURL(VIEW_BOOKMARKS_FLAG))) {
-//
-//            } else if (url.equals(ArgUtils.formatURL(DELETE_BOOKMARK_FLAG))) {
-//
-//            } else {
-//
-//                // Consider making url a 'flag'
-//                // Cycle through the flags
-//                for (int i = 0; i < flags.size(); i++) {
-//                    if (flags.get(i).equals(BOOKMARK_FLAG)) {
-//                        if (i < flags.size()) {
-//                            bookmarkAlias = flags.get(i+1);
-//                            Bookmark.bookmark(bookmarkAlias, url);
-//                        } else {
-//                            System.out.println(Help.getNoBookmarkAliasMessage());
-//                        }
-//                    }
-//                }
-//
-//            }
-//
-//
-//            // Open up the default browser at the given location
-//            Desktop.getDesktop().browse(new URI(url));
-//
-//        } else {
-//            System.out.println(Help.getInvalidArgMessage());
-//        }
+        if (args.length > 0) {
+
+            unformattedURL = args[0];
+            url = Bookmark.getURLFromAlias(configFile, unformattedURL);
+            if (url == null) {
+                url = ArgUtils.formatURL(unformattedURL);
+            }
+
+            String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
+            flags = Arrays.asList(flagsArr);
+
+            if (url.equals(ArgUtils.formatURL(HELP_FLAG))) {
+
+            } else if (url.equals(ArgUtils.formatURL(VIEW_BOOKMARKS_FLAG))) {
+
+            } else if (url.equals(ArgUtils.formatURL(DELETE_BOOKMARK_FLAG))) {
+
+            } else {
+
+                // Consider making url a 'flag'
+                // Cycle through the flags
+                for (int i = 0; i < flags.size(); i++) {
+                    if (flags.get(i).equals(BOOKMARK_FLAG)) {
+                        if (i < flags.size()) {
+                            bookmarkAlias = flags.get(i+1);
+                            Bookmark.bookmark(configFolder, configFile, bookmarkAlias, url);
+                        } else {
+                            System.out.println(Help.getNoBookmarkAliasMessage());
+                        }
+                    }
+                }
+
+            }
+
+
+            // Open up the default browser at the given location
+            Desktop.getDesktop().browse(new URI(url));
+
+        } else {
+            System.out.println(Help.getInvalidArgMessage());
+        }
     }
 }
