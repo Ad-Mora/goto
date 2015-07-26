@@ -21,5 +21,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="JUnit" level="project" />
+    <orderEntry type="library" name="commons-io-2" level="project" />
   </component>
 </module>

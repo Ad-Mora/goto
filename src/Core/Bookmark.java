@@ -11,8 +11,8 @@ public class Bookmark {
 
     public static void bookmark(String alias, String url) {
 
-        String folderPath = Main.SETTINGS_LOCATION + "/" + Main.FOLDER_NAME;
-        String filePath = folderPath + "/" + Main.FILE_NAME;
+        String folderPath = Main.CONFIG_LOCATION + "/" + Main.GOTO_CONFIG_FOLDER_NAME;
+        String filePath = folderPath + "/" + Main.CONFIG_FILE_NAME;
         File folder = new File(folderPath);
         File file = new File(filePath);
 
@@ -88,7 +88,7 @@ public class Bookmark {
     }
 
     public static String getURLFromAlias(String alias) {
-        Map<String, String> aliasesToURLs = getFileData(new File(Main.FILE_PATH));
+        Map<String, String> aliasesToURLs = getFileData(new File(Main.CONFIG_FILE_PATH));
         return aliasesToURLs.get(alias);
     }
 
