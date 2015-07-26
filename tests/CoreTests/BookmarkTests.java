@@ -27,27 +27,32 @@ public class BookmarkTests {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         System.out.println("setup");
-        FileUtils.deleteQuietly(new File(""));
-
-
-    }
-
-    @After
-    public void tearDown() {
-        System.out.println("tearDown");
+        FileUtils.deleteDirectory(new File(Main.GOTO_CONFIG_FOLDER_PATH));
     }
 
     @AfterClass
-    public static void oneTimeTearDown() {
+    public static void oneTimeTearDown() throws IOException {
         System.out.println("oneTimeTearDown");
+        File configFolder = new File(Main.GOTO_CONFIG_FOLDER_PATH);
+        File configFile = new File(Main.CONFIG_FILE_PATH);
+
+        FileUtils.deleteDirectory(configFolder);
+
+        configFolder.mkdir();
+        configFile.createNewFile();
+        FileUtils.writeStringToFile(configFile, originalFileContent);
     }
 
     @Test
     public void test1() {
-        System.out.println("testing");
-        int testInt = 4/0;
+        System.out.println("testing1");
+    }
+
+    @Test
+    public void test2() {
+        System.out.println("testing2");
     }
 
 

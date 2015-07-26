@@ -9,6 +9,7 @@ import java.util.List;
 
 import Utils.ArgUtils;
 import com.sun.org.apache.xpath.internal.Arg;
+import org.apache.commons.io.FileUtils;
 
 /**
  * Created by AdrianM on 6/18/15.
@@ -31,10 +32,9 @@ import com.sun.org.apache.xpath.internal.Arg;
 public class Main {
 
     // Config file location
-    public static final String CONFIG_LOCATION = System.getProperty("user.home");
-    public static final String GOTO_CONFIG_FOLDER_NAME = ".config/gotoconfig";
-    public static final String CONFIG_FILE_NAME = "config";
-    public static final String CONFIG_FILE_PATH = CONFIG_LOCATION + "/" + GOTO_CONFIG_FOLDER_NAME + "/" + CONFIG_FILE_NAME;
+    public static final String HOME_PATH = System.getProperty("user.home");
+    public static final String GOTO_CONFIG_FOLDER_PATH = HOME_PATH + "/.config/gotoconfig";
+    public static final String CONFIG_FILE_PATH = GOTO_CONFIG_FOLDER_PATH + "/config";
 
     // Flags
     public static final String HELP_FLAG = "--help";
@@ -46,6 +46,9 @@ public class Main {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
+
+//        File configFile = new File(CONFIG_FILE_PATH);
+//        configFile.createNewFile();
 
 
 
