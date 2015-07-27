@@ -1,5 +1,7 @@
 package Core;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,17 +21,32 @@ public class Bookmark {
         } catch(IOException ex) {
             System.out.println("Error creating file");
         }
+        Bookmark.cleanFile(configFile);
         Bookmark.createOrUpdateBookmark(configFile, alias, url);
     }
+
+    public static void cleanFile(File configFile) {
+
+    }
+
 
     public static void createOrUpdateBookmark(File configFile, String alias, String url) {
 
         Map<String, String> aliasesToURLs = getConfigFileData(configFile);
 
         if (aliasesToURLs.containsKey(alias)) {
+            if (url.equals("")) {
+                aliasesToURLs.remove(alias);
+            } else {
+                aliasesToURLs.put(alias, url);
+            }
             updateBookmark(configFile, aliasesToURLs);
         } else {
-            createBookmark(configFile, alias, url);
+            try {
+                FileUtils.writeStringToFile(configFile, alias + " " + url, true);
+            } catch (IOException e) {
+                System.out.println("Error writing to file");
+            }
         }
     }
 
@@ -54,6 +71,8 @@ public class Bookmark {
         return aliasesToURLs;
     }
 
+    // overwrites current config file with modfied dictionary (aliasesToURLs)
+    // assumes alias exists
     public static void updateBookmark(File configFile, Map<String, String> aliasesToURLs) {
         try {
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(configFile, false)));
@@ -61,6 +80,7 @@ public class Bookmark {
 
             for (String alias : aliasesToURLs.keySet()) {
                 url = aliasesToURLs.get(alias);
+//                FileUtils.writeStringToFile(configFile, alias + " " + url, true);
                 writer.println(alias + " " + url);
             }
             writer.close();
@@ -72,17 +92,6 @@ public class Bookmark {
         }
     }
 
-    public static void createBookmark(File configFile, String alias, String url) {
-        try {
-            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(configFile, true)));
-            writer.println(alias + " " + url);
-            writer.close();
-        } catch(FileNotFoundException ex) {
-            System.out.println("File not found");
-        } catch(IOException ex) {
-            System.out.println("Error writing to file");
-        }
-    }
 
     public static String getURLFromAlias(File configFile, String alias) {
         Map<String, String> aliasesToURLs = getConfigFileData(configFile);

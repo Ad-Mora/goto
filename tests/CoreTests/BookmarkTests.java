@@ -15,15 +15,16 @@ import java.io.IOException;
 /*
  * Testing outline:
  *
+ * ##################################################
  * public static void bookmark(File configFile, String alias, String url)
  *
  * configFile:
  *
- * - configFile does not exist, parent directory exists
- * - configFile does not exist, parent directory does not exist
- * - configFile is empty
- * - configFile contains some existing bookmarks
- * - configFile contains invalidly formatted data
+ * - File does not exist, parent directory exists
+ * - File does not exist, parent directory does not exist
+ * - File is empty
+ * - File contains some existing bookmarks
+ * - File contains invalidly formatted data
  *
  * alias:
  *
@@ -37,16 +38,78 @@ import java.io.IOException;
  * - URL exists in file
  *
  *
+ * ##################################################
+ *
+ * public static void cleanFile(File configFile)
+ *
+ * configFile:
+ *
+ * - File is empty
+ * - File has validly formatted data
+ * - File has only invalidly formatted data
+ * - File has
+ *
+ *
  * public static void createOrUpdateBookmark(File configFile, String alias, String url)
  *
- * -
+ * configFile:
  *
+ * - File is empty
+ * - File contains existing bookmarks
+ *
+ * alias:
+ *
+ * - Alias does not exist in file
+ * - Alias exists in file
+ * - Alias contains a newline character
+ *
+ * url:
+ *
+ * - URL does not exist in file
+ * - URL exists in file
+ *
+ *
+ * ##################################################
  * public static Map<String, String> getFileData(File configFile)
  *
+ * configFile:
+ *
+ * - File is empty
+ * - File contains existing bookmarks
+ *
+ *
+ * ##################################################
  * public static void updateBookmark(File configFile, Map<String, String> aliasesToURLs)
  *
+ * - Update old alias with new value
+ * - Delete old alias
+ *
+ * configFile:
+ *
+ * - File is empty
+ * - File contains existing bookmarks
+ * - File contains invalidly formatted data
+ *
+ * aliasesToURLs:
+ *
+ * - Empty dictionary
+ * - One item in dictionary
+ * - Multiple items in dictionary
+ * - Duplicate URLs corresponding to different keys
+ *
+ *
+ * ##################################################
  * public static void createBookmark(File configFile, String alias, String url)
  *
+ * configFile:
+ *
+ * - File is empty
+ * - File contains existing bookmarks
+ * - File contains invalidly formatted data
+ *
+ *
+ *
+ * ##################################################
  * public static String getURLFromAlias(File configFile, String alias)
  *
  *
