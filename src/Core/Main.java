@@ -45,6 +45,7 @@ public class Main {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
         // TODO: Check that given aliases are not flags
+        // TODO: FileUtils.writeStringToFile appends with new line or no?
 
         String firstArg;
         String alias;
@@ -53,7 +54,7 @@ public class Main {
         File configFile = new File(CONFIG_FILE_PATH);
 
         Bookmark.createConfigFile(configFile);
-        Bookmark.cleanFile(configFile);
+        Bookmark.cleanConfigFile(configFile);
 
         if (args.length > 0) {
             firstArg = args[0];

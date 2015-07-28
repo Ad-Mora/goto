@@ -55,21 +55,4 @@ public class ArgUtils {
 
         return prefix + tempURL + suffix;
     }
-
-    /**
-     * This function takes in the flag arguments passed in, and determines whether or not any of them are invalid
-     * If any flag in the flags set is invalid, this function will return false. Otherwise, this function will
-     * return true.
-     *
-     * @param flags The flags passed in by the user. All arguments after the URL argument are treated as flags.
-     * @return True if all flags in the flags array are valid, false otherwise.
-     */
-    public static boolean validateFlags(Set<String> flags) {
-        for (String flag : flags) {
-            if (!Main.VALID_FLAGS.contains(flag)) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

@@ -19,7 +19,7 @@ public class Bookmark {
             updateConfigFile(configFile, aliasesToURLs);
         } else {
             try {
-                String entry = alias + " " + url;
+                String entry = getLineEntry(alias, url);
                 FileUtils.writeStringToFile(configFile, entry, true);
             } catch (IOException e) {
                 System.out.println("Error writing to file");
@@ -38,7 +38,6 @@ public class Bookmark {
     }
 
     public static void viewBookmarks(File configFile) {
-
     }
 
     public static void createConfigFile(File configFile) {
@@ -53,8 +52,7 @@ public class Bookmark {
         }
     }
 
-    public static void cleanFile(File configFile) {
-
+    public static void cleanConfigFile(File configFile) {
     }
 
     public static Map<String, String> getConfigFileData(File configFile) {
@@ -82,16 +80,13 @@ public class Bookmark {
     // assumes alias exists
     public static void updateConfigFile(File configFile, Map<String, String> aliasesToURLs) {
         try {
-            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(configFile, false)));
             String url;
-
+            String entry;
             for (String alias : aliasesToURLs.keySet()) {
                 url = aliasesToURLs.get(alias);
-//                FileUtils.writeStringToFile(configFile, alias + " " + url, true);
-                writer.println(alias + " " + url);
+                entry = getLineEntry(alias, url);
+                FileUtils.writeStringToFile(configFile, entry, true);
             }
-            writer.close();
-
         } catch(FileNotFoundException ex) {
             System.out.println("File not found");
         } catch(IOException ex) {
@@ -104,14 +99,8 @@ public class Bookmark {
         return aliasesToURLs.get(alias);
     }
 
-
-
-
-
-
-
-
-
-
+    public static String getLineEntry(String alias, String url) {
+        return alias + " " + url;
+    }
 
 }
