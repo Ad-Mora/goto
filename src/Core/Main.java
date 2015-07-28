@@ -41,61 +41,58 @@ public class Main {
     public static final String BOOKMARK_FLAG = "--bookmark";
     public static final String DELETE_BOOKMARK_FLAG = "--delete-bookmark";
     public static final String VIEW_BOOKMARKS_FLAG = "--view-bookmarks";
-    public static final Set<String> VALID_FLAGS = new HashSet<String>(Arrays.asList(
-            HELP_FLAG, BOOKMARK_FLAG, DELETE_BOOKMARK_FLAG, VIEW_BOOKMARKS_FLAG));
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
+        // TODO: Check that given aliases are not flags
 
-//        File configFile = new File(CONFIG_FILE_PATH);
-//        configFile.createNewFile();
-
-
+        String firstArg;
+        String alias;
         String url;
-        String unformattedURL;
-        String bookmarkAlias;
-        List<String> flags;
+
         File configFile = new File(CONFIG_FILE_PATH);
-        File configFolder = new File(GOTO_CONFIG_FOLDER_PATH);
+
+        Bookmark.createConfigFile(configFile);
+        Bookmark.cleanFile(configFile);
 
         if (args.length > 0) {
+            firstArg = args[0];
 
-            unformattedURL = args[0];
-            url = Bookmark.getURLFromAlias(configFile, unformattedURL);
-            if (url == null) {
-                url = ArgUtils.formatURL(unformattedURL);
-            }
-
-            String[] flagsArr = Arrays.copyOfRange(args, 1, args.length);
-            flags = Arrays.asList(flagsArr);
-
-            if (url.equals(ArgUtils.formatURL(HELP_FLAG))) {
-
-            } else if (url.equals(ArgUtils.formatURL(VIEW_BOOKMARKS_FLAG))) {
-
-            } else if (url.equals(ArgUtils.formatURL(DELETE_BOOKMARK_FLAG))) {
-
-            } else {
-
-                // Consider making url a 'flag'
-                // Cycle through the flags
-                for (int i = 0; i < flags.size(); i++) {
-                    if (flags.get(i).equals(BOOKMARK_FLAG)) {
-                        if (i < flags.size()) {
-                            bookmarkAlias = flags.get(i+1);
-                            Bookmark.bookmark(configFolder, configFile, bookmarkAlias, url);
-                        } else {
-                            System.out.println(Help.getNoBookmarkAliasMessage());
-                        }
+            switch (firstArg) {
+                case HELP_FLAG:
+                    System.out.println(Help.getHelp());
+                    break;
+                case BOOKMARK_FLAG:
+                    if (args.length == 3) {
+                        alias = args[1];
+                        url = args[2];
+                        Bookmark.bookmark(configFile, alias, url);
+                    } else {
+                        System.out.println(Help.getInvalidArgMessage());
                     }
-                }
-
+                    break;
+                case DELETE_BOOKMARK_FLAG:
+                    if (args.length == 2) {
+                        alias = args[1];
+                        Bookmark.deleteBookmark(configFile, alias);
+                    } else {
+                        System.out.println(Help.getInvalidArgMessage());
+                    }
+                    break;
+                case VIEW_BOOKMARKS_FLAG:
+                    break;
+                default:
+                    if (args.length == 1) {
+                        url = Bookmark.getURLFromAlias(configFile, firstArg);
+                        if (url == null) {
+                            url = ArgUtils.formatURL(firstArg);
+                        }
+                        Desktop.getDesktop().browse(new URI(url));
+                    } else {
+                        System.out.println(Help.getInvalidArgMessage());
+                    }
+                    break;
             }
-
-
-            // Open up the default browser at the given location
-            Desktop.getDesktop().browse(new URI(url));
-
         } else {
             System.out.println(Help.getInvalidArgMessage());
         }
