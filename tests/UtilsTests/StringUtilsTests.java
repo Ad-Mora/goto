@@ -15,24 +15,25 @@ import static org.junit.Assert.assertTrue;
 /*
  * Testing outline:
  *
- *  String formatURL(String url):
+ * ##################################################
+ * String formatURL(String url):
  *
- *  url:
- *  - Name, no prefixes or suffixes
- *  - Name and http prefix
- *  - Name and https prefix
- *  - Name and www prefix
- *  - Name and http and www prefix
- *  - Name and https and www prefix
- *  - Name and .com suffix
- *  - Name and non .com suffix
- *  - Name and suffix with two dots
- *  - Name, http prefix, and .com suffix
- *  - Name, https prefix, and .com suffix
- *  - Name, www prefix, and .com suffix
- *  - Name, http and www prefix, and .com suffix
- *  - Name, https and www prefix, and .com suffix
- *  - Name, and dot at end
+ * url:
+ * - Name, no prefixes or suffixes
+ * - Name and http prefix
+ * - Name and https prefix
+ * - Name and www prefix
+ * - Name and http and www prefix
+ * - Name and https and www prefix
+ * - Name and .com suffix
+ * - Name and non .com suffix
+ * - Name and suffix with two dots
+ * - Name, http prefix, and .com suffix
+ * - Name, https prefix, and .com suffix
+ * - Name, www prefix, and .com suffix
+ * - Name, http and www prefix, and .com suffix
+ * - Name, https and www prefix, and .com suffix
+ * - Name, and dot at end
  *
  */
 public class StringUtilsTests {

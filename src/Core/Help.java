@@ -39,16 +39,12 @@ public class Help {
     }
 
     /**
-     * This method is called when a user either enters an invalid argument, or enters no arguments at all. Shows the
-     * user an invalid argument message.
+     * This method is called when a user either enters an invalid argument, or enters no arguments at all. The user
+     * is shown an invalid argument message.
      *
      * @return A message saying that the argument(s) (or lack of) are invalid. Also suggests usage of the help flag.
      */
     public static String getInvalidArgMessage() {
         return "\nInvalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.";
-    }
-
-    public static String getNoBookmarkAliasMessage() {
-        return "";
     }
 }
