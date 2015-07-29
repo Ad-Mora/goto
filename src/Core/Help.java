@@ -11,7 +11,7 @@ package Core;
 public class Help {
 
     /**
-     * This method is called explicitly by the user. Provides information on the program itself,
+     * This method is called directly by the user, when they ask for help. Provides information on the program itself,
      * on how to structure a command, and on the possible flags.
      *
      * @return A message containing information about this program, including basic usage and a list of all the

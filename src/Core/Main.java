@@ -20,6 +20,18 @@ import org.apache.commons.io.FileUtils;
  *
  * It is assumed that every element in the args array is an individual argument, rather than there being only one item
  * in the args array containing a single String of all the arguments.
+ *
+ * If invalid arguments (or no arguments) are given, a help message is output and the program ends.
+ *
+ * If the first argument is a flag, an action corresponding to that flag is executed. Otherwise, the argument is first
+ * checked for being an alias for a url. If it is, the browser navigates to that url. If not, the browser will navigate
+ * to the url returned after formatting the first argument.
+ *
+ * All alias and url pairs are stored in a text file in the user's home directory. Before any actions are taken,
+ * it is ensured that the file exists and that it is readable by this program.
+ *
+ * All constants are also kept in this class.
+ *
  */
 public class Main {
 
