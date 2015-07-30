@@ -24,21 +24,22 @@ import org.apache.commons.io.FileUtils;
  * If invalid arguments (or no arguments) are given, a help message is output and the program ends.
  *
  * If the first argument is a flag, an action corresponding to that flag is executed. Otherwise, the argument is first
- * checked for being an alias for a url. If it is, the browser navigates to that url. If not, the browser will navigate
- * to the url returned after formatting the first argument.
+ * checked for being an alias for a URL. If it is, the browser navigates to that URL. If not, the browser will navigate
+ * to the URL returned after formatting the first argument.
  *
- * All alias and url pairs are stored in a text file in the user's home directory. Before any actions are taken,
+ * An alias can be registered to be used in place of a URL via the bookmark flag.
+ *
+ * All alias and URL pairs are stored in a text file in the user's home directory. Before any actions are taken,
  * it is ensured that the file exists and that it is readable by this program.
  *
  * All constants are also kept in this class.
- *
  */
 public class Main {
 
     // Config file location
     public static final String HOME_PATH = System.getProperty("user.home");
-    public static final String GOTO_CONFIG_FOLDER_PATH = HOME_PATH + File.separator + ".config/gotoconfig";
-    public static final String CONFIG_FILE_PATH = GOTO_CONFIG_FOLDER_PATH + File.separator + "config";
+    public static final String CONFIG_FILE_PATH = HOME_PATH + File.separator + ".config"
+            + File.separator + "gotoconfig" + File.separator + "config";
 
     // Flags
     public static final String HELP_FLAG = "--help";
@@ -54,6 +55,8 @@ public class Main {
         // TODO: Bookmark tests
         // TODO: main tests
         // TODO: Update Help messages
+        // TODO: Replace println messages with tailored Help messages
+        // TOOD: View existing bookmarks
 
         String firstArg;
         String alias;
@@ -89,6 +92,7 @@ public class Main {
                     }
                     break;
                 case VIEW_BOOKMARKS_FLAG:
+                    Bookmark.viewBookmarks(configFile);
                     break;
                 default:
                     if (args.length == 1) {
