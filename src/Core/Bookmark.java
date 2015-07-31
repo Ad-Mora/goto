@@ -97,6 +97,8 @@ public class Bookmark {
 
     /**
      * Ensures that the config file is formatted properly so that it can be handled from without conflict.
+     * This is meant to guard against a user manually editing the file themselves.
+     *
      * If a line in the file is found to be improperly formatted, everything on that line is deleted. URLs are
      * also checked for being fully qualified. If a URL is not fully qualified, the entire bookmark is deleted.
      * When performing deletions, no blank lines will be left between correctly formatted bookmarks.

@@ -51,12 +51,15 @@ public class Main {
 
         // TODO: Check that given aliases are not flags
         // TODO: FileUtils.writeStringToFile appends with new line or no?
-        // TODO: Finish specs
+        // TODO: Finish testing strategies
         // TODO: Bookmark tests
         // TODO: main tests
         // TODO: Update Help messages
         // TODO: Replace println messages with tailored Help messages
-        // TOOD: View existing bookmarks
+        // TODO: View existing bookmarks
+        // TODO: Check for newline characters in aliases
+        // TODO: Input validation?
+        // TODO: Update testing strategy for createConfigFile if file location is changed
 
         String firstArg;
         String alias;

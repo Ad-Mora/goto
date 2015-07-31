@@ -20,11 +20,8 @@ import java.io.IOException;
  *
  * configFile:
  *
- * - File does not exist, parent directory exists
- * - File does not exist, parent directory does not exist
  * - File is empty
  * - File contains some existing bookmarks
- * - File contains invalidly formatted data
  *
  * alias:
  *
@@ -37,20 +34,8 @@ import java.io.IOException;
  * - URL does not exist in file
  * - URL exists in file
  *
- *
  * ##################################################
- *
- * public static void cleanFile(File configFile)
- *
- * configFile:
- *
- * - File is empty
- * - File has validly formatted data
- * - File has only invalidly formatted data
- * - File has
- *
- *
- * public static void createOrUpdateBookmark(File configFile, String alias, String url)
+ * public static void deleteBookmark(File configFile, String alias)
  *
  * configFile:
  *
@@ -61,25 +46,49 @@ import java.io.IOException;
  *
  * - Alias does not exist in file
  * - Alias exists in file
- * - Alias contains a newline character
- *
- * url:
- *
- * - URL does not exist in file
- * - URL exists in file
- *
  *
  * ##################################################
- * public static Map<String, String> getFileData(File configFile)
+ * public static void viewBookmarks(File configFile)
  *
  * configFile:
  *
  * - File is empty
  * - File contains existing bookmarks
  *
+ * ##################################################
+ * public static void createConfigFile(File configFile)
+ *
+ * - File does not exist
+ * - .config folder does not exist
+ * - .config folder exists, gotoconfig folder does not exist
+ * - .config folder exists, gotoconfig folder exists, file does not exist
+ * - File exists
  *
  * ##################################################
- * public static void updateBookmark(File configFile, Map<String, String> aliasesToURLs)
+ * public static void cleanConfigFile(File configFile)
+ *
+ * configFile:
+ *
+ * - File is empty
+ * - File has validly formatted data
+ * - File has only invalidly formatted data
+ * - File has valid and invalid data
+ * - One of the URLs is not fully qualified
+ * - File contains duplicate aliases
+ * - Leading and trailing spaces around an entry
+ * - Extra spaces between alias and URL
+ * - Blank line between two entries
+ *
+ * ##################################################
+ * public static Map<String, String> getConfigFileData(File configFile)
+ *
+ * configFile:
+ *
+ * - File is empty
+ * - File contains existing bookmarks
+ *
+ * ##################################################
+ * public static void updateConfigFile(File configFile, Map<String, String> aliasesToURLs)
  *
  * - Update old alias with new value
  * - Delete old alias
@@ -97,27 +106,28 @@ import java.io.IOException;
  * - Multiple items in dictionary
  * - Duplicate URLs corresponding to different keys
  *
- *
  * ##################################################
- * public static void createBookmark(File configFile, String alias, String url)
+ * public static String getURLFromAlias(File configFile, String alias)
  *
  * configFile:
  *
  * - File is empty
  * - File contains existing bookmarks
- * - File contains invalidly formatted data
  *
+ * alias:
  *
+ * - Alias does not exist
+ * - Alias exists
  *
  * ##################################################
- * public static String getURLFromAlias(File configFile, String alias)
+ * public static getLineEntry(String alias, String url)
  *
+ * - Returns properly formatted entry
  *
  */
 public class BookmarkTests {
 
     private static String originalFileContent = "";
-
 
     @BeforeClass
     public static void oneTimeSetup() throws IOException {
@@ -129,13 +139,11 @@ public class BookmarkTests {
 
     @Before
     public void setUp() throws IOException {
-        System.out.println("setup");
-        FileUtils.deleteDirectory(new File(Main.GOTO_CONFIG_FOLDER_PATH));
+        FileUtils.deleteDirectory(new File(Main.CONFIG_FILE_PATH).getParentFile());
     }
 
     @AfterClass
     public static void oneTimeTearDown() throws IOException {
-        System.out.println("oneTimeTearDown");
         File configFolder = new File(Main.GOTO_CONFIG_FOLDER_PATH);
         File configFile = new File(Main.CONFIG_FILE_PATH);
 
@@ -155,8 +163,6 @@ public class BookmarkTests {
     public void test2() {
         System.out.println("testing2");
     }
-
-
 
 
 
