@@ -36,10 +36,26 @@ import org.apache.commons.io.FileUtils;
  */
 public class Main {
 
-    // Config file location
+//    TODO: Check that given aliases are not flags
+//    TODO: FileUtils.writeStringToFile appends with new line or no?
+//    TODO: Finish testing strategies
+//    TODO: Bookmark tests
+//    TODO: main tests
+//    TODO: Update Help messages
+//    TODO: Replace println messages with tailored Help messages
+//    TODO: View existing bookmarks
+//    TODO: Check for newline characters in aliases
+//    TODO: Input validation?
+//    TODO: Update testing strategy for createBookmarkFile if file location is changed
+
+
+    // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
-    public static final String CONFIG_FILE_PATH = HOME_PATH + File.separator + ".config"
-            + File.separator + "gotoconfig" + File.separator + "config";
+    public static final String GENERAL_PROJECT_DIR_PATH = HOME_PATH + File.separator + ".butler";
+    public static final String GENERAL_PROJECT_DIR_PATH_TEMP = Main.GENERAL_PROJECT_DIR_PATH + "Temp";
+    public static final String GOTO_DIR_PATH = GENERAL_PROJECT_DIR_PATH + File.separator + "goto";
+    public static final String BOOKMARK_FILE_PATH = GOTO_DIR_PATH + File.separator + "bookmarks";
+
 
     // Flags
     public static final String HELP_FLAG = "--help";
@@ -49,68 +65,65 @@ public class Main {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        // TODO: Check that given aliases are not flags
-        // TODO: FileUtils.writeStringToFile appends with new line or no?
-        // TODO: Finish testing strategies
-        // TODO: Bookmark tests
-        // TODO: main tests
-        // TODO: Update Help messages
-        // TODO: Replace println messages with tailored Help messages
-        // TODO: View existing bookmarks
-        // TODO: Check for newline characters in aliases
-        // TODO: Input validation?
-        // TODO: Update testing strategy for createConfigFile if file location is changed
+        File generalProjectDir = new File(HOME_PATH + "/.butler");
+        File generalProjectDirTemp = new File(HOME_PATH + "/.butlerTemp");
 
-        String firstArg;
-        String alias;
-        String url;
+        FileUtils.copyDirectory(generalProjectDir, generalProjectDirTemp);
 
-        File configFile = new File(CONFIG_FILE_PATH);
 
-        Bookmark.createConfigFile(configFile);
-        Bookmark.cleanConfigFile(configFile);
 
-        if (args.length > 0) {
-            firstArg = args[0];
 
-            switch (firstArg) {
-                case HELP_FLAG:
-                    System.out.println(Help.getHelp());
-                    break;
-                case BOOKMARK_FLAG:
-                    if (args.length == 3) {
-                        alias = args[1];
-                        url = args[2];
-                        Bookmark.bookmark(configFile, alias, url);
-                    } else {
-                        System.out.println(Help.getInvalidArgMessage());
-                    }
-                    break;
-                case DELETE_BOOKMARK_FLAG:
-                    if (args.length == 2) {
-                        alias = args[1];
-                        Bookmark.deleteBookmark(configFile, alias);
-                    } else {
-                        System.out.println(Help.getInvalidArgMessage());
-                    }
-                    break;
-                case VIEW_BOOKMARKS_FLAG:
-                    Bookmark.viewBookmarks(configFile);
-                    break;
-                default:
-                    if (args.length == 1) {
-                        url = Bookmark.getURLFromAlias(configFile, firstArg);
-                        if (url == null) {
-                            url = ArgUtils.formatURL(firstArg);
-                        }
-                        Desktop.getDesktop().browse(new URI(url));
-                    } else {
-                        System.out.println(Help.getInvalidArgMessage());
-                    }
-                    break;
-            }
-        } else {
-            System.out.println(Help.getInvalidArgMessage());
-        }
+//
+//        String firstArg;
+//        String alias;
+//        String url;
+//
+//        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
+//
+////        Bookmark.createBookmarkFile(bookmarkFile);
+////        Bookmark.cleanBookmarkFile(bookmarkFile);
+//
+//        if (args.length > 0) {
+//            firstArg = args[0];
+//
+//            switch (firstArg) {
+//                case HELP_FLAG:
+//                    System.out.println(Help.getHelp());
+//                    break;
+//                case BOOKMARK_FLAG:
+//                    if (args.length == 3) {
+//                        alias = args[1];
+//                        url = args[2];
+//                        Bookmark.bookmark(bookmarkFile, alias, url);
+//                    } else {
+//                        System.out.println(Help.getInvalidArgMessage());
+//                    }
+//                    break;
+//                case DELETE_BOOKMARK_FLAG:
+//                    if (args.length == 2) {
+//                        alias = args[1];
+//                        Bookmark.deleteBookmark(bookmarkFile, alias);
+//                    } else {
+//                        System.out.println(Help.getInvalidArgMessage());
+//                    }
+//                    break;
+//                case VIEW_BOOKMARKS_FLAG:
+//                    Bookmark.viewBookmarks(bookmarkFile);
+//                    break;
+//                default:
+//                    if (args.length == 1) {
+//                        url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
+//                        if (url == null) {
+//                            url = ArgUtils.formatURL(firstArg);
+//                        }
+//                        Desktop.getDesktop().browse(new URI(url));
+//                    } else {
+//                        System.out.println(Help.getInvalidArgMessage());
+//                    }
+//                    break;
+//            }
+//        } else {
+//            System.out.println(Help.getInvalidArgMessage());
+//        }
     }
 }

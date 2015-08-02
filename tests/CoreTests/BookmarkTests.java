@@ -15,10 +15,13 @@ import java.io.IOException;
 /*
  * Testing outline:
  *
- * ##################################################
- * public static void bookmark(File configFile, String alias, String url)
+ * - Check that the bookmark file path is of the form home directory/general project directory/
+ * goto directory/bookmark file
  *
- * configFile:
+ * ##################################################
+ * public static void bookmark(File bookmarkFile, String alias, String url)
+ *
+ * bookmarkFile:
  *
  * - File is empty
  * - File contains some existing bookmarks
@@ -35,9 +38,9 @@ import java.io.IOException;
  * - URL exists in file
  *
  * ##################################################
- * public static void deleteBookmark(File configFile, String alias)
+ * public static void deleteBookmark(File bookmarkFile, String alias)
  *
- * configFile:
+ * bookmarkFile:
  *
  * - File is empty
  * - File contains existing bookmarks
@@ -48,26 +51,25 @@ import java.io.IOException;
  * - Alias exists in file
  *
  * ##################################################
- * public static void viewBookmarks(File configFile)
+ * public static void viewBookmarks(File bookmarkFile)
  *
- * configFile:
+ * bookmarkFile:
  *
  * - File is empty
  * - File contains existing bookmarks
  *
  * ##################################################
- * public static void createConfigFile(File configFile)
+ * public static void createBookmarkFile(File bookmarkFile)
  *
- * - File does not exist
- * - .config folder does not exist
- * - .config folder exists, gotoconfig folder does not exist
- * - .config folder exists, gotoconfig folder exists, file does not exist
+ * - General project folder does not exist
+ * - General project folder exists, goto folder does not exist
+ * - General project folder, goto folder exists, file does not exist
  * - File exists
  *
  * ##################################################
- * public static void cleanConfigFile(File configFile)
+ * public static void cleanBookmarkFile(File bookmarkFile)
  *
- * configFile:
+ * bookmarkFile:
  *
  * - File is empty
  * - File has validly formatted data
@@ -80,20 +82,20 @@ import java.io.IOException;
  * - Blank line between two entries
  *
  * ##################################################
- * public static Map<String, String> getConfigFileData(File configFile)
+ * public static Map<String, String> getBookmarkFileData(File bookmarkFile)
  *
- * configFile:
+ * bookmarkFile:
  *
  * - File is empty
  * - File contains existing bookmarks
  *
  * ##################################################
- * public static void updateConfigFile(File configFile, Map<String, String> aliasesToURLs)
+ * public static void updateBookmarkFile(File bookmarkFile, Map<String, String> aliasesToURLs)
  *
  * - Update old alias with new value
  * - Delete old alias
  *
- * configFile:
+ * bookmarkFile:
  *
  * - File is empty
  * - File contains existing bookmarks
@@ -107,9 +109,9 @@ import java.io.IOException;
  * - Duplicate URLs corresponding to different keys
  *
  * ##################################################
- * public static String getURLFromAlias(File configFile, String alias)
+ * public static String getURLFromAlias(File bookmarkFile, String alias)
  *
- * configFile:
+ * bookmarkFile:
  *
  * - File is empty
  * - File contains existing bookmarks
@@ -127,31 +129,31 @@ import java.io.IOException;
  */
 public class BookmarkTests {
 
-    private static String originalFileContent = "";
-
     @BeforeClass
     public static void oneTimeSetup() throws IOException {
-        File configFile = new File(Main.CONFIG_FILE_PATH);
-        if (configFile.exists()) {
-            originalFileContent = FileUtils.readFileToString(configFile);
+        File generalProjectDir = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File generalProjectDirTemp = new File(Main.GENERAL_PROJECT_DIR_PATH_TEMP);
+
+        if (generalProjectDir.exists()) {
+            FileUtils.copyDirectory(generalProjectDir, generalProjectDirTemp);
         }
     }
 
     @Before
     public void setUp() throws IOException {
-        FileUtils.deleteDirectory(new File(Main.CONFIG_FILE_PATH).getParentFile());
+        // The goto directory in the general project directory is deleted before each test is run
+        File gotoDir = new File(Main.BOOKMARK_FILE_PATH);
+        FileUtils.deleteDirectory(gotoDir);
     }
 
     @AfterClass
     public static void oneTimeTearDown() throws IOException {
-        File configFolder = new File(Main.GOTO_CONFIG_FOLDER_PATH);
-        File configFile = new File(Main.CONFIG_FILE_PATH);
+        File generalProjectDir = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File generalProjectDirTemp = new File(Main.GENERAL_PROJECT_DIR_PATH_TEMP);
 
-        FileUtils.deleteDirectory(configFolder);
-
-        configFolder.mkdir();
-        configFile.createNewFile();
-        FileUtils.writeStringToFile(configFile, originalFileContent);
+        if (generalProjectDirTemp.exists()) {
+            FileUtils.copyDirectory(generalProjectDirTemp, generalProjectDir);
+        }
     }
 
     @Test
