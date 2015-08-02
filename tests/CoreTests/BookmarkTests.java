@@ -15,9 +15,6 @@ import java.io.IOException;
 /*
  * Testing outline:
  *
- * - Check that the bookmark file path is of the form home directory/general project directory/
- * goto directory/bookmark file
- *
  * ##################################################
  * public static void bookmark(File bookmarkFile, String alias, String url)
  *

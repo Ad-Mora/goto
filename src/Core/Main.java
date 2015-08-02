@@ -46,8 +46,6 @@ public class Main {
 //    TODO: View existing bookmarks
 //    TODO: Check for newline characters in aliases
 //    TODO: Input validation?
-//    TODO: Update testing strategy for createBookmarkFile if file location is changed
-
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -64,12 +62,6 @@ public class Main {
     public static final String VIEW_BOOKMARKS_FLAG = "--view-bookmarks";
 
     public static void main(String[] args) throws URISyntaxException, IOException {
-
-        File generalProjectDir = new File(HOME_PATH + "/.butler");
-        File generalProjectDirTemp = new File(HOME_PATH + "/.butlerTemp");
-
-        FileUtils.copyDirectory(generalProjectDir, generalProjectDirTemp);
-
 
 
 
