@@ -46,6 +46,7 @@ public class Main {
 //    TODO: View existing bookmarks
 //    TODO: Check for newline characters in aliases
 //    TODO: Input validation?
+//    TODO: Add in DEBUG flag to control opening browser while running tests
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -65,57 +66,57 @@ public class Main {
 
 
 
-//
-//        String firstArg;
-//        String alias;
-//        String url;
-//
-//        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
-//
-////        Bookmark.createBookmarkFile(bookmarkFile);
-////        Bookmark.cleanBookmarkFile(bookmarkFile);
-//
-//        if (args.length > 0) {
-//            firstArg = args[0];
-//
-//            switch (firstArg) {
-//                case HELP_FLAG:
-//                    System.out.println(Help.getHelp());
-//                    break;
-//                case BOOKMARK_FLAG:
-//                    if (args.length == 3) {
-//                        alias = args[1];
-//                        url = args[2];
-//                        Bookmark.bookmark(bookmarkFile, alias, url);
-//                    } else {
-//                        System.out.println(Help.getInvalidArgMessage());
-//                    }
-//                    break;
-//                case DELETE_BOOKMARK_FLAG:
-//                    if (args.length == 2) {
-//                        alias = args[1];
-//                        Bookmark.deleteBookmark(bookmarkFile, alias);
-//                    } else {
-//                        System.out.println(Help.getInvalidArgMessage());
-//                    }
-//                    break;
-//                case VIEW_BOOKMARKS_FLAG:
-//                    Bookmark.viewBookmarks(bookmarkFile);
-//                    break;
-//                default:
-//                    if (args.length == 1) {
-//                        url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
-//                        if (url == null) {
-//                            url = ArgUtils.formatURL(firstArg);
-//                        }
-//                        Desktop.getDesktop().browse(new URI(url));
-//                    } else {
-//                        System.out.println(Help.getInvalidArgMessage());
-//                    }
-//                    break;
-//            }
-//        } else {
-//            System.out.println(Help.getInvalidArgMessage());
-//        }
+
+        String firstArg;
+        String alias;
+        String url;
+
+        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
+
+        Bookmark.createBookmarkFile(bookmarkFile);
+        Bookmark.cleanBookmarkFile(bookmarkFile);
+
+        if (args.length > 0) {
+            firstArg = args[0];
+
+            switch (firstArg) {
+                case HELP_FLAG:
+                    System.out.println(Help.getHelp());
+                    break;
+                case BOOKMARK_FLAG:
+                    if (args.length == 3) {
+                        alias = args[1];
+                        url = args[2];
+                        Bookmark.bookmark(bookmarkFile, alias, url);
+                    } else {
+                        System.out.println(Help.getInvalidArgMessage());
+                    }
+                    break;
+                case DELETE_BOOKMARK_FLAG:
+                    if (args.length == 2) {
+                        alias = args[1];
+                        Bookmark.deleteBookmark(bookmarkFile, alias);
+                    } else {
+                        System.out.println(Help.getInvalidArgMessage());
+                    }
+                    break;
+                case VIEW_BOOKMARKS_FLAG:
+                    Bookmark.viewBookmarks(bookmarkFile);
+                    break;
+                default:
+                    if (args.length == 1) {
+                        url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
+                        if (url == null) {
+                            url = ArgUtils.formatURL(firstArg);
+                        }
+                        Desktop.getDesktop().browse(new URI(url));
+                    } else {
+                        System.out.println(Help.getInvalidArgMessage());
+                    }
+                    break;
+            }
+        } else {
+            System.out.println(Help.getInvalidArgMessage());
+        }
     }
 }
