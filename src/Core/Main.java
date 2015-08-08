@@ -38,7 +38,6 @@ public class Main {
 
 //    TODO: Check that given aliases are not flags
 //    TODO: FileUtils.writeStringToFile appends with new line or no?
-//    TODO: Finish testing strategies
 //    TODO: Bookmark tests
 //    TODO: main tests
 //    TODO: Update Help messages
@@ -55,7 +54,6 @@ public class Main {
     public static final String GOTO_DIR_PATH = GENERAL_PROJECT_DIR_PATH + File.separator + "goto";
     public static final String BOOKMARK_FILE_PATH = GOTO_DIR_PATH + File.separator + "bookmarks";
 
-
     // Flags
     public static final String HELP_FLAG = "--help";
     public static final String BOOKMARK_FLAG = "--bookmark";
@@ -67,56 +65,57 @@ public class Main {
 
 
 
-        String firstArg;
-        String alias;
-        String url;
 
-        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
-
-        Bookmark.createBookmarkFile(bookmarkFile);
-        Bookmark.cleanBookmarkFile(bookmarkFile);
-
-        if (args.length > 0) {
-            firstArg = args[0];
-
-            switch (firstArg) {
-                case HELP_FLAG:
-                    System.out.println(Help.getHelp());
-                    break;
-                case BOOKMARK_FLAG:
-                    if (args.length == 3) {
-                        alias = args[1];
-                        url = args[2];
-                        Bookmark.bookmark(bookmarkFile, alias, url);
-                    } else {
-                        System.out.println(Help.getInvalidArgMessage());
-                    }
-                    break;
-                case DELETE_BOOKMARK_FLAG:
-                    if (args.length == 2) {
-                        alias = args[1];
-                        Bookmark.deleteBookmark(bookmarkFile, alias);
-                    } else {
-                        System.out.println(Help.getInvalidArgMessage());
-                    }
-                    break;
-                case VIEW_BOOKMARKS_FLAG:
-                    Bookmark.viewBookmarks(bookmarkFile);
-                    break;
-                default:
-                    if (args.length == 1) {
-                        url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
-                        if (url == null) {
-                            url = ArgUtils.formatURL(firstArg);
-                        }
-                        Desktop.getDesktop().browse(new URI(url));
-                    } else {
-                        System.out.println(Help.getInvalidArgMessage());
-                    }
-                    break;
-            }
-        } else {
-            System.out.println(Help.getInvalidArgMessage());
-        }
+//        String firstArg;
+//        String alias;
+//        String url;
+//
+//        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
+//
+//        Bookmark.createBookmarkFile(bookmarkFile);
+//        Bookmark.cleanBookmarkFile(bookmarkFile);
+//
+//        if (args.length > 0) {
+//            firstArg = args[0];
+//
+//            switch (firstArg) {
+//                case HELP_FLAG:
+//                    System.out.println(Help.getHelp());
+//                    break;
+//                case BOOKMARK_FLAG:
+//                    if (args.length == 3) {
+//                        alias = args[1];
+//                        url = args[2];
+//                        Bookmark.bookmark(bookmarkFile, alias, url);
+//                    } else {
+//                        System.out.println(Help.getInvalidArgMessage());
+//                    }
+//                    break;
+//                case DELETE_BOOKMARK_FLAG:
+//                    if (args.length == 2) {
+//                        alias = args[1];
+//                        Bookmark.deleteBookmark(bookmarkFile, alias);
+//                    } else {
+//                        System.out.println(Help.getInvalidArgMessage());
+//                    }
+//                    break;
+//                case VIEW_BOOKMARKS_FLAG:
+//                    Bookmark.viewBookmarks(bookmarkFile);
+//                    break;
+//                default:
+//                    if (args.length == 1) {
+//                        url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
+//                        if (url == null) {
+//                            url = ArgUtils.formatURL(firstArg);
+//                        }
+//                        Desktop.getDesktop().browse(new URI(url));
+//                    } else {
+//                        System.out.println(Help.getInvalidArgMessage());
+//                    }
+//                    break;
+//            }
+//        } else {
+//            System.out.println(Help.getInvalidArgMessage());
+//        }
     }
 }

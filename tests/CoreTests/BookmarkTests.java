@@ -138,9 +138,14 @@ public class BookmarkTests {
 
     @Before
     public void setUp() throws IOException {
-        // The goto directory in the general project directory is deleted before each test is run
-        File gotoDir = new File(Main.BOOKMARK_FILE_PATH);
+        // The goto directory in the general project directory is first deleted, then recreated with an empty
+        // bookmark file in the goto directory before each test is run
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        File gotoDir = bookmarkFile.getParentFile();
+
         FileUtils.deleteDirectory(gotoDir);
+        gotoDir.mkdirs();
+        bookmarkFile.createNewFile();
     }
 
     @AfterClass
@@ -153,15 +158,18 @@ public class BookmarkTests {
         }
     }
 
-    @Test
-    public void test1() {
-        System.out.println("testing1");
-    }
+    // ##################################################
+    // bookmark(File bookmarkFile, String alias, String url) tests
+
+    // bookmarkFile tests
 
     @Test
-    public void test2() {
-        System.out.println("testing2");
+    public void testBookmarkEmptyFile() {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
     }
+
+
 
 
 
