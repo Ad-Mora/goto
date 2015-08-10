@@ -7,10 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.*;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -63,10 +60,11 @@ import static org.junit.Assert.*;
  * ##################################################
  * public static void createBookmarkFile(File bookmarkFile)
  *
- * - General project folder does not exist
- * - General project folder exists, goto folder does not exist
- * - General project folder, goto folder exists, file does not exist
- * - File exists
+ * - General project directory does not exist
+ * - General project directory exists, goto directory does not exist
+ * - General project directory, goto directory exists, file does not exist
+ * - File exists, empty file
+ * - File exists, existing bookmarks
  *
  * ##################################################
  * public static void cleanBookmarkFile(File bookmarkFile)
@@ -160,7 +158,7 @@ public class BookmarkTests {
         gotoDir.mkdirs();
         bookmarkFile.createNewFile();
 
-        // Set the output stream
+        // Clear the output stream
         outContent.reset();
     }
 
@@ -176,7 +174,7 @@ public class BookmarkTests {
             FileUtils.deleteDirectory(generalProjectDirTemp);
         }
 
-        // Reset output stream to defualt
+        // Reset output stream to the default
         System.setOut(defaultOut);
     }
 
@@ -396,7 +394,7 @@ public class BookmarkTests {
 
         // Done modifying file, now test
         BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<String>();
+        Set<String> bookmarks = new HashSet<>();
         String line;
         while ((line = reader.readLine()) != null) {
             assertTrue(!line.equals(""));
@@ -515,8 +513,158 @@ public class BookmarkTests {
 
     @Test
     public void testViewBookmarksEmptyFile() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Bookmark.viewBookmarks(bookmarkFile);
 
+        assertTrue(outContent.toString().equals(""));
+    }
 
+    @Test
+    public void testViewBookmarksExistingBookmarks() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        Bookmark.viewBookmarks(bookmarkFile);
+
+        // Begin tests
+        String output = outContent.toString();
+        BufferedReader reader = new BufferedReader(new StringReader(output));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    // ####################################################################################################
+    // public static void createBookmarkFile(File bookmarkFile) tests
+
+    @Test
+    public void testCreateBookmarkFileGeneralProjectDirDoesNotExist() throws IOException {
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        FileUtils.deleteDirectory(generalProjectDirectory);
+
+        assertTrue(!generalProjectDirectory.exists());
+        assertTrue(!gotoDirectory.exists());
+        assertTrue(!bookmarkFile.exists());
+        Bookmark.createBookmarkFile(bookmarkFile);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+    }
+
+    @Test
+    public void testCreateBookmarkFileGotoDirDoesNotExist() throws IOException {
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        FileUtils.deleteDirectory(gotoDirectory);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(!gotoDirectory.exists());
+        assertTrue(!bookmarkFile.exists());
+        Bookmark.createBookmarkFile(bookmarkFile);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+    }
+
+    @Test
+    public void testCreateBookmarkFileFileDoesNotExist() {
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        bookmarkFile.delete();
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(!bookmarkFile.exists());
+        Bookmark.createBookmarkFile(bookmarkFile);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+    }
+
+    @Test
+    public void testCreateBookmarkFileEmptyFile() {
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+
+        Bookmark.createBookmarkFile(bookmarkFile);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+    }
+
+    @Test
+    public void testCreateBookmarkFileExistingBookmarks() throws IOException {
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        Bookmark.createBookmarkFile(bookmarkFile);
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
     }
 
 

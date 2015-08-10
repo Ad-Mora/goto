@@ -77,6 +77,11 @@ public class Bookmark {
      * @param bookmarkFile the file containing the bookmarks. Must exist, and be properly formatted
      */
     public static void viewBookmarks(File bookmarkFile) {
+        Map<String, String> aliasesToURLs = getBookmarkFileData(bookmarkFile);
+        for (String alias : aliasesToURLs.keySet()) {
+            String url = aliasesToURLs.get(alias);
+            System.out.println(alias + ": " + url);
+        }
     }
 
     /**

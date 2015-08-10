@@ -48,6 +48,7 @@ public class Main {
 //    TODO: Ensure that a newline character is not present in a url or alias
 //    TODO: Check if reading in the last line of a file is null or empty String
 //    TODO: Check if output stream aggregates over time or what
+//    TODO: Add prechecks to test to ensure beginning conditions
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -70,9 +71,32 @@ public class Main {
         System.setOut(new PrintStream(outContent));
         System.out.println("line1");
         System.out.println("line2");
-        System.setOut(System.out);
-        System.out.println("First time:");
-        System.out.print(outContent.toString());
+        System.out.println("This is the third line");
+        System.setOut(oldOutContent);
+        System.out.println("Should not appear");
+
+        String output = outContent.toString();
+        BufferedReader reader = new BufferedReader(new StringReader(output));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            bookmarks.add(line);
+        }
+
+        for (String bookmark : bookmarks) {
+            System.out.println("output: " + bookmark);
+        }
+        reader.close();
+
+
+
+
+
+
+
+
+//        System.out.println("First time:");
+//        System.out.print(outContent.toString());
 
 //        outContent.reset();
 //        System.setOut(new PrintStream(outContent));
