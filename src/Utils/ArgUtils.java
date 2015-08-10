@@ -55,4 +55,8 @@ public class ArgUtils {
 
         return prefix + tempURL + suffix;
     }
+
+    public static boolean validateArgs(String[] args) {
+        return false;
+    }
 }

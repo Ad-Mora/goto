@@ -37,7 +37,6 @@ import org.apache.commons.io.FileUtils;
 public class Main {
 
 //    TODO: Check that given aliases are not flags
-//    TODO: FileUtils.writeStringToFile appends with new line or no?
 //    TODO: Bookmark tests
 //    TODO: main tests
 //    TODO: Update Help messages
@@ -46,6 +45,8 @@ public class Main {
 //    TODO: Check for newline characters in aliases
 //    TODO: Input validation?
 //    TODO: Add in DEBUG flag to control opening browser while running tests
+//    TODO: Ensure that a newline character is not present in a url or alias
+//    TODO: Check if reading in the last line of a file is null or empty String
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -64,8 +65,6 @@ public class Main {
 
 
 
-
-
 //        String firstArg;
 //        String alias;
 //        String url;
@@ -75,7 +74,7 @@ public class Main {
 //        Bookmark.createBookmarkFile(bookmarkFile);
 //        Bookmark.cleanBookmarkFile(bookmarkFile);
 //
-//        if (args.length > 0) {
+//        if (args.length > 0 && ArgUtils.validateArgs(args)) {
 //            firstArg = args[0];
 //
 //            switch (firstArg) {
@@ -85,7 +84,7 @@ public class Main {
 //                case BOOKMARK_FLAG:
 //                    if (args.length == 3) {
 //                        alias = args[1];
-//                        url = args[2];
+//                        url = args[2]; // format URL?
 //                        Bookmark.bookmark(bookmarkFile, alias, url);
 //                    } else {
 //                        System.out.println(Help.getInvalidArgMessage());

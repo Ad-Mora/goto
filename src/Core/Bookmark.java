@@ -181,6 +181,6 @@ public class Bookmark {
      * @return a properly formatted single bookmark entry
      */
     public static String getLineEntry(String alias, String url) {
-        return alias + " " + url;
+        return alias + " " + url + System.getProperty("line.separator");
     }
 }

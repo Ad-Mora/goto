@@ -1,12 +1,18 @@
 package CoreTests;
 
 
+import Core.Bookmark;
 import Core.Main;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by AdrianM on 7/19/15.
@@ -27,7 +33,6 @@ import java.io.IOException;
  *
  * - Alias does not exist in file
  * - Alias exists in file
- * - Alias contains newline character
  *
  * url:
  *
@@ -155,17 +160,345 @@ public class BookmarkTests {
 
         if (generalProjectDirTemp.exists()) {
             FileUtils.copyDirectory(generalProjectDirTemp, generalProjectDir);
+            FileUtils.deleteDirectory(generalProjectDirTemp);
         }
     }
 
-    // ##################################################
+    // ####################################################################################################
     // bookmark(File bookmarkFile, String alias, String url) tests
 
-    // bookmarkFile tests
+    @Test
+    public void testBookmarkEmptyFile() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String newAlias = "newAlias";
+        String newUrl = "http://www.google.com";
+        Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("newAlias http://www.google.com"));
+        assertTrue(bookmarks.size() == 1);
+    }
 
     @Test
-    public void testBookmarkEmptyFile() {
+    public void testBookmarkExistingBookmarks() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String newAlias = "newAlias";
+        String newUrl = "http://www.stackoverflow.com";
+        Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("newAlias http://www.stackoverflow.com"));
+        assertTrue(bookmarks.size() == 4);
+    }
+
+    @Test
+    public void testBookmarkAliasDoesNotExist() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String newAlias = "newAlias";
+        String newUrl = "http://www.stackoverflow.com";
+        Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("newAlias http://www.stackoverflow.com"));
+        assertTrue(bookmarks.size() == 4);
+    }
+
+    @Test
+    public void testBookmarkAliasExists() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String newAlias = "alias2";
+        String newUrl = "http://www.stackoverflow.com";
+        Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.stackoverflow.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(!bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    @Test
+    public void testBookmarkURLDoesNotExist() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String newAlias = "newAlias";
+        String newUrl = "http://www.stackoverflow.com";
+        Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("newAlias http://www.stackoverflow.com"));
+        assertTrue(bookmarks.size() == 4);
+    }
+
+    @Test
+    public void testBookmarkURLExists() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String newAlias = "newAlias";
+        String newUrl = "http://www.google.com";
+        Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("newAlias http://www.google.com"));
+        assertTrue(bookmarks.size() == 4);
+    }
+
+    // ####################################################################################################
+    // public static void deleteBookmark(File bookmarkFile, String alias) tests
+
+    @Test
+    public void testDeleteBookmarkEmptyFile() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String aliasToDelete = "aliasToDelete";
+        Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<String>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.size() == 0);
+    }
+
+    @Test
+    public void testDeleteBookmarkExistingBookmarks() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String aliasToDelete = "aliasToDelete";
+        Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    @Test
+    public void testDeleteBookmarkAliasDoesNotExist() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String aliasToDelete = "aliasToDelete";
+        Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    @Test
+    public void testDeleteBookmarkAliasExists() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
+        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+
+        String aliasToDelete = "alias2";
+        Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
+
+        // Done modifying file, now test
+        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
+        Set<String> bookmarks = new HashSet<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            assertTrue(!line.equals(""));
+            assertTrue(!bookmarks.contains(line));
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(!bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 2);
+    }
+
+    // ####################################################################################################
+    // public static void viewBookmarks(File bookmarkFile) tests
+
+    @Test
+    public void testViewBookmarksEmptyFile() throws IOException {
 
     }
 
