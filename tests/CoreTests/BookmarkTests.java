@@ -131,14 +131,22 @@ import static org.junit.Assert.*;
  */
 public class BookmarkTests {
 
+    private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private static final PrintStream defaultOut = System.out;
+
     @BeforeClass
     public static void oneTimeSetup() throws IOException {
+        // Copy the contents of the general project directory to a temp directory so that
+        // the contents can be recopied back in later
         File generalProjectDir = new File(Main.GENERAL_PROJECT_DIR_PATH);
         File generalProjectDirTemp = new File(Main.GENERAL_PROJECT_DIR_PATH_TEMP);
 
         if (generalProjectDir.exists()) {
             FileUtils.copyDirectory(generalProjectDir, generalProjectDirTemp);
         }
+
+        // Set the output stream
+        System.setOut(new PrintStream(outContent));
     }
 
     @Before
@@ -151,10 +159,15 @@ public class BookmarkTests {
         FileUtils.deleteDirectory(gotoDir);
         gotoDir.mkdirs();
         bookmarkFile.createNewFile();
+
+        // Set the output stream
+        outContent.reset();
     }
 
     @AfterClass
     public static void oneTimeTearDown() throws IOException {
+        // Restore the contents of the general project directory to what they were
+        // before the tests began
         File generalProjectDir = new File(Main.GENERAL_PROJECT_DIR_PATH);
         File generalProjectDirTemp = new File(Main.GENERAL_PROJECT_DIR_PATH_TEMP);
 
@@ -162,6 +175,9 @@ public class BookmarkTests {
             FileUtils.copyDirectory(generalProjectDirTemp, generalProjectDir);
             FileUtils.deleteDirectory(generalProjectDirTemp);
         }
+
+        // Reset output stream to defualt
+        System.setOut(defaultOut);
     }
 
     // ####################################################################################################
@@ -499,6 +515,7 @@ public class BookmarkTests {
 
     @Test
     public void testViewBookmarksEmptyFile() throws IOException {
+
 
     }
 

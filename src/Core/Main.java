@@ -47,6 +47,7 @@ public class Main {
 //    TODO: Add in DEBUG flag to control opening browser while running tests
 //    TODO: Ensure that a newline character is not present in a url or alias
 //    TODO: Check if reading in the last line of a file is null or empty String
+//    TODO: Check if output stream aggregates over time or what
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -62,6 +63,26 @@ public class Main {
     public static final String VIEW_BOOKMARKS_FLAG = "--view-bookmarks";
 
     public static void main(String[] args) throws URISyntaxException, IOException {
+
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream oldOutContent = System.out;
+
+        System.setOut(new PrintStream(outContent));
+        System.out.println("line1");
+        System.out.println("line2");
+        System.setOut(System.out);
+        System.out.println("First time:");
+        System.out.print(outContent.toString());
+
+//        outContent.reset();
+//        System.setOut(new PrintStream(outContent));
+//        System.out.println("line3");
+//        System.out.println("line4");
+//        System.setOut(oldOutContent);
+//        System.out.println("Second time:");
+//        System.out.println(outContent.toString());
+
+
 
 
 
