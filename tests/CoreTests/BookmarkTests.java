@@ -188,16 +188,8 @@ public class BookmarkTests {
         String newUrl = "http://www.google.com";
         Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("newAlias http://www.google.com"));
         assertTrue(bookmarks.size() == 1);
@@ -221,16 +213,8 @@ public class BookmarkTests {
         String newUrl = "http://www.stackoverflow.com";
         Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -257,16 +241,8 @@ public class BookmarkTests {
         String newUrl = "http://www.stackoverflow.com";
         Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -293,16 +269,8 @@ public class BookmarkTests {
         String newUrl = "http://www.stackoverflow.com";
         Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.stackoverflow.com"));
@@ -329,16 +297,8 @@ public class BookmarkTests {
         String newUrl = "http://www.stackoverflow.com";
         Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -365,16 +325,8 @@ public class BookmarkTests {
         String newUrl = "http://www.google.com";
         Bookmark.bookmark(bookmarkFile, newAlias, newUrl);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -392,16 +344,8 @@ public class BookmarkTests {
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.size() == 0);
     }
@@ -423,16 +367,8 @@ public class BookmarkTests {
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -457,16 +393,8 @@ public class BookmarkTests {
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -491,16 +419,8 @@ public class BookmarkTests {
         String aliasToDelete = "alias2";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
 
-        // Done modifying file, now test
-        BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            assertTrue(!line.equals(""));
-            assertTrue(!bookmarks.contains(line));
-            bookmarks.add(line);
-        }
-        reader.close();
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(!bookmarks.contains("alias2 http://www.facebook.com"));
@@ -538,16 +458,16 @@ public class BookmarkTests {
         // Begin tests
         String output = outContent.toString();
         BufferedReader reader = new BufferedReader(new StringReader(output));
-        Set<String> bookmarks = new HashSet<>();
+        List<String> bookmarks = new ArrayList<>();
         String line;
         while ((line = reader.readLine()) != null) {
             bookmarks.add(line);
         }
         reader.close();
 
-        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
-        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
-        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias1 - http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 - http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 - http://www.youtube.com"));
         assertTrue(bookmarks.size() == 3);
     }
 

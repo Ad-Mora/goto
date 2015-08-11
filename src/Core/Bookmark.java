@@ -45,6 +45,7 @@ public class Bookmark {
             aliasesToURLs.put(alias, url);
             updateBookmarkFile(bookmarkFile, aliasesToURLs);
         } else {
+
             try {
                 String entry = getLineEntry(alias, url);
                 FileUtils.writeStringToFile(bookmarkFile, entry, true);
@@ -80,7 +81,7 @@ public class Bookmark {
         Map<String, String> aliasesToURLs = getBookmarkFileData(bookmarkFile);
         for (String alias : aliasesToURLs.keySet()) {
             String url = aliasesToURLs.get(alias);
-            System.out.println(alias + ": " + url);
+            System.out.println(alias + " - " + url);
         }
     }
 

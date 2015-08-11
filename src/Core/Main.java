@@ -46,8 +46,6 @@ public class Main {
 //    TODO: Input validation?
 //    TODO: Add in DEBUG flag to control opening browser while running tests
 //    TODO: Ensure that a newline character is not present in a url or alias
-//    TODO: Check if reading in the last line of a file is null or empty String
-//    TODO: Check if output stream aggregates over time or what
 //    TODO: Add prechecks to test to ensure beginning conditions
 
     // Bookmark file location
@@ -65,46 +63,19 @@ public class Main {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final PrintStream oldOutContent = System.out;
 
-        System.setOut(new PrintStream(outContent));
-        System.out.println("line1");
-        System.out.println("line2");
-        System.out.println("This is the third line");
-        System.setOut(oldOutContent);
-        System.out.println("Should not appear");
-
-        String output = outContent.toString();
-        BufferedReader reader = new BufferedReader(new StringReader(output));
-        Set<String> bookmarks = new HashSet<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            bookmarks.add(line);
-        }
+        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         for (String bookmark : bookmarks) {
-            System.out.println("output: " + bookmark);
+            System.out.println("Output: " + bookmark);
         }
-        reader.close();
+        System.out.println("Number of lines: " + bookmarks.size());
 
 
 
 
 
-
-
-
-//        System.out.println("First time:");
-//        System.out.print(outContent.toString());
-
-//        outContent.reset();
-//        System.setOut(new PrintStream(outContent));
-//        System.out.println("line3");
-//        System.out.println("line4");
-//        System.setOut(oldOutContent);
-//        System.out.println("Second time:");
-//        System.out.println(outContent.toString());
 
 
 
