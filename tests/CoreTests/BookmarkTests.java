@@ -1019,6 +1019,47 @@ public class BookmarkTests {
         assertTrue(bookmarks.size() == 2);
     }
 
+    // ####################################################################################################
+    // public static void getBookmarkFileData(File bookmarkFile) tests
+
+    @Test
+    public void testGetBookmarkFileDataEmptyFile() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Map<String, String> aliasesToURLs = Bookmark.getBookmarkFileData(bookmarkFile);
+
+        // Begin tests
+
+        assertTrue(aliasesToURLs.size() == 0);
+    }
+
+    @Test
+    public void testGetBookmarkFileDataExistingBookmarks() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+
+        Map<String, String> aliasesToURLs = Bookmark.getBookmarkFileData(bookmarkFile);
+
+        // Begin tests
+
+        assertTrue(aliasesToURLs.get("alias1").equals("http://www.google.com"));
+        assertTrue(aliasesToURLs.get("alias2").equals("http://www.facebook.com"));
+        assertTrue(aliasesToURLs.get("alias3").equals("http://www.youtube.com"));
+        assertTrue(aliasesToURLs.size() == 3);
+    }
+
+    // ####################################################################################################
+    // public static void updateBookmarkFile(File bookmarkFile, Map<String, String> aliasesToURLs) tests
+
+
+
+
+
 
 
 
