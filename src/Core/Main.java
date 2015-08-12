@@ -47,6 +47,7 @@ public class Main {
 //    TODO: Add in DEBUG flag to control opening browser while running tests
 //    TODO: Ensure that a newline character is not present in a url or alias
 //    TODO: Add prechecks to test to ensure beginning conditions
+//    TODO: Update cleanBookmarkFile multiple aliases tests
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");

@@ -80,6 +80,9 @@ import static org.junit.Assert.*;
  * - File contains duplicate aliases, both valid bookmarks
  * - File contains duplicate aliases, one bookmark valid, one invalid
  * - File contains duplicate aliases, both bookmarks invalid
+ * - Multiple duplicate aliases, all valid
+ * - Multiple duplicate aliases, some valid some invalid
+ * - Multiple duplicate aliases, all invalid
  * - Leading and trailing spaces around an entry
  * - Extra spaces between alias and URL
  * - Leading and trailing spaces, and spaces in between alias and URL
@@ -89,6 +92,8 @@ import static org.junit.Assert.*;
  * - Trailing blank lines in a file
  * - Leading and trailing blank lines in file
  * - Multiple types of invalid entries in file
+ *
+
  *
  * ##################################################
  * public static Map<String, String> getBookmarkFileData(File bookmarkFile)
@@ -795,6 +800,96 @@ public class BookmarkTests {
     }
 
     @Test
+    public void testCleanBookmarkFileMultipleDuplicateAliasesAllValid() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias1 http://www.youtube.com";
+        String entry3 = "alias2 http://www.facebook.com";
+        String entry4 = "alias3 http://www.microsoft.com";
+        String entry5 = "alias1 http://www.apple.com";
+        String entry6 = "alias2 http://www.stackoverflow.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+
+        Bookmark.cleanBookmarkFile(bookmarkFile);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com") ||
+                bookmarks.contains("alias1 http://www.apple.com") ||
+                bookmarks.contains("alias1 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com") ||
+                bookmarks.contains("alias2 http://www.stackoverflow.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.microsoft.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    @Test
+    public void testCleanBookmarkFileMultipleDuplicateAliasesSomeValidSomeInvalid() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias1 http://www.youtube.com";
+        String entry3 = "alias2 http://www.facebook.com";
+        String entry4 = "alias3 http://www.microsoft.com";
+        String entry5 = "alias1 http://www.apple";
+        String entry6 = "alias2 http://www.stackoverflow.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+
+        Bookmark.cleanBookmarkFile(bookmarkFile);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com") ||
+                bookmarks.contains("alias1 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com") ||
+                bookmarks.contains("alias2 http://www.stackoverflow.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.microsoft.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    @Test
+    public void testCleanBookmarkFileMultipleDuplicateAliasesAllInvalid() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google   ";
+        String entry2 = "alias1    http://www.youtube.com";
+        String entry3 = "   alias2 http://www.facebook.com";
+        String entry4 = "alias3 http://www.microsoft.com";
+        String entry5 = "alias1 apple.com";
+        String entry6 = "alias2 http://www.stackoverflow.com extraArg";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+
+        Bookmark.cleanBookmarkFile(bookmarkFile);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias3 http://www.microsoft.com"));
+        assertTrue(bookmarks.size() == 1);
+    }
+
+    @Test
     public void testCleanBookmarkFileLeadingAndTrailingSpaces() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         String entry1 = "     alias1 http://www.google.com    ";
@@ -1055,6 +1150,11 @@ public class BookmarkTests {
 
     // ####################################################################################################
     // public static void updateBookmarkFile(File bookmarkFile, Map<String, String> aliasesToURLs) tests
+
+    @Test
+    public void testUpdateBookmarkFile() {
+
+    }
 
 
 
