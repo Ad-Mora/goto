@@ -93,8 +93,6 @@ import static org.junit.Assert.*;
  * - Leading and trailing blank lines in file
  * - Multiple types of invalid entries in file
  *
-
- *
  * ##################################################
  * public static Map<String, String> getBookmarkFileData(File bookmarkFile)
  *
@@ -106,14 +104,15 @@ import static org.junit.Assert.*;
  * ##################################################
  * public static void updateBookmarkFile(File bookmarkFile, Map<String, String> aliasesToURLs)
  *
+ * - Update file with new bookmark
  * - Update old alias with new value
  * - Delete old alias
+ * - Add new bookmark, update old alias with new value, and delete old alias
  *
  * bookmarkFile:
  *
  * - File is empty
  * - File contains existing bookmarks
- * - File contains invalidly formatted data
  *
  * aliasesToURLs:
  *
@@ -212,16 +211,13 @@ public class BookmarkTests {
     @Test
     public void testBookmarkExistingBookmarks() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.stackoverflow.com";
@@ -240,16 +236,13 @@ public class BookmarkTests {
     @Test
     public void testBookmarkAliasDoesNotExist() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.stackoverflow.com";
@@ -268,16 +261,13 @@ public class BookmarkTests {
     @Test
     public void testBookmarkAliasExists() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String newAlias = "alias2";
         String newUrl = "http://www.stackoverflow.com";
@@ -296,16 +286,13 @@ public class BookmarkTests {
     @Test
     public void testBookmarkURLDoesNotExist() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.stackoverflow.com";
@@ -324,16 +311,13 @@ public class BookmarkTests {
     @Test
     public void testBookmarkURLExists() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.google.com";
@@ -367,16 +351,13 @@ public class BookmarkTests {
     @Test
     public void testDeleteBookmarkExistingBookmarks() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
@@ -393,16 +374,13 @@ public class BookmarkTests {
     @Test
     public void testDeleteBookmarkAliasDoesNotExist() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
@@ -419,16 +397,13 @@ public class BookmarkTests {
     @Test
     public void testDeleteBookmarkAliasExists() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         String aliasToDelete = "alias2";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
@@ -456,16 +431,13 @@ public class BookmarkTests {
     @Test
     public void testViewBookmarksExistingBookmarks() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.viewBookmarks(bookmarkFile);
 
@@ -578,16 +550,13 @@ public class BookmarkTests {
         assertTrue(gotoDirectory.exists());
         assertTrue(bookmarkFile.exists());
 
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.createBookmarkFile(bookmarkFile);
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
@@ -618,16 +587,13 @@ public class BookmarkTests {
     @Test
     public void testCleanBookmarkFileOnlyValidData() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String alias1 = "alias1";
-        String url1 = "http://www.google.com";
-        String alias2 = "alias2";
-        String url2 = "http://www.facebook.com";
-        String alias3 = "alias3";
-        String url3 = "http://www.youtube.com";
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias1, url1), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias2, url2), true);
-        FileUtils.writeStringToFile(bookmarkFile, Bookmark.getLineEntry(alias3, url3), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -650,10 +616,10 @@ public class BookmarkTests {
         String entry3 = "   alias2 http://www.facebook.com    ";
         String entry4 = "d";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -671,10 +637,10 @@ public class BookmarkTests {
         String entry3 = "     alias3 http://www.youtube.com";
         String entry4 = "";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -695,11 +661,11 @@ public class BookmarkTests {
         String entry4 = "arg1 arg2 alias3 http://www.youtube.com arg3";
         String entry5 = "alias3 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -718,9 +684,9 @@ public class BookmarkTests {
         String entry2 = "alias2 facebook";
         String entry3 = "alias3 youtube";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -739,9 +705,9 @@ public class BookmarkTests {
         String entry2 = "alias1 http://www.youtube.com";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -762,9 +728,9 @@ public class BookmarkTests {
         String entry2 = "alias1 youtube    ";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -785,9 +751,9 @@ public class BookmarkTests {
         String entry2 = "alias1 http://www.youtube.com extraArg";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -809,12 +775,12 @@ public class BookmarkTests {
         String entry5 = "alias1 http://www.apple.com";
         String entry6 = "alias2 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -841,12 +807,12 @@ public class BookmarkTests {
         String entry5 = "alias1 http://www.apple";
         String entry6 = "alias2 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -872,12 +838,12 @@ public class BookmarkTests {
         String entry5 = "alias1 apple.com";
         String entry6 = "alias2 http://www.stackoverflow.com extraArg";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -897,10 +863,10 @@ public class BookmarkTests {
         String entry3 = "alias3 http://www.youtube.com       ";
         String entry4 = "alias4 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -919,9 +885,9 @@ public class BookmarkTests {
         String entry2 = "alias2       http://www.facebook.com";
         String entry3 = "alias3  http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -940,9 +906,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = " alias3  http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -961,9 +927,9 @@ public class BookmarkTests {
         String entry2 = "";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -986,12 +952,12 @@ public class BookmarkTests {
         String entry5 = "\n\n";
         String entry6 = "alias4 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1014,10 +980,10 @@ public class BookmarkTests {
         String entry3 = "alias2 http://www.facebook.com";
         String entry4 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1039,10 +1005,10 @@ public class BookmarkTests {
         String entry3 = "alias2 http://www.facebook.com";
         String entry4 = "\n\n\n\n\n\n\n\n\n\n";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1065,11 +1031,11 @@ public class BookmarkTests {
         String entry4 = "alias3 http://www.youtube.com";
         String entry5 = "\n\n\n\n";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1094,13 +1060,13 @@ public class BookmarkTests {
         String entry6 = "alias4 http://www.youtube.com";
         String entry7 = "alias1 http://www.apple.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry7, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry7 + System.lineSeparator(), true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1134,9 +1100,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2, true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
         Map<String, String> aliasesToURLs = Bookmark.getBookmarkFileData(bookmarkFile);
 
@@ -1152,7 +1118,14 @@ public class BookmarkTests {
     // public static void updateBookmarkFile(File bookmarkFile, Map<String, String> aliasesToURLs) tests
 
     @Test
-    public void testUpdateBookmarkFile() {
+    public void testUpdateBookmarkFileUpdateFileWithNewBookmark() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+
 
     }
 

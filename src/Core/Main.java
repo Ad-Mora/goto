@@ -48,6 +48,8 @@ public class Main {
 //    TODO: Ensure that a newline character is not present in a url or alias
 //    TODO: Add prechecks to test to ensure beginning conditions
 //    TODO: Update cleanBookmarkFile multiple aliases tests
+//    TODO: Check if writeStringToFile auto adds newline at end of entry //no
+//    TODO: Add newline character to end of all writeStringToFile statements
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -66,12 +68,9 @@ public class Main {
 
 
         File bookmarkFile = new File(BOOKMARK_FILE_PATH);
-        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        for (String bookmark : bookmarks) {
-            System.out.println("Output: " + bookmark);
-        }
-        System.out.println("Number of lines: " + bookmarks.size());
+
+
 
 
 
