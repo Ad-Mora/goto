@@ -135,7 +135,7 @@ import static org.junit.Assert.*;
  * - Alias exists
  *
  * ##################################################
- * public static getLineEntry(String alias, String url)
+ * public static String getLineEntry(String alias, String url)
  *
  * - Returns properly formatted entry
  *
@@ -1120,13 +1120,356 @@ public class BookmarkTests {
     @Test
     public void testUpdateBookmarkFileUpdateFileWithNewBookmark() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String entry1 = "alias1 http://www.google.com";
-        String entry2 = "alias2 http://www.facebook.com";
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
 
         FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
         FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
+        String newAlias = "alias4";
+        String newURL = "http://www.stackoverflow.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+        aliasesToURLs.put(alias1, url1);
+        aliasesToURLs.put(alias2, url2);
+        aliasesToURLs.put(alias3, url3);
 
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
+        assertTrue(aliasesToURLs.size() == 4);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileUpdateOldAliasWithNewValue() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String newAlias = "alias1";
+        String newURL = "http://www.stackoverflow.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+        aliasesToURLs.put(alias2, url2);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.stackoverflow.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(aliasesToURLs.size() == 3);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileDeleteOldAlias() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(alias1, url1);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(aliasesToURLs.size() == 2);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileAddBookmarkUpdateOldAliasAndDeleteBookmark() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String newAlias = "alias4";
+        String newURL = "http://www.stackoverflow.com";
+        String updateAlias = "alias1";
+        String updateURL = "http://www.apple.com";
+
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+        aliasesToURLs.put(updateAlias, updateURL);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.apple.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(aliasesToURLs.size() == 3);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileEmptyFile() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String newAlias = "alias4";
+        String newURL = "http://www.google.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(aliasesToURLs.size() == 1);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileExistingBookmarks() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String newAlias = "alias4";
+        String newURL = "http://www.stackoverflow.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+        aliasesToURLs.put(alias1, url1);
+        aliasesToURLs.put(alias2, url2);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
+        assertTrue(aliasesToURLs.size() == 4);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileEmptyDictionary() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Map<String, String> aliasesToURLs = new HashMap<>();
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        assertTrue(aliasesToURLs.size() == 0);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileOneItemInDictionary() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String newAlias = "alias4";
+        String newURL = "http://www.stackoverflow.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+        aliasesToURLs.put(alias1, url1);
+        aliasesToURLs.put(alias2, url2);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
+        assertTrue(aliasesToURLs.size() == 4);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileMultipleItemsInDictionary() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String newAlias1 = "alias4";
+        String newURL1 = "http://www.stackoverflow.com";
+        String newAlias2 = "alias5";
+        String newURL2 = "http://www.apple.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias1, newURL1);
+        aliasesToURLs.put(newAlias2, newURL2);
+        aliasesToURLs.put(alias1, url1);
+        aliasesToURLs.put(alias2, url2);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.apple.com"));
+        assertTrue(aliasesToURLs.size() == 5);
+    }
+
+    @Test
+    public void testUpdateBookmarkFileDuplicateURLs() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias1 = "alias1";
+        String url1 = "http://www.google.com";
+        String alias2 = "alias2";
+        String url2 = "http://www.facebook.com";
+        String alias3 = "alias3";
+        String url3 = "http://www.youtube.com";
+
+        String entry1 = alias1 + " " + url1;
+        String entry2 = alias2 + " " + url2;
+        String entry3 = alias3 + " " + url3;
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String newAlias = "alias4";
+        String newURL = "http://www.google.com";
+        Map<String, String> aliasesToURLs = new HashMap<>();
+        aliasesToURLs.put(newAlias, newURL);
+        aliasesToURLs.put(alias1, url1);
+        aliasesToURLs.put(alias2, url2);
+        aliasesToURLs.put(alias3, url3);
+
+        Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
+
+        // Begin tests
+
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias4 http://www.google.com"));
+        assertTrue(aliasesToURLs.size() == 4);
     }
 
 
