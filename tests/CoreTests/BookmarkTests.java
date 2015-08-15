@@ -1547,6 +1547,17 @@ public class BookmarkTests {
     // ####################################################################################################
     // public static void getLineEntry(File alias, String url) tests
 
+    @Test
+    public void testGetLineEntry() {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String alias = "alias1";
+        String url = "http://www.google.com";
+        String formattedEntry = Bookmark.getLineEntry(alias, url);
+
+        assertTrue(formattedEntry.equals("alias1 http://www.google.com" + System.lineSeparator()));
+    }
+
 
 
 
