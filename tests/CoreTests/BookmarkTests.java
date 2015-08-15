@@ -1472,6 +1472,85 @@ public class BookmarkTests {
         assertTrue(aliasesToURLs.size() == 4);
     }
 
+    // ####################################################################################################
+    // public static void getURLFromAlias(File bookmarkFile, String alias) tests
+
+    @Test
+    public void testGetURLFromAliasEmptyFile() {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String alias = "alias1";
+
+        String url = Bookmark.getURLFromAlias(bookmarkFile, alias);
+
+        // Begin tests
+
+        assertTrue(url == null);
+    }
+
+    @Test
+    public void testGetURLFromAliasExistingBookmarks() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String alias = "alias3";
+        String url = Bookmark.getURLFromAlias(bookmarkFile, alias);
+
+        // Begin tests
+
+        assertTrue(url.equals("http://www.youtube.com"));
+    }
+
+    @Test
+    public void testGetURLFromAliasAliasDoesNotExist() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String alias = "alias4";
+        String url = Bookmark.getURLFromAlias(bookmarkFile, alias);
+
+        // Begin tests
+
+        assertTrue(url == null);
+    }
+
+    @Test
+    public void testGetURLFromAliasAliasExists() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        String alias = "alias1";
+        String url = Bookmark.getURLFromAlias(bookmarkFile, alias);
+
+        // Begin tests
+
+        assertTrue(url.equals("http://www.google.com"));
+    }
+
+    // ####################################################################################################
+    // public static void getLineEntry(File alias, String url) tests
+
+
+
+
+
 
 
 
