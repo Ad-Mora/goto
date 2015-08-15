@@ -56,6 +56,18 @@ public class ArgUtils {
         return prefix + tempURL + suffix;
     }
 
+    /**
+     * Checks the validity of all passed in arguments. Returns false if any of the arguments contain
+     * a newline character, or if the array of arguments as a while form an invalid command.
+     *
+     * For example, the input "goto <bookmark flag> <alias> <URL> extraArgument is an invalid command,
+     * because the bookmark flag only requires an alias and a URL to follow the bookmark flag, and an
+     * extra argument was given.
+     *
+     * @param args the arguments passed in directly by the user
+     * @return false if any individual argument is invalid, or if the array of arguments as a whole form an
+     * invalid command
+     */
     public static boolean validateArgs(String[] args) {
         return false;
     }

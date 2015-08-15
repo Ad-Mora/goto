@@ -1558,22 +1558,4 @@ public class BookmarkTests {
         assertTrue(formattedEntry.equals("alias1 http://www.google.com" + System.lineSeparator()));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -3,9 +3,6 @@ package UtilsTests;
 import Utils.ArgUtils;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  * Testing outline:
  *
  * ##################################################
- * String formatURL(String url):
+ * public static String formatURL(String url)
  *
  * url:
  * - Name, no prefixes or suffixes
@@ -35,10 +32,16 @@ import static org.junit.Assert.assertTrue;
  * - Name, https and www prefix, and .com suffix
  * - Name, and dot at end
  *
+ * ##################################################
+ *
+ * public static boolean validateArgs(String[] args)
+ *
+ *
  */
-public class StringUtilsTests {
+public class ArgUtilsTests {
 
-    // formatURL tests
+    // ####################################################################################################
+    // formatURL(String url) tests
 
     @Test
     public void testFormatURLNoPrefixOrSuffix() {
@@ -218,4 +221,9 @@ public class StringUtilsTests {
 
         assertTrue(formattedURL.equals(desiredOutput));
     }
+
+    // ####################################################################################################
+    // validateArgs(String[] args) tests
+
+
 }
