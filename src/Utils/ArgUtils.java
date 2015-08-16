@@ -58,7 +58,8 @@ public class ArgUtils {
 
     /**
      * Checks the validity of all passed in arguments. Returns false if any of the arguments contain
-     * a newline character, or if the array of arguments as a while form an invalid command.
+     * a newline character, if there are an invalid number of arguments, or if the array of arguments as a
+     * whole form an invalid command.
      *
      * For example, the input "goto <bookmark flag> <alias> <URL> extraArgument is an invalid command,
      * because the bookmark flag only requires an alias and a URL to follow the bookmark flag, and an
@@ -69,6 +70,10 @@ public class ArgUtils {
      * invalid command
      */
     public static boolean validateArgs(String[] args) {
-        return false;
+        if (1==1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

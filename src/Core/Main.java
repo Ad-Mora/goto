@@ -37,16 +37,13 @@ import org.apache.commons.io.FileUtils;
 public class Main {
 
 //    TODO: Check that given aliases are not flags
-//    TODO: Bookmark tests
 //    TODO: main tests
 //    TODO: Update Help messages
-//    TODO: Replace println messages with tailored Help messages
 //    TODO: View existing bookmarks
 //    TODO: Check for newline characters in aliases
 //    TODO: Input validation?
 //    TODO: Add in DEBUG flag to control opening browser while running tests
 //    TODO: Ensure that a newline character is not present in a url or alias
-//    TODO: Add prechecks to test to ensure beginning conditions
 //    TODO: Update cleanBookmarkFile multiple aliases tests
 //    TODO: Check if writeStringToFile auto adds newline at end of entry //no
 //    TODO: Add newline character to end of all writeStringToFile statements
@@ -66,31 +63,16 @@ public class Main {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
+        String firstArg;
+        String alias;
+        String url;
 
         File bookmarkFile = new File(BOOKMARK_FILE_PATH);
 
+        Bookmark.createBookmarkFile(bookmarkFile);
+        Bookmark.cleanBookmarkFile(bookmarkFile);
 
-
-
-
-
-
-
-
-
-
-
-
-//        String firstArg;
-//        String alias;
-//        String url;
-//
-//        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
-//
-//        Bookmark.createBookmarkFile(bookmarkFile);
-//        Bookmark.cleanBookmarkFile(bookmarkFile);
-//
-//        if (args.length > 0 && ArgUtils.validateArgs(args)) {
+//        if (ArgUtils.validateArgs(args)) {
 //            firstArg = args[0];
 //
 //            switch (firstArg) {
@@ -98,35 +80,24 @@ public class Main {
 //                    System.out.println(Help.getHelp());
 //                    break;
 //                case BOOKMARK_FLAG:
-//                    if (args.length == 3) {
-//                        alias = args[1];
-//                        url = args[2]; // format URL?
-//                        Bookmark.bookmark(bookmarkFile, alias, url);
-//                    } else {
-//                        System.out.println(Help.getInvalidArgMessage());
-//                    }
+//                    alias = args[1];
+//                    url = args[2]; // format URL? yes
+//                    Bookmark.bookmark(bookmarkFile, alias, url);
 //                    break;
 //                case DELETE_BOOKMARK_FLAG:
-//                    if (args.length == 2) {
-//                        alias = args[1];
-//                        Bookmark.deleteBookmark(bookmarkFile, alias);
-//                    } else {
-//                        System.out.println(Help.getInvalidArgMessage());
-//                    }
+//                    alias = args[1];
+//                    Bookmark.deleteBookmark(bookmarkFile, alias);
+//                    System.out.println(Help.getInvalidArgMessage());
 //                    break;
 //                case VIEW_BOOKMARKS_FLAG:
 //                    Bookmark.viewBookmarks(bookmarkFile);
 //                    break;
 //                default:
-//                    if (args.length == 1) {
-//                        url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
-//                        if (url == null) {
-//                            url = ArgUtils.formatURL(firstArg);
-//                        }
-//                        Desktop.getDesktop().browse(new URI(url));
-//                    } else {
-//                        System.out.println(Help.getInvalidArgMessage());
+//                    url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
+//                    if (url == null) {
+//                        url = ArgUtils.formatURL(firstArg);
 //                    }
+//                    Desktop.getDesktop().browse(new URI(url));
 //                    break;
 //            }
 //        } else {
