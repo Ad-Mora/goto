@@ -37,38 +37,37 @@ import java.io.PrintStream;
  * - First argument is an alias
  * - First argument is not a qualified URL
  * - First argument is a qualified URL
- * - First argument is a non-flag argument, followed by a valid flag
  * - First argument is a non-flag argument, followed by another non-flag argument
+ * - First argument is a non-flag argument, followed by a valid flag
  * - First argument contains a newline character
  *
  * - First argument is the view bookmarks flag, no following arguments
- * - First argument is the view bookmarks flag followed by another valid flag
- * - First argument is the view bookmarks flag followed by a non-flag invalid argument
- * - First argument is the view bookmarks flag followed by an argument containing a newline character
+ * - First argument is the view bookmarks flag, second argument is another valid flag
+ * - First argument is the view bookmarks flag, second argument is not a valid flag
+ * - First argument is the view bookmarks flag, second argument contains a newline character
  *
  * - First argument is the delete bookmark flag, no following arguments
  * - First argument is the delete bookmark flag, second argument is not a flag or an existing alias
  * - First argument is the delete bookmark flag, second argument is a valid flag
- * - First argument is the delete bookmark flag, second argument is an existing bookmark
- * - First argument is the delete bookmark flag, second argument is not an existing bookmark, third argument is present
- * - First argument is the delete bookmark flag, second argument is an existing bookmark, third argument is present
+ * - First argument is the delete bookmark flag, second argument is an existing alias
+ * - First argument is the delete bookmark flag, second argument is not an existing alias, third argument is present
+ * - First argument is the delete bookmark flag, second argument is an existing alias, third argument is present
  * - First argument is the delete bookmark flag, second argument contains a newline character
  *
  * - First argument is the bookmark flag, no following arguments
  * - First argument is the bookmark flag, second argument is not an alias or a flag
  * - First argument is the bookmark flag, second argument is a valid flag
- * - First argument is the bookmark flag, second argument is an existing alias
+ * - First argument is the bookmark flag, second argument is a valid alias
  * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument
  * is an unqualified URL
  * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument is a qualified URL
- * - First argument is the bookmark flag, second argument is an existing alias, third argument is an unqualified URL
- * - First argument is the bookmark flag, second argument is an existing alias, third argument is a qualified URL
+ * - First argument is the bookmark flag, second argument is a valid alias, third argument is an unqualified URL
+ * - First argument is the bookmark flag, second argument is a valid alias, third argument is a qualified URL
  * - First argument is the bookmark flag, second argument is a valid flag, third argument is an unqualified URL
  * - First argument is the bookmark flag, second argument is a valid flag, third argument is a qualified URL
  * - First argument is the bookmark flag, second argument is not an alias or a flag, third and fourth arguments are
  * present
- * - First argument is the bookmark flag, second argument is an existing alias, third and fourth arguments are present
- * - First argument is the bookmark flag, second argument is not a flag, third and fourth arguments are present
+ * - First argument is the bookmark flag, second argument is a valid alias, third and fourth arguments are present
  * - First argument is the bookmark flag, second argument is a valid flag, third and fourth arguments are present
  * - First argument is the bookmark flag, second argument contains a newline character
  * - First argument is the bookmark flag, second argument is present, third argument contains a newline character
@@ -92,6 +91,9 @@ public class MainTests {
 
         // Set the output stream
         System.setOut(new PrintStream(outContent));
+
+        // Set DEBUG to true
+        Main.DEBUG = true;
     }
 
     @Before
@@ -123,14 +125,155 @@ public class MainTests {
 
         // Reset output stream to the default
         System.setOut(defaultOut);
+
+        // Reset DEBUG to false
+        Main.DEBUG = false;
     }
 
     // ####################################################################################################
-    // main(String[] args)
+    // main(String[] args) tests
 
     @Test
     public void testMainEmptyArgsArray() {
     }
+
+    @Test
+    public void testMainFirstArgumentNotAnAlias() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsAnAlias() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsUnqualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsQualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsNotAValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsAValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentContainsNewlineCharacter() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArguments() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsAnotherValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsNotValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentContainsNewlineCharacter() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagNoFollowingArguments() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAValidFlagOrExistingAlias() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAlias() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAnExistingAliasThirdArgumentIsPresent() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAliasThirdArgumentIsPresent() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagNoFollowingArguments() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidAlias() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsUnqualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsQualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsUnqualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsQualifiedURL() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentNotValidAliasOrFlagThirdAndFourthArgumentsPresent() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdAndFourthArgumentsPresent() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdAndFourthArgumentsPresent() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentContainsNewlineCharacter() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() {
+    }
+
+
+
+
+
+
 
 
 
