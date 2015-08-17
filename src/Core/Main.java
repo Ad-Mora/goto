@@ -41,11 +41,8 @@ public class Main {
 //    TODO: Update Help messages
 //    TODO: View existing bookmarks
 //    TODO: Check for newline characters in aliases
-//    TODO: Input validation?
-//    TODO: Add in DEBUG flag to control opening browser while running tests
 //    TODO: Ensure that a newline character is not present in a url or alias
 //    TODO: Update cleanBookmarkFile multiple aliases tests
-//    TODO: Check if writeStringToFile auto adds newline at end of entry //no
 //    TODO: Add newline character to end of all writeStringToFile statements
 
     // Bookmark file location
@@ -61,6 +58,9 @@ public class Main {
     public static final String DELETE_BOOKMARK_FLAG = "--delete-bookmark";
     public static final String VIEW_BOOKMARKS_FLAG = "--view-bookmarks";
 
+    // Debug
+    public static boolean DEBUG = false;
+
     public static void main(String[] args) throws URISyntaxException, IOException {
 
         String firstArg;
@@ -72,36 +72,39 @@ public class Main {
         Bookmark.createBookmarkFile(bookmarkFile);
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
-//        if (ArgUtils.validateArgs(args)) {
-//            firstArg = args[0];
-//
-//            switch (firstArg) {
-//                case HELP_FLAG:
-//                    System.out.println(Help.getHelp());
-//                    break;
-//                case BOOKMARK_FLAG:
-//                    alias = args[1];
-//                    url = args[2]; // format URL? yes
-//                    Bookmark.bookmark(bookmarkFile, alias, url);
-//                    break;
-//                case DELETE_BOOKMARK_FLAG:
-//                    alias = args[1];
-//                    Bookmark.deleteBookmark(bookmarkFile, alias);
-//                    System.out.println(Help.getInvalidArgMessage());
-//                    break;
-//                case VIEW_BOOKMARKS_FLAG:
-//                    Bookmark.viewBookmarks(bookmarkFile);
-//                    break;
-//                default:
-//                    url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
-//                    if (url == null) {
-//                        url = ArgUtils.formatURL(firstArg);
-//                    }
-//                    Desktop.getDesktop().browse(new URI(url));
-//                    break;
-//            }
-//        } else {
-//            System.out.println(Help.getInvalidArgMessage());
-//        }
+        if (ArgUtils.validateArgs(args)) {
+            firstArg = args[0];
+
+            switch (firstArg) {
+                case HELP_FLAG:
+                    System.out.println(Help.getHelp());
+                    break;
+                case BOOKMARK_FLAG:
+                    alias = args[1];
+                    url = args[2]; // format URL? yes
+                    Bookmark.bookmark(bookmarkFile, alias, url);
+                    break;
+                case DELETE_BOOKMARK_FLAG:
+                    alias = args[1];
+                    Bookmark.deleteBookmark(bookmarkFile, alias);
+                    System.out.println(Help.getInvalidArgMessage());
+                    break;
+                case VIEW_BOOKMARKS_FLAG:
+                    Bookmark.viewBookmarks(bookmarkFile);
+                    break;
+                default:
+                    url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
+                    if (url == null) {
+                        url = ArgUtils.formatURL(firstArg);
+                    }
+                    if (DEBUG) {
+                        System.out.println("Open browser at: " + url);
+                    } else {
+                        Desktop.getDesktop().browse(new URI(url));
+                    }
+            }
+        } else {
+            System.out.println(Help.getInvalidArgMessage());
+        }
     }
 }

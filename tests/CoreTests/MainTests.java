@@ -1,5 +1,17 @@
 package CoreTests;
 
+import Core.Main;
+import org.apache.commons.io.FileUtils;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+
 /**
  * Created by AdrianM on 8/2/15.
  */
@@ -63,6 +75,68 @@ package CoreTests;
  */
 
 public class MainTests {
+
+    private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private static final PrintStream defaultOut = System.out;
+
+    @BeforeClass
+    public static void oneTimeSetup() throws IOException {
+        // Copy the contents of the general project directory to a temp directory so that
+        // the contents can be recopied back in later
+        File generalProjectDir = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File generalProjectDirTemp = new File(Main.GENERAL_PROJECT_DIR_PATH_TEMP);
+
+        if (generalProjectDir.exists()) {
+            FileUtils.copyDirectory(generalProjectDir, generalProjectDirTemp);
+        }
+
+        // Set the output stream
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @Before
+    public void setUp() throws IOException {
+        // The goto directory in the general project directory is first deleted, then recreated with an empty
+        // bookmark file in the goto directory before each test is run
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        File gotoDir = bookmarkFile.getParentFile();
+
+        FileUtils.deleteDirectory(gotoDir);
+        gotoDir.mkdirs();
+        bookmarkFile.createNewFile();
+
+        // Clear the output stream
+        outContent.reset();
+    }
+
+    @AfterClass
+    public static void oneTimeTearDown() throws IOException {
+        // Restore the contents of the general project directory to what they were
+        // before the tests began
+        File generalProjectDir = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File generalProjectDirTemp = new File(Main.GENERAL_PROJECT_DIR_PATH_TEMP);
+
+        if (generalProjectDirTemp.exists()) {
+            FileUtils.copyDirectory(generalProjectDirTemp, generalProjectDir);
+            FileUtils.deleteDirectory(generalProjectDirTemp);
+        }
+
+        // Reset output stream to the default
+        System.setOut(defaultOut);
+    }
+
+    // ####################################################################################################
+    // main(String[] args)
+
+    @Test
+    public void testMainEmptyArgsArray() {
+    }
+
+
+
+
+
+
 
 
 }
