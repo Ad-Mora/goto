@@ -57,6 +57,11 @@ import static org.junit.Assert.*;
  * - First argument is not a flag, second argument is present
  * - First argument is not a flag, followed by two or more arguments
  *
+ * - First argument is the help flag, no following arguments
+ * - First argument is the help flag followed by a non-flag argument
+ * - First argument is the help flag followed by another valid flag
+ * - First argument is the help flag followed by an argument with a newline character
+ *
  * - First argument is the view bookmarks flag, no following arguments
  * - First argument is the view bookmarks flag followed by a non-flag argument
  * - First argument is the view bookmarks flag followed by another valid flag
@@ -359,6 +364,30 @@ public class ArgUtilsTests {
     @Test
     public void testValidateArgsFirstArgumentIsValidAtLeastTwoMoreArgumentsPresent() {
         String[] args = {"apple", "secondArg", "thirdArg"};
+        assertFalse(ArgUtils.validateArgs(args));
+    }
+
+    @Test
+    public void testValidateArgsFirstArgumentIsHelpFlagNoFollowingArguments() {
+        String[] args = {"--help"};
+        assertTrue(ArgUtils.validateArgs(args));
+    }
+
+    @Test
+    public void testValidateArgsFirstArgumentIsHelpFlagFollowedByNonFlagArgument() {
+        String[] args = {"--help", "secondArg"};
+        assertFalse(ArgUtils.validateArgs(args));
+    }
+
+    @Test
+    public void testValidateArgsFirstArgumentIsHelpFlagFollowedByValidFlag() {
+        String[] args = {"--help", "--view-bookmarks"};
+        assertFalse(ArgUtils.validateArgs(args));
+    }
+
+    @Test
+    public void testValidateArgsFirstArgumentIsHelpFlagFollowedByArgumentWithNewlineCharacter() {
+        String[] args = {"--help", "go\nogle"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 

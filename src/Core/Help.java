@@ -45,6 +45,6 @@ public class Help {
      * @return A message saying that the argument(s) (or lack of) are invalid. Also suggests usage of the help flag.
      */
     public static String getInvalidArgMessage() {
-        return "\nInvalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.";
+        return "\nInvalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.\n";
     }
 }

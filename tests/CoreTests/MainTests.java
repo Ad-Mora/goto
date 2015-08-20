@@ -1,16 +1,19 @@
 package CoreTests;
 
+import Core.Help;
 import Core.Main;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URISyntaxException;
 
 /**
  * Created by AdrianM on 8/2/15.
@@ -39,7 +42,14 @@ import java.io.PrintStream;
  * - First argument is a qualified URL
  * - First argument is a non-flag argument, followed by another non-flag argument
  * - First argument is a non-flag argument, followed by a valid flag
+ * - First argument is not a flag, second argument present
+ * - First argument is not a flag, followed by two or more arguments
  * - First argument contains a newline character
+ *
+ * - First argument is the help flag, no following arguments
+ * - First argument is the help flag, second argument is another valid flag
+ * - First argument is the help flag, second argument is not a valid flag
+ * - First argument is the help flag, second argument contains a newline character
  *
  * - First argument is the view bookmarks flag, no following arguments
  * - First argument is the view bookmarks flag, second argument is another valid flag
@@ -134,7 +144,11 @@ public class MainTests {
     // main(String[] args) tests
 
     @Test
-    public void testMainEmptyArgsArray() {
+    public void testMainEmptyArgsArray() throws IOException, URISyntaxException {
+        String[] args = {};
+        Main.main(args);
+
+        assertTrue(outContent.toString().equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
@@ -162,7 +176,31 @@ public class MainTests {
     }
 
     @Test
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsPresent() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsNotAValidFlagFollowedByAtLeastTwoArguments() {
+    }
+
+    @Test
     public void testMainFirstArgumentContainsNewlineCharacter() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsHelpFlagNoFollowingArguments() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsNotAValidFlag() {
+    }
+
+    @Test
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() {
     }
 
     @Test
