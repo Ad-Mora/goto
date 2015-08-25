@@ -36,15 +36,10 @@ import org.apache.commons.io.FileUtils;
  */
 public class Main {
 
-//    TODO: Check that given aliases are not flags
-//    TODO: main tests
 //    TODO: Update Help messages
-//    TODO: View existing bookmarks
-//    TODO: Check for newline characters in aliases
-//    TODO: Ensure that a newline character is not present in a url or alias
-//    TODO: Update cleanBookmarkFile multiple aliases tests
 //    TODO: Add newline character to end of all writeStringToFile statements
 //    TODO: Decide on ambiguous test cases in ArgUtils
+//    TODO: Replace flag strings in tests with Main constants
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -61,6 +56,8 @@ public class Main {
 
     // Debug
     public static boolean DEBUG = false;
+    public static String OPEN_BROWSER_AT_MESSAGE = "Open browser at ";
+
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
@@ -99,7 +96,7 @@ public class Main {
                         url = ArgUtils.formatURL(firstArg);
                     }
                     if (DEBUG) {
-                        System.out.println("Open browser at: " + url);
+                        System.out.println(OPEN_BROWSER_AT_MESSAGE + url);
                     } else {
                         Desktop.getDesktop().browse(new URI(url));
                     }

@@ -40,9 +40,10 @@ import java.net.URISyntaxException;
  * - First argument is an alias
  * - First argument is not a qualified URL
  * - First argument is a qualified URL
- * - First argument is a non-flag argument, followed by another non-flag argument
- * - First argument is a non-flag argument, followed by a valid flag
- * - First argument is not a flag, second argument present
+ * - First argument is not a flag, followed by another non-flag argument
+ * - First argument is not a flag, followed by a valid flag
+ * - First argument is a valid alias, second argument is present but not a flag
+ * - First argument is a valid alias, second argument is a valid flag
  * - First argument is not a flag, followed by two or more arguments
  * - First argument contains a newline character
  *
@@ -148,59 +149,193 @@ public class MainTests {
         String[] args = {};
         Main.main(args);
 
-        assertTrue(outContent.toString().equals(Help.getInvalidArgMessage() + "\n"));
+        // Begin tests
+        String output = outContent.toString();
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentNotAnAlias() {
+    public void testMainFirstArgumentNotAnAlias() throws IOException, URISyntaxException {
+        String[] args = {"google"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsAnAlias() {
+    public void testMainFirstArgumentIsAnAlias() throws IOException, URISyntaxException {
+        String[] args = {"alias2"};
+
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.facebook.com\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsUnqualifiedURL() {
+    public void testMainFirstArgumentIsUnqualifiedURL() throws IOException, URISyntaxException {
+        String[] args = {"google"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsQualifiedURL() {
+    public void testMainFirstArgumentIsQualifiedURL() throws IOException, URISyntaxException {
+        String[] args = {"http://www.apple.com"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.apple.com\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsNotAValidFlag() {
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {"alias1", "secondArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsAValidFlag() {
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {"alias1", "--help"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsPresent() {
+    public void testMainFirstArgumentIsNotAValidFlagFollowedByAtLeastTwoArguments() throws IOException, URISyntaxException {
+        String[] args = {"alias1", "secondArg", "thirdArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagFollowedByAtLeastTwoArguments() {
+    public void testMainFirstArgumentIsAValidAliasSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {"alias3", "secondArg"};
+
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentContainsNewlineCharacter() {
+    public void testMainFirstArgumentIsAValidAliasSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {"alias1", "--help"};
+
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagNoFollowingArguments() {
+    public void testMainFirstArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+        String[] args = {"ali\nas1"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsValidFlag() {
+    public void testMainFirstArgumentIsHelpFlagNoFollowingArguments() throws IOException, URISyntaxException {
+        String[] args = {"--help"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getHelp() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsNotAValidFlag() {
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsValidFlag() throws IOException, URISyntaxException {
+        String[] args = {"--help", "--bookmark"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() {
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {"--help", "secondArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+    }
+
+    @Test
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
+        String[] args = {"--help", "second\nArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
     }
 
     @Test
@@ -306,18 +441,31 @@ public class MainTests {
     @Test
     public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() {
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

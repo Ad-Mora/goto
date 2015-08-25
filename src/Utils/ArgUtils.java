@@ -71,9 +71,9 @@ public class ArgUtils {
      */
     public static boolean validateArgs(String[] args) {
         if (1==1) {
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 }
