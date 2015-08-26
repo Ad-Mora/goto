@@ -1,6 +1,5 @@
 package CoreTests;
 
-import Core.Bookmark;
 import Core.Help;
 import Core.Main;
 import org.apache.commons.io.FileUtils;
@@ -22,7 +21,10 @@ import java.util.List;
 /*
  * Testing outline:
  *
- * - Bookmark file path is of the form home directory/general project directory/
+ * ##################################################
+ * General tests:
+ *
+ * - Check that the bookmark file path is of the form home directory/general project directory/
  * goto directory/bookmark file
  * - General project directory does not exist
  * - General project directory exists, goto directory does not exist
@@ -71,8 +73,13 @@ import java.util.List;
  * - First argument is the bookmark flag, second argument is a valid flag
  * - First argument is the bookmark flag, second argument is a valid alias
  * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument
- * is an unqualified URL
- * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument is a qualified URL
+ * is an unqualified URL, no other existing bookmarks
+ * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument is a qualified URL,
+ * no other existing bookmarks
+ * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument is an unqualified
+ * URL, file contains existing bookmarks
+ * - First argument is the bookmark flag, second argument is not an alias or a flag, third argument is a qualified
+ * URL, file contains existing bookmarks
  * - First argument is the bookmark flag, second argument is a valid alias, third argument is an unqualified URL
  * - First argument is the bookmark flag, second argument is a valid alias, third argument is a qualified URL
  * - First argument is the bookmark flag, second argument is a valid flag, third argument is an unqualified URL
@@ -84,9 +91,8 @@ import java.util.List;
  * - First argument is the bookmark flag, second argument contains a newline character
  * - First argument is the bookmark flag, second argument is present, third argument contains a newline character
  *
- * - Consecutively bookmark two different alias URL paris // TODO
- * - Consecutively delete two different bookmarks // TODO
- *
+ * - Consecutively bookmark two different alias URL paris
+ * - Consecutively delete two different bookmarks
  */
 
 public class MainTests {
@@ -144,6 +150,33 @@ public class MainTests {
 
         // Reset DEBUG to false
         Main.DEBUG = false;
+    }
+
+    // ####################################################################################################
+    // General tests
+
+    @Test
+    public void testMainBookmarkFilePathHasCorrectForm() {
+    }
+
+    @Test
+    public void testMainGeneralProjectDirectoryDoesNotExist() {
+    }
+
+    @Test
+    public void testMainGeneralProjectDirectoryExistsGotoDirectoryDoesNotExist() {
+    }
+
+    @Test
+    public void testMainGeneralProjectDirectoryExistsGotoDirectoryExistsFileDoesNotExist() {
+    }
+
+    @Test
+    public void testMainFileExistsInvalidlyFormattedData() {
+    }
+
+    @Test
+    public void testMainFileExistsValidlyFormattedData() {
     }
 
     // ####################################################################################################
@@ -517,67 +550,334 @@ public class MainTests {
         String output = outContent.toString();
 
         assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
-
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagNoFollowingArguments() {
+    public void testMainFirstArgumentIsBookmarkFlagNoFollowingArguments() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlag() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlag() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "secondArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidFlag() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, Main.DELETE_BOOKMARK_FLAG};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidAlias() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidAlias() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "alias1"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURL() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURLNoExistingBookmarks() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "apl", "apple"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("apl http://www.apple.com"));
+        assertTrue(bookmarks.size() == 1);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURL() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURLNoExistingBookmarks() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "apl", "http://www.apple.com"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("apl http://www.apple.com"));
+        assertTrue(bookmarks.size() == 1);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsUnqualifiedURL() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURLExistingBookmarks() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "testAlias", "microsoft.com"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("testAlias http://www.microsoft.com"));
+        assertTrue(bookmarks.size() == 4);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsQualifiedURL() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURLExistingBookmarks() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "testAlias", "https://www.microsoft.com"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("testAlias https://www.microsoft.com"));
+        assertTrue(bookmarks.size() == 4);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsUnqualifiedURL() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsUnqualifiedURL() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "alias1", "https://www.apple"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 https://www.apple.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsQualifiedURL() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsQualifiedURL() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "alias3", "http://www.stackoverflow.com"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentNotValidAliasOrFlagThirdAndFourthArgumentsPresent() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsUnqualifiedURL() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, Main.HELP_FLAG, "google"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(bookmarks.size() == 0);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdAndFourthArgumentsPresent() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsQualifiedURL() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, Main.HELP_FLAG, "http://www.google.com"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(bookmarks.size() == 0);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdAndFourthArgumentsPresent() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentNotValidAliasOrFlagThirdAndFourthArgumentsPresent() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "secondArg", "thirdArg", "fourthArg"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(bookmarks.size() == 0);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentContainsNewlineCharacter() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdAndFourthArgumentsPresent() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "alias2", "thirdArg", "fourthArg"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdAndFourthArgumentsPresent() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG, "thirdArg", "fourthArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "ali\nas1"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+    }
+
+    @Test
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+        String[] args = {Main.BOOKMARK_FLAG, "alias1", "goo\ngle"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(bookmarks.size() == 0);
+    }
+
+    @Test
+    public void testMainBookmarkTwoAliasURLPairsInARow() throws IOException, URISyntaxException {
+        String[] args1 = {Main.BOOKMARK_FLAG, "alias1", "google"};
+        String[] args2 = {Main.BOOKMARK_FLAG, "alias2", "facebook"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        Main.main(args1);
+        Main.main(args2);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.size() == 2);
+    }
+
+    @Test
+    public void testMainDeleteTwoBookmarksInARow() throws IOException, URISyntaxException {
+        String[] args1 = {Main.DELETE_BOOKMARK_FLAG, "alias2"};
+        String[] args2 = {Main.DELETE_BOOKMARK_FLAG, "alias1"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args1);
+        Main.main(args2);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 1);
     }
 }
 
