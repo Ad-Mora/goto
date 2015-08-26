@@ -419,7 +419,6 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
-        assertTrue(!bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
         assertTrue(bookmarks.size() == 2);
     }

@@ -432,27 +432,92 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAValidFlagOrExistingAlias() {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAValidFlagOrExistingAlias() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getAliasDoesNotExistMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, Main.BOOKMARK_FLAG};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAlias() {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAlias() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "alias3"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.size() == 2);
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAnExistingAliasThirdArgumentIsPresent() {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAnExistingAliasThirdArgumentIsPresent() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondArg", "thirdArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAliasThirdArgumentIsPresent() {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAliasThirdArgumentIsPresent() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "alias2", "thirdArg"};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondA\nrg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+
     }
 
     @Test

@@ -39,7 +39,7 @@ public class Main {
 //    TODO: Replace flag strings in tests with Main constants
 //    TODO: Replace all newlines in program with generic System.getLineSeparator()
 //    TODO: Ensure newline after new bookmark is placed in file
-//    TODO: All returned strings do not end with a newline character
+//    TODO: All returned strings do not end with a newline character mention somewhere
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
