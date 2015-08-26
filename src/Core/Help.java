@@ -33,7 +33,7 @@ public class Help {
 
         helpString += "Possible optional flags are as follows:\n\n";
 
-        helpString += Main.HELP_FLAG + ": Get help with goto (see this information again)\n";
+        helpString += Main.HELP_FLAG + ": Get help with goto (see this information again)";
 
         return helpString;
     }
@@ -45,7 +45,7 @@ public class Help {
      * @return A message saying that the argument(s) (or lack of) are invalid. Also suggests usage of the help flag.
      */
     public static String getInvalidArgMessage() {
-        return "Invalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.\n";
+        return "Invalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.";
     }
 
     /**
@@ -54,7 +54,7 @@ public class Help {
      * @return A message saying that the alias in question does not exist.
      */
     public static String getAliasDoesNotExistMessage() {
-        return "Alias does not exist\n";
+        return "Alias does not exist";
     }
 
     /**
@@ -64,6 +64,6 @@ public class Help {
      * @return A message saying that there are no bookmarks currently saved.
      */
     public static String getNoBookmarksSavedMessage() {
-        return "There are no bookmarks currently saved\n";
+        return "There are no bookmarks currently saved";
     }
 }

@@ -68,7 +68,9 @@ public class Bookmark {
             aliasesToURLs.remove(alias);
             updateBookmarkFile(bookmarkFile, aliasesToURLs);
         } else {
+            System.out.println();
             System.out.println(Help.getAliasDoesNotExistMessage());
+            System.out.println("\n");
         }
     }
 
@@ -81,11 +83,14 @@ public class Bookmark {
     public static String getBookmarks(File bookmarkFile) {
         Map<String, String> aliasesToURLs = getBookmarkFileData(bookmarkFile);
         String bookmarks = "";
-        for (String alias : aliasesToURLs.keySet()) {
-            String url = aliasesToURLs.get(alias);
-            bookmarks += alias + " - " + url + "\n";
-        }
-        if (bookmarks.equals("")) {
+
+        if (aliasesToURLs.size() > 0) {
+            for (String alias : aliasesToURLs.keySet()) {
+                String url = aliasesToURLs.get(alias);
+                bookmarks += alias + " - " + url + "\n";
+            }
+            bookmarks = bookmarks.trim();
+        } else {
             bookmarks = Help.getNoBookmarksSavedMessage();
         }
         return bookmarks;

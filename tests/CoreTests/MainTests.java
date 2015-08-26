@@ -221,7 +221,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -232,7 +232,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -243,7 +243,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -264,7 +264,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -285,7 +285,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -296,7 +296,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -307,7 +307,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getHelp() + "\n"));
+        assertTrue(output.equals("\n" + Help.getHelp() + "\n\n"));
     }
 
     @Test
@@ -318,7 +318,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -329,7 +329,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -340,7 +340,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
@@ -351,23 +351,84 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n"));
+        assertTrue(output.equals("\n" + Help.getNoBookmarksSavedMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsAnotherValidFlag() {
+    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArgumentsFileContainsBookmarks() throws IOException, URISyntaxException {
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+        BufferedReader reader = new BufferedReader(new StringReader(output));
+        List<String> bookmarks = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            bookmarks.add(line);
+        }
+        reader.close();
+
+        assertTrue(output.startsWith("\n"));
+        assertTrue(output.endsWith("\n\n"));
+        assertTrue(bookmarks.contains("alias1 - http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 - http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 - http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 5);
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsNotValidFlag() {
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsAnotherValidFlag() throws IOException, URISyntaxException {
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, Main.HELP_FLAG};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentContainsNewlineCharacter() {
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsNotValidFlag() throws IOException, URISyntaxException {
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "secondArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagNoFollowingArguments() {
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "second\nArg"};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+    }
+
+    @Test
+    public void testMainFirstArgumentIsDeleteBookmarkFlagNoFollowingArguments() throws IOException, URISyntaxException {
+        String[] args = {Main.DELETE_BOOKMARK_FLAG};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
     }
 
     @Test

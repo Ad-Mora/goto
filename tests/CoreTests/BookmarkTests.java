@@ -460,7 +460,6 @@ public class BookmarkTests {
         assertTrue(bookmarksList.contains("alias1 - http://www.google.com"));
         assertTrue(bookmarksList.contains("alias2 - http://www.facebook.com"));
         assertTrue(bookmarksList.contains("alias3 - http://www.youtube.com"));
-        assertTrue(bookmarks.endsWith("\n"));
         assertTrue(bookmarksList.size() == 3);
     }
 

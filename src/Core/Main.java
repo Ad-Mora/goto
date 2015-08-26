@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.*;
 
 import Utils.ArgUtils;
 
@@ -38,6 +39,7 @@ public class Main {
 //    TODO: Replace flag strings in tests with Main constants
 //    TODO: Replace all newlines in program with generic System.getLineSeparator()
 //    TODO: Ensure newline after new bookmark is placed in file
+//    TODO: All returned strings do not end with a newline character
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -73,7 +75,9 @@ public class Main {
 
             switch (firstArg) {
                 case HELP_FLAG:
+                    System.out.println();
                     System.out.println(Help.getHelp());
+                    System.out.println("\n");
                     break;
                 case BOOKMARK_FLAG:
                     alias = args[1];
@@ -83,10 +87,11 @@ public class Main {
                 case DELETE_BOOKMARK_FLAG:
                     alias = args[1];
                     Bookmark.deleteBookmark(bookmarkFile, alias);
-                    System.out.println(Help.getInvalidArgMessage());
                     break;
                 case VIEW_BOOKMARKS_FLAG:
+                    System.out.println();
                     System.out.println(Bookmark.getBookmarks(bookmarkFile));
+                    System.out.println("\n");
                     break;
                 default:
                     url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
