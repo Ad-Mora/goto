@@ -50,7 +50,7 @@ public class Bookmark {
                 String entry = getLineEntry(alias, url);
                 FileUtils.writeStringToFile(bookmarkFile, entry, true);
             } catch (IOException e) {
-                System.out.println("Error writing to file");
+                System.out.println("Error writing to file"); // TODO
             }
         }
     }
@@ -68,21 +68,27 @@ public class Bookmark {
             aliasesToURLs.remove(alias);
             updateBookmarkFile(bookmarkFile, aliasesToURLs);
         } else {
-            System.out.println("Alias does not exist");
+            System.out.println(Help.getAliasDoesNotExistMessage());
         }
     }
 
     /**
-     * Prints out all bookmarks from the bookmark file.
+     * Returns a properly formatted String displaying all existing bookmarks in the bookmark file. If there are
+     * no existing bookmarks, a message saying that there are no existing bookmarks is returned.
      *
      * @param bookmarkFile the file containing the bookmarks. Must exist, and be properly formatted
      */
-    public static void viewBookmarks(File bookmarkFile) {
+    public static String getBookmarks(File bookmarkFile) {
         Map<String, String> aliasesToURLs = getBookmarkFileData(bookmarkFile);
+        String bookmarks = "";
         for (String alias : aliasesToURLs.keySet()) {
             String url = aliasesToURLs.get(alias);
-            System.out.println(alias + " - " + url);
+            bookmarks += alias + " - " + url + "\n";
         }
+        if (bookmarks.equals("")) {
+            bookmarks = Help.getNoBookmarksSavedMessage();
+        }
+        return bookmarks;
     }
 
     /**
@@ -99,7 +105,7 @@ public class Bookmark {
         try {
             bookmarkFile.createNewFile();
         } catch(IOException ex) {
-            System.out.println("Error creating file");
+            System.out.println("Error creating file"); // TODO
         }
     }
 
@@ -136,7 +142,7 @@ public class Bookmark {
             }
             reader.close();
         } catch(FileNotFoundException ex) {
-            System.out.println("File not found");
+            System.out.println("File not found"); // TODO
         } catch(IOException ex) {
             System.out.println("Error reading file");
         }
@@ -160,7 +166,7 @@ public class Bookmark {
                 FileUtils.writeStringToFile(bookmarkFile, entry, true);
             }
         } catch(FileNotFoundException ex) {
-            System.out.println("File not found");
+            System.out.println("File not found"); // TODO
         } catch(IOException ex) {
             System.out.println("Error writing to file");
         }

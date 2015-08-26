@@ -18,7 +18,7 @@ public class Help {
      * possible flags and their descriptions.
      */
     public static String getHelp() {
-        String helpString = "\n";
+        String helpString = "";
         helpString += "Welcome to goto. This is a command line program that enables a user to browse the web from " +
                 "the command line.\n\n";
 
@@ -45,6 +45,25 @@ public class Help {
      * @return A message saying that the argument(s) (or lack of) are invalid. Also suggests usage of the help flag.
      */
     public static String getInvalidArgMessage() {
-        return "\nInvalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.\n";
+        return "Invalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.\n";
+    }
+
+    /**
+     * This method is called when a user tries to retrieve or edit an alias that does not exist.
+     *
+     * @return A message saying that the alias in question does not exist.
+     */
+    public static String getAliasDoesNotExistMessage() {
+        return "Alias does not exist\n";
+    }
+
+    /**
+     * This method is called when a user tries to view the existing bookmarks, and there are no existing
+     * bookmarks to view.
+     *
+     * @return A message saying that there are no bookmarks currently saved.
+     */
+    public static String getNoBookmarksSavedMessage() {
+        return "There are no bookmarks currently saved\n";
     }
 }

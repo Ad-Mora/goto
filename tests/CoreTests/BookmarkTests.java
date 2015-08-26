@@ -2,6 +2,7 @@ package CoreTests;
 
 
 import Core.Bookmark;
+import Core.Help;
 import Core.Main;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
@@ -50,7 +51,7 @@ import static org.junit.Assert.*;
  * - Alias exists in file
  *
  * ##################################################
- * public static void viewBookmarks(File bookmarkFile)
+ * public static void getBookmarks(File bookmarkFile)
  *
  * bookmarkFile:
  *
@@ -344,7 +345,9 @@ public class BookmarkTests {
 
         // Begin tests
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+        String output = outContent.toString();
 
+        assertTrue(output.equals(Help.getAliasDoesNotExistMessage() + "\n"));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -364,7 +367,9 @@ public class BookmarkTests {
 
         // Begin tests
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+        String output = outContent.toString();
 
+        assertTrue(output.equals(Help.getAliasDoesNotExistMessage() + "\n"));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -387,7 +392,9 @@ public class BookmarkTests {
 
         // Begin tests
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+        String output = outContent.toString();
 
+        assertTrue(output.equals(Help.getAliasDoesNotExistMessage() + "\n"));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -418,18 +425,18 @@ public class BookmarkTests {
     }
 
     // ####################################################################################################
-    // public static void viewBookmarks(File bookmarkFile) tests
+    // public static void getBookmarks(File bookmarkFile) tests
 
     @Test
-    public void testViewBookmarksEmptyFile() throws IOException {
+    public void testGetBookmarksEmptyFile() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        Bookmark.viewBookmarks(bookmarkFile);
+        String bookmarks = Bookmark.getBookmarks(bookmarkFile);
 
-        assertTrue(outContent.toString().equals(""));
+        assertTrue(bookmarks.equals(Help.getNoBookmarksSavedMessage()));
     }
 
     @Test
-    public void testViewBookmarksExistingBookmarks() throws IOException {
+    public void testGetBookmarksExistingBookmarks() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         String entry1 = "alias1 http://www.google.com";
         String entry2 = "alias2 http://www.facebook.com";
@@ -439,22 +446,22 @@ public class BookmarkTests {
         FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
         FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
-        Bookmark.viewBookmarks(bookmarkFile);
+        String bookmarks = Bookmark.getBookmarks(bookmarkFile);
 
         // Begin tests
-        String output = outContent.toString();
-        BufferedReader reader = new BufferedReader(new StringReader(output));
-        List<String> bookmarks = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new StringReader(bookmarks));
+        List<String> bookmarksList = new ArrayList<>();
         String line;
         while ((line = reader.readLine()) != null) {
-            bookmarks.add(line);
+            bookmarksList.add(line);
         }
         reader.close();
 
-        assertTrue(bookmarks.contains("alias1 - http://www.google.com"));
-        assertTrue(bookmarks.contains("alias2 - http://www.facebook.com"));
-        assertTrue(bookmarks.contains("alias3 - http://www.youtube.com"));
-        assertTrue(bookmarks.size() == 3);
+        assertTrue(bookmarksList.contains("alias1 - http://www.google.com"));
+        assertTrue(bookmarksList.contains("alias2 - http://www.facebook.com"));
+        assertTrue(bookmarksList.contains("alias3 - http://www.youtube.com"));
+        assertTrue(bookmarks.endsWith("\n"));
+        assertTrue(bookmarksList.size() == 3);
     }
 
     // ####################################################################################################

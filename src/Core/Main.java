@@ -4,12 +4,8 @@ import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
-import java.util.List;
 
 import Utils.ArgUtils;
-import com.sun.org.apache.xpath.internal.Arg;
-import org.apache.commons.io.FileUtils;
 
 /**
  * Created by AdrianM on 6/18/15.
@@ -40,6 +36,8 @@ public class Main {
 //    TODO: Add newline character to end of all writeStringToFile statements
 //    TODO: Decide on ambiguous test cases in ArgUtils
 //    TODO: Replace flag strings in tests with Main constants
+//    TODO: Replace all newlines in program with generic System.getLineSeparator()
+//    TODO: Ensure newline after new bookmark is placed in file
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -79,7 +77,7 @@ public class Main {
                     break;
                 case BOOKMARK_FLAG:
                     alias = args[1];
-                    url = args[2]; // format URL? yes
+                    url = args[2]; // format URL? yes TODO
                     Bookmark.bookmark(bookmarkFile, alias, url);
                     break;
                 case DELETE_BOOKMARK_FLAG:
@@ -88,7 +86,7 @@ public class Main {
                     System.out.println(Help.getInvalidArgMessage());
                     break;
                 case VIEW_BOOKMARKS_FLAG:
-                    Bookmark.viewBookmarks(bookmarkFile);
+                    System.out.println(Bookmark.getBookmarks(bookmarkFile));
                     break;
                 default:
                     url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);

@@ -1,5 +1,6 @@
 package CoreTests;
 
+import Core.Bookmark;
 import Core.Help;
 import Core.Main;
 import org.apache.commons.io.FileUtils;
@@ -9,11 +10,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by AdrianM on 8/2/15.
@@ -52,7 +52,8 @@ import java.net.URISyntaxException;
  * - First argument is the help flag, second argument is not a valid flag
  * - First argument is the help flag, second argument contains a newline character
  *
- * - First argument is the view bookmarks flag, no following arguments
+ * - First argument is the view bookmarks flag, no following arguments, empty file
+ * - First argument is the view bookmarks flag, no following arguments, file contains bookmarks
  * - First argument is the view bookmarks flag, second argument is another valid flag
  * - First argument is the view bookmarks flag, second argument is not a valid flag
  * - First argument is the view bookmarks flag, second argument contains a newline character
@@ -82,6 +83,10 @@ import java.net.URISyntaxException;
  * - First argument is the bookmark flag, second argument is a valid flag, third and fourth arguments are present
  * - First argument is the bookmark flag, second argument contains a newline character
  * - First argument is the bookmark flag, second argument is present, third argument contains a newline character
+ *
+ * - Consecutively bookmark two different alias URL paris // TODO
+ * - Consecutively delete two different bookmarks // TODO
+ *
  */
 
 public class MainTests {
@@ -244,8 +249,8 @@ public class MainTests {
     @Test
     public void testMainFirstArgumentIsAValidAliasSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
         String[] args = {"alias3", "secondArg"};
-
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
         String entry1 = "alias1 http://www.google.com";
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
@@ -265,8 +270,8 @@ public class MainTests {
     @Test
     public void testMainFirstArgumentIsAValidAliasSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
         String[] args = {"alias1", "--help"};
-
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
         String entry1 = "alias1 http://www.google.com";
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
@@ -339,7 +344,14 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArguments() {
+    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArgumentsEmptyFile() throws IOException, URISyntaxException {
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG};
+        Main.main(args);
+
+        // Begin tests
+        String output = outContent.toString();
+
+        assertTrue(output.equals("\n"));
     }
 
     @Test
