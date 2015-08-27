@@ -1,6 +1,7 @@
 package UtilsTests;
 
 import Core.Main;
+import Core.Strings;
 import Utils.ArgUtils;
 import org.junit.Test;
 
@@ -280,7 +281,7 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsOneInvalidArgument() {
-        String[] args = {"\n"};
+        String[] args = {Strings.NEWLINE};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -310,49 +311,50 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsOneNewlineCharacterSingleArgument() {
-        String[] args = {"goo\ngle"};
+        String[] args = {"goo" + Strings.NEWLINE +"gle"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsOneNewlineCharacterMultipleArguments() {
-        String[] args = {Main.BOOKMARK_FLAG, "google", "http://\nwww.google.com"};
+        String[] args = {Main.BOOKMARK_FLAG, "google", "http://" + Strings.NEWLINE + "www.google.com"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsNewlineCharacterAtBeginningOfArgumentSingleArgument() {
-        String[] args = {"\napple"};
+        String[] args = {Strings.NEWLINE + "apple"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsNewlineCharacterAtEndOfArgumentSingleArgument() {
-        String[] args = {"google\n"};
+        String[] args = {"google" + Strings.NEWLINE};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsNewlineCharacterAtBeginningOfArgumentsMultipleArguments() {
-        String[] args = {"\n" + Main.DELETE_BOOKMARK_FLAG, "apple"};
+        String[] args = {Strings.NEWLINE + Main.DELETE_BOOKMARK_FLAG, "apple"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsNewlineCharacterAtEndOfArgumentsMultipleArguments() {
-        String[] args = {Main.DELETE_BOOKMARK_FLAG, "stackoverflow\n"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "stackoverflow" + Strings.NEWLINE};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsMultipleNewlineCharactersSingleArgument() {
-        String[] args = {"fa\nce\nbook\n"};
+        String[] args = {"fa" + Strings.NEWLINE + "ce" + Strings.NEWLINE + "book" + Strings.NEWLINE};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsMultipleNewlineCharactersMultipleArguments() {
-        String[] args = {Main.BOOKMARK_FLAG, "micro\nsoft\n", "\nmicrosoft.\ncom"};
+        String[] args = {Main.BOOKMARK_FLAG, "micro" + Strings.NEWLINE + "soft" + Strings.NEWLINE,
+                Strings.NEWLINE + "microsoft." + Strings.NEWLINE + "com"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -388,7 +390,7 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsFirstArgumentIsHelpFlagFollowedByArgumentWithNewlineCharacter() {
-        String[] args = {Main.HELP_FLAG, "go\nogle"};
+        String[] args = {Main.HELP_FLAG, "go" + Strings.NEWLINE + "ogle"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -412,7 +414,7 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsFirstArgumentIsViewBookmarksFollowedByArgumentWithNewline() {
-        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "secondA\nrg"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "secondA" + Strings.NEWLINE + "rg"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -442,7 +444,7 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() {
-        String[] args = {Main.DELETE_BOOKMARK_FLAG, "arg\n2"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "arg" + Strings.NEWLINE + "2"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -496,13 +498,13 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentContainsANewlineCharacter() {
-        String[] args = {Main.BOOKMARK_FLAG, "goo\ngle"};
+        String[] args = {Main.BOOKMARK_FLAG, "goo" + Strings.NEWLINE +"gle"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentHasNewlineCharacter() {
-        String[] args = {Main.BOOKMARK_FLAG, "fb", "http://www.face\nbook.com"};
+        String[] args = {Main.BOOKMARK_FLAG, "fb", "http://www.face" + Strings.NEWLINE + "book.com"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 }

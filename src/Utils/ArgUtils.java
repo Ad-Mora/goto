@@ -5,6 +5,7 @@ package Utils;
  */
 
 import Core.Main;
+import Core.Strings;
 
 /**
  * This class provides helper functions to parse in the arguments given by the user.
@@ -83,8 +84,8 @@ public class ArgUtils {
                 }
                 alias = args[1];
                 url = args[2];
-                if (alias.contains("\n") ||
-                        url.contains("\n") ||
+                if (alias.contains(Strings.NEWLINE) ||
+                        url.contains(Strings.NEWLINE) ||
                         Main.VALID_FLAGS.contains(alias)) {
                     return false;
                 }
@@ -94,7 +95,7 @@ public class ArgUtils {
                     return false;
                 }
                 alias = args[1];
-                if (alias.contains("\n") || Main.VALID_FLAGS.contains(alias)) {
+                if (alias.contains(Strings.NEWLINE) || Main.VALID_FLAGS.contains(alias)) {
                     return false;
                 }
                 break;
@@ -109,7 +110,7 @@ public class ArgUtils {
                 }
                 break;
             default:
-                if (args.length != 1 || firstArg.contains("\n")) {
+                if (args.length != 1 || firstArg.contains(Strings.NEWLINE)) {
                     return false;
                 }
                 break;

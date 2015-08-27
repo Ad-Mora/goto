@@ -28,6 +28,12 @@ public class Strings {
     public static String INVALID_ARGS = "Invalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.";
     public static String ALIAS_DOES_NOT_EXIST = "Alias does not exist";
     public static String NO_BOOKMARKS_SAVED = "There are no bookmarks currently saved";
+    public static String ERROR_WRITING_TO_FILE = "Error writing to file";
+    public static String ERROR_CREATING_BOOKMARK_FILE = "Error creating bookmark file";
+    public static String FILE_NOT_FOUND = "File not found";
+    public static String ERROR_READING_FROM_FILE = "Error reading from file";
+    public static String NEWLINE = System.lineSeparator();
+    public static String DOUBLE_NEWLINE = System.lineSeparator() + System.lineSeparator();
 
 
 }

@@ -207,7 +207,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("newAlias http://www.google.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -219,9 +219,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.stackoverflow.com";
@@ -231,7 +231,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -246,9 +246,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.stackoverflow.com";
@@ -258,7 +258,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -273,9 +273,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias2";
         String newUrl = "http://www.stackoverflow.com";
@@ -285,7 +285,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.stackoverflow.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -299,9 +299,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.stackoverflow.com";
@@ -311,7 +311,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -326,9 +326,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "newAlias";
         String newUrl = "http://www.google.com";
@@ -338,7 +338,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -359,7 +359,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.ALIAS_DOES_NOT_EXIST + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -370,9 +370,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
@@ -382,8 +382,8 @@ public class BookmarkTests {
         String output = outContent.toString();
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
-        assertTrue(output.equals("\n" + Strings.ALIAS_DOES_NOT_EXIST + "\n\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + "Strings.DOUBLE_NEWLINE"));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -397,9 +397,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String aliasToDelete = "aliasToDelete";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
@@ -409,8 +409,8 @@ public class BookmarkTests {
         String output = outContent.toString();
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
-        assertTrue(output.equals("\n" + Strings.ALIAS_DOES_NOT_EXIST + "\n\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -424,9 +424,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String aliasToDelete = "alias2";
         Bookmark.deleteBookmark(bookmarkFile, aliasToDelete);
@@ -435,7 +435,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
         assertTrue(bookmarks.size() == 2);
@@ -459,9 +459,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String bookmarks = Bookmark.getFormattedBookmarks(bookmarkFile);
 
@@ -577,9 +577,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.createBookmarkFile(bookmarkFile);
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
@@ -614,9 +614,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -624,7 +624,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -636,14 +636,14 @@ public class BookmarkTests {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
         String entry1 = "alias1 google";
-        String entry2 = "\n\n\ntestLine\n\n";
+        String entry2 = Strings.DOUBLE_NEWLINE + Strings.NEWLINE + "testLine" + Strings.DOUBLE_NEWLINE;
         String entry3 = "   alias2 http://www.facebook.com    ";
         String entry4 = "d";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -651,7 +651,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(!bookmarksString.endsWith("\n"));
+        assertTrue(!bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -663,10 +663,10 @@ public class BookmarkTests {
         String entry3 = "     alias3 http://www.youtube.com";
         String entry4 = "";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -674,7 +674,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -688,11 +688,11 @@ public class BookmarkTests {
         String entry4 = "arg1 arg2 alias3 http://www.youtube.com arg3";
         String entry5 = "alias3 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -700,7 +700,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias3 http://www.stackoverflow.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -712,9 +712,9 @@ public class BookmarkTests {
         String entry2 = "alias2 facebook";
         String entry3 = "alias3 youtube";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -722,7 +722,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -734,9 +734,9 @@ public class BookmarkTests {
         String entry2 = "alias1 http://www.youtube.com";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -744,7 +744,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com")
                 || bookmarks.contains("alias1 http://www.youtube.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -758,9 +758,9 @@ public class BookmarkTests {
         String entry2 = "alias1 youtube    ";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -768,7 +768,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 2);
@@ -782,9 +782,9 @@ public class BookmarkTests {
         String entry2 = "alias1 http://www.youtube.com extraArg";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -792,7 +792,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -807,12 +807,12 @@ public class BookmarkTests {
         String entry5 = "alias1 http://www.apple.com";
         String entry6 = "alias2 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -820,7 +820,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com") ||
                 bookmarks.contains("alias1 http://www.apple.com") ||
                 bookmarks.contains("alias1 http://www.youtube.com"));
@@ -840,12 +840,12 @@ public class BookmarkTests {
         String entry5 = "alias1 http://www.apple";
         String entry6 = "alias2 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -853,7 +853,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com") ||
                 bookmarks.contains("alias1 http://www.youtube.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com") ||
@@ -872,12 +872,12 @@ public class BookmarkTests {
         String entry5 = "alias1 apple.com";
         String entry6 = "alias2 http://www.stackoverflow.com extraArg";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -885,7 +885,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias3 http://www.microsoft.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -898,10 +898,10 @@ public class BookmarkTests {
         String entry3 = "alias3 http://www.youtube.com       ";
         String entry4 = "alias4 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -909,7 +909,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -921,9 +921,9 @@ public class BookmarkTests {
         String entry2 = "alias2       http://www.facebook.com";
         String entry3 = "alias3  http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -931,7 +931,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -943,9 +943,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = " alias3  http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -953,7 +953,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -965,9 +965,9 @@ public class BookmarkTests {
         String entry2 = "";
         String entry3 = "alias2 http://www.facebook.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -975,7 +975,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 2);
@@ -985,18 +985,18 @@ public class BookmarkTests {
     public void testCleanBookmarkFileMultipleBlankLinesBetweenEntries() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         String entry1 = "alias1 http://www.google.com";
-        String entry2 = "\n\n\n\n\n\n\n\n\n\n";
+        String entry2 = Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE;
         String entry3 = "alias2 http://www.facebook.com";
         String entry4 = "alias3 http://www.youtube.com";
-        String entry5 = "\n\n";
+        String entry5 = Strings.DOUBLE_NEWLINE;
         String entry6 = "alias4 http://www.stackoverflow.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1004,7 +1004,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1015,15 +1015,15 @@ public class BookmarkTests {
     @Test
     public void testCleanBookmarkFileLeadingBlankLinesInFile() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String entry1 = "\n\n\n\n\n\n\n\n\n\n";
+        String entry1 = Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE;
         String entry2 = "alias1 http://www.google.com";
         String entry3 = "alias2 http://www.facebook.com";
         String entry4 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1031,7 +1031,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1044,12 +1044,12 @@ public class BookmarkTests {
         String entry1 = "alias3 http://www.youtube.com";
         String entry2 = "alias1 http://www.google.com";
         String entry3 = "alias2 http://www.facebook.com";
-        String entry4 = "\n\n\n\n\n\n\n\n\n\n";
+        String entry4 = Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1057,7 +1057,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1067,17 +1067,17 @@ public class BookmarkTests {
     @Test
     public void testCleanBookmarkFileLeadingAndTrailingBlankLinesInFile() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String entry1 = "\n\n\n\n\n\n\n\n\n\n";
+        String entry1 = Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE;
         String entry2 = "alias1 http://www.google.com";
         String entry3 = "alias2 http://www.facebook.com";
         String entry4 = "alias3 http://www.youtube.com";
-        String entry5 = "\n\n\n\n";
+        String entry5 = Strings.DOUBLE_NEWLINE + Strings.DOUBLE_NEWLINE;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1085,7 +1085,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1100,8 +1100,8 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
         FileUtils.writeStringToFile(bookmarkFile, entry3, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
@@ -1110,7 +1110,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1123,18 +1123,18 @@ public class BookmarkTests {
         String entry1 = "   alias1 http://www.google.com";
         String entry2 = "alias1 http://www.facebook.com";
         String entry3 = "alias2 facebook";
-        String entry4 = "\narg1\n\n";
+        String entry4 = Strings.NEWLINE + "arg1" + Strings.DOUBLE_NEWLINE;
         String entry5 = "alias3    http://www.stackoverflow.com";
         String entry6 = "alias4 http://www.youtube.com";
         String entry7 = "alias1 http://www.apple.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry5 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry6 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry7 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry5 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry6 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry7 + Strings.NEWLINE, true);
 
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
@@ -1142,7 +1142,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.facebook.com")
                 || bookmarks.contains("alias1 http://www.apple.com"));
         assertTrue(bookmarks.contains("alias4 http://www.youtube.com"));
@@ -1169,9 +1169,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Map<String, String> aliasesToURLs = Bookmark.getBookmarkFileData(bookmarkFile);
 
@@ -1200,9 +1200,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias4";
         String newURL = "http://www.stackoverflow.com";
@@ -1218,7 +1218,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1240,9 +1240,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias1";
         String newURL = "http://www.stackoverflow.com";
@@ -1257,7 +1257,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.stackoverflow.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1278,9 +1278,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Map<String, String> aliasesToURLs = new HashMap<>();
         aliasesToURLs.put(alias1, url1);
@@ -1292,7 +1292,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
         assertTrue(bookmarks.size() == 2);
@@ -1312,9 +1312,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias4";
         String newURL = "http://www.stackoverflow.com";
@@ -1332,7 +1332,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.apple.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
         assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
@@ -1354,7 +1354,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -1373,9 +1373,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias4";
         String newURL = "http://www.stackoverflow.com";
@@ -1391,7 +1391,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1413,9 +1413,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         Map<String, String> aliasesToURLs = new HashMap<>();
 
@@ -1441,9 +1441,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias4";
         String newURL = "http://www.stackoverflow.com";
@@ -1459,7 +1459,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1481,9 +1481,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias1 = "alias4";
         String newURL1 = "http://www.stackoverflow.com";
@@ -1502,7 +1502,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1525,9 +1525,9 @@ public class BookmarkTests {
         String entry2 = alias2 + " " + url2;
         String entry3 = alias3 + " " + url3;
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String newAlias = "alias4";
         String newURL = "http://www.google.com";
@@ -1543,7 +1543,7 @@ public class BookmarkTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1573,9 +1573,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String alias = "alias3";
         String url = Bookmark.getURLFromAlias(bookmarkFile, alias);
@@ -1592,9 +1592,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String alias = "alias4";
         String url = Bookmark.getURLFromAlias(bookmarkFile, alias);
@@ -1611,9 +1611,9 @@ public class BookmarkTests {
         String entry2 = "alias2 http://www.facebook.com";
         String entry3 = "alias3 http://www.youtube.com";
 
-        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
-        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + Strings.NEWLINE, true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + Strings.NEWLINE, true);
 
         String alias = "alias1";
         String url = Bookmark.getURLFromAlias(bookmarkFile, alias);

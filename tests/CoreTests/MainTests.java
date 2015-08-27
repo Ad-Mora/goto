@@ -250,7 +250,7 @@ public class MainTests {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
         String entry1 = "alias1 http://www.google.com thirdArg";
-        String entry2 = "alias2 http://www.facebook.\ncom";
+        String entry2 = "alias2 http://www.facebook." + Strings.NEWLINE + "com";
         String entry3 = "alias3 youtube";
         String entry4 = "alias4 http://www.apple.com";
 
@@ -265,7 +265,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias4 http://www.apple.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -289,7 +289,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -306,7 +306,7 @@ public class MainTests {
 
         // Begin tests
         String output = outContent.toString();
-        assertTrue(output.equals(Strings.INVALID_ARGS + "\n"));
+        assertTrue(output.equals(Strings.INVALID_ARGS + Strings.NEWLINE));
     }
 
     @Test
@@ -317,7 +317,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com\n"));
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -338,7 +338,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.facebook.com\n"));
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.facebook.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -349,7 +349,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com\n"));
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -360,7 +360,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.apple.com\n"));
+        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.apple.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -371,7 +371,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -382,7 +382,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -393,7 +393,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -414,7 +414,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -435,18 +435,18 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
     public void testMainFirstArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {"ali\nas1"};
+        String[] args = {"ali" + Strings.NEWLINE + "as1"};
         Main.main(args);
 
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -457,7 +457,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INFO + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INFO + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -468,7 +468,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -479,18 +479,18 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
     public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {Main.HELP_FLAG, "second\nArg"};
+        String[] args = {Main.HELP_FLAG, "second" + Strings.NEWLINE + "Arg"};
         Main.main(args);
 
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -501,7 +501,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.NO_BOOKMARKS_SAVED + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.NO_BOOKMARKS_SAVED + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -529,8 +529,8 @@ public class MainTests {
         }
         reader.close();
 
-        assertTrue(output.startsWith("\n"));
-        assertTrue(output.endsWith("\n\n"));
+        assertTrue(output.startsWith(Strings.NEWLINE));
+        assertTrue(output.endsWith(Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.contains("alias1 - http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 - http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 - http://www.youtube.com"));
@@ -545,7 +545,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -556,18 +556,18 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
     public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "second\nArg"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "second" + Strings.NEWLINE + "Arg"};
         Main.main(args);
 
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -578,7 +578,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -589,7 +589,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.ALIAS_DOES_NOT_EXIST + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -600,7 +600,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -622,7 +622,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 2);
@@ -636,7 +636,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -657,18 +657,18 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
     public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondA\nrg"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondA" + Strings.NEWLINE + "rg"};
         Main.main(args);
 
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -679,7 +679,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -690,7 +690,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -701,7 +701,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -724,8 +724,8 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -742,7 +742,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("apl http://www.apple.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -757,7 +757,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("apl http://www.apple.com"));
         assertTrue(bookmarks.size() == 1);
     }
@@ -781,7 +781,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -808,7 +808,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -835,7 +835,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 https://www.apple.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -861,7 +861,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -878,7 +878,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -892,7 +892,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -906,7 +906,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -930,8 +930,8 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -946,23 +946,23 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
     public void testMainFirstArgumentIsBookmarkFlagSecondArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {Main.BOOKMARK_FLAG, "ali\nas1"};
+        String[] args = {Main.BOOKMARK_FLAG, "ali" + Strings.NEWLINE + "as1"};
         Main.main(args);
 
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
     public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {Main.BOOKMARK_FLAG, "alias1", "goo\ngle"};
+        String[] args = {Main.BOOKMARK_FLAG, "alias1", "goo" + Strings.NEWLINE + "gle"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
 
@@ -970,7 +970,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -987,7 +987,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.size() == 2);
@@ -1014,7 +1014,7 @@ public class MainTests {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
-        assertTrue(bookmarksString.endsWith("\n"));
+        assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
         assertTrue(bookmarks.size() == 1);
     }

@@ -49,10 +49,10 @@ public class Bookmark {
         } else {
             try {
                 String entry = getLineEntry(alias, url);
-                FileUtils.writeStringToFile(bookmarkFile, entry + System.lineSeparator(), true);
+                FileUtils.writeStringToFile(bookmarkFile, entry + Strings.NEWLINE, true);
             } catch (IOException e) {
                 System.out.println();
-                System.out.println("Error writing to file"); // TODO make constant
+                System.out.println(Strings.ERROR_WRITING_TO_FILE);
                 System.out.println();
             }
         }
@@ -90,7 +90,7 @@ public class Bookmark {
         if (aliasesToURLs.size() > 0) {
             for (String alias : aliasesToURLs.keySet()) {
                 String url = aliasesToURLs.get(alias);
-                bookmarks += alias + " - " + url + "\n";
+                bookmarks += alias + " - " + url + Strings.NEWLINE;
             }
             bookmarks = bookmarks.trim();
         } else {
@@ -114,7 +114,7 @@ public class Bookmark {
             bookmarkFile.createNewFile();
         } catch(IOException ex) {
             System.out.println();
-            System.out.println("Error creating bookmark file"); // TODO make constant
+            System.out.println(Strings.ERROR_CREATING_BOOKMARK_FILE);
             System.out.println();
         }
     }
@@ -152,8 +152,8 @@ public class Bookmark {
             String alias = aliasAndURL[0];
             String url = aliasAndURL[1];
             if (!url.equals(ArgUtils.formatURL(url)) ||
-                    alias.contains("\n") ||
-                    url.contains("\n") ||
+                    alias.contains(Strings.NEWLINE) ||
+                    url.contains(Strings.NEWLINE) ||
                     Main.VALID_FLAGS.contains(alias)) {
                 continue;
             }
@@ -183,11 +183,11 @@ public class Bookmark {
             reader.close();
         } catch(FileNotFoundException ex) {
             System.out.println();
-            System.out.println("File not found"); // TODO
+            System.out.println(Strings.FILE_NOT_FOUND);
             System.out.println();
         } catch(IOException ex) {
             System.out.println();
-            System.out.println("Error reading file");
+            System.out.println(Strings.ERROR_READING_FROM_FILE);
             System.out.println();
         }
         return aliasesToURLs;
@@ -208,15 +208,15 @@ public class Bookmark {
             for (String alias : aliasesToURLs.keySet()) {
                 url = aliasesToURLs.get(alias);
                 entry = getLineEntry(alias, url);
-                FileUtils.writeStringToFile(bookmarkFile, entry + System.lineSeparator(), true);
+                FileUtils.writeStringToFile(bookmarkFile, entry + Strings.NEWLINE, true);
             }
         } catch(FileNotFoundException ex) {
             System.out.println();
-            System.out.println("File not found"); // TODO make constant
+            System.out.println(Strings.FILE_NOT_FOUND);
             System.out.println();
         } catch(IOException ex) {
             System.out.println();
-            System.out.println("Error writing to file");
+            System.out.println(Strings.ERROR_WRITING_TO_FILE);
             System.out.println();
         }
     }

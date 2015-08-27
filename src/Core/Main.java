@@ -34,12 +34,11 @@ import org.apache.commons.io.FileUtils;
  */
 public class Main {
 
-//    TODO: Update Strings Info message
-//    TODO: Replace all newlines in program with generic System.getLineSeparator()
+//    TODO: Run Main tests
 //    TODO: All returned strings do not end with a newline character mention somewhere
-//    TODO: Check for warning (yellow) errors
-//    TODO: Add error messages to Strings file
+//    TODO: Update Strings Info message
 //    TODO: Update README
+//    TODO: Check for warning (yellow) errors
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
