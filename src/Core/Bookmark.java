@@ -72,7 +72,7 @@ public class Bookmark {
             updateBookmarkFile(bookmarkFile, aliasesToURLs);
         } else {
             System.out.println();
-            System.out.println(Help.getAliasDoesNotExistMessage());
+            System.out.println(Strings.ALIAS_DOES_NOT_EXIST);
             System.out.println();
         }
     }
@@ -94,7 +94,7 @@ public class Bookmark {
             }
             bookmarks = bookmarks.trim();
         } else {
-            bookmarks = Help.getNoBookmarksSavedMessage();
+            bookmarks = Strings.NO_BOOKMARKS_SAVED;
         }
         return bookmarks;
     }

@@ -1,7 +1,7 @@
 package CoreTests;
 
-import Core.Help;
 import Core.Main;
+import Core.Strings;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -306,7 +306,7 @@ public class MainTests {
 
         // Begin tests
         String output = outContent.toString();
-        assertTrue(output.equals(Help.getInvalidArgMessage() + "\n"));
+        assertTrue(output.equals(Strings.INVALID_ARGS + "\n"));
     }
 
     @Test
@@ -371,7 +371,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -382,7 +382,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -393,7 +393,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -414,7 +414,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -435,7 +435,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -446,7 +446,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -457,7 +457,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getHelp() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INFO + "\n\n"));
     }
 
     @Test
@@ -468,7 +468,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -479,7 +479,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -490,7 +490,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -501,7 +501,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getNoBookmarksSavedMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.NO_BOOKMARKS_SAVED + "\n\n"));
     }
 
     @Test
@@ -545,7 +545,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -556,7 +556,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -567,7 +567,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -578,7 +578,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -589,7 +589,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getAliasDoesNotExistMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.ALIAS_DOES_NOT_EXIST + "\n\n"));
     }
 
     @Test
@@ -600,7 +600,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -636,7 +636,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -657,7 +657,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -668,7 +668,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -679,7 +679,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -690,7 +690,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -701,7 +701,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -725,7 +725,7 @@ public class MainTests {
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
         assertTrue(bookmarksString.endsWith("\n"));
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -878,7 +878,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -892,7 +892,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -906,7 +906,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -931,7 +931,7 @@ public class MainTests {
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
         assertTrue(bookmarksString.endsWith("\n"));
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -946,7 +946,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -957,7 +957,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
     }
 
     @Test
@@ -970,7 +970,7 @@ public class MainTests {
         String output = outContent.toString();
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
-        assertTrue(output.equals("\n" + Help.getInvalidArgMessage() + "\n\n"));
+        assertTrue(output.equals("\n" + Strings.INVALID_ARGS + "\n\n"));
         assertTrue(bookmarks.size() == 0);
     }
 

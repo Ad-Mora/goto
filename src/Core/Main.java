@@ -34,11 +34,13 @@ import org.apache.commons.io.FileUtils;
  */
 public class Main {
 
-//    TODO: Update Help messages
+//    TODO: Update Strings Info message
 //    TODO: Replace flag strings in tests with Main constants
 //    TODO: Replace all newlines in program with generic System.getLineSeparator()
 //    TODO: All returned strings do not end with a newline character mention somewhere
 //    TODO: Turn Help class into a Strings file
+//    TODO: Check for mild errors
+//    TODO: Update README
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -76,7 +78,7 @@ public class Main {
             switch (firstArg) {
                 case HELP_FLAG:
                     System.out.println();
-                    System.out.println(Help.getHelp());
+                    System.out.println(Strings.INFO);
                     System.out.println();
                     break;
                 case BOOKMARK_FLAG:
@@ -105,7 +107,7 @@ public class Main {
                     }
             }
         } else {
-            System.out.println(Help.getInvalidArgMessage());
+            System.out.println(Strings.INVALID_ARGS);
         }
     }
 }
