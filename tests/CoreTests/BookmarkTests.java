@@ -445,7 +445,7 @@ public class BookmarkTests {
     // public static void getBookmarks(File bookmarkFile) tests
 
     @Test
-    public void testGetBookmarksEmptyFile() throws IOException {
+    public void testGetBookmarksEmptyFile() {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         String bookmarks = Bookmark.getFormattedBookmarks(bookmarkFile);
 
@@ -1153,7 +1153,7 @@ public class BookmarkTests {
     // public static void getBookmarkFileData(File bookmarkFile) tests
 
     @Test
-    public void testGetBookmarkFileDataEmptyFile() throws IOException {
+    public void testGetBookmarkFileDataEmptyFile() {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Map<String, String> aliasesToURLs = Bookmark.getBookmarkFileData(bookmarkFile);
 

@@ -4,6 +4,7 @@ import Utils.ArgUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,8 +138,17 @@ public class Bookmark {
      *
      * @param bookmarkFile the file containing the bookmarks. Must exist
      */
-    public static void cleanBookmarkFile(File bookmarkFile) throws IOException {
-        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+    public static void cleanBookmarkFile(File bookmarkFile) {
+
+        List<String> bookmarks;
+        try {
+            bookmarks = FileUtils.readLines(bookmarkFile);
+        } catch (IOException e) {
+            System.out.println();
+            System.out.println(Strings.ERROR_READING_FROM_FILE);
+            System.out.println();
+            return;
+        }
         Map<String, String> cleanAliasesToURLs = new HashMap<>();
 
         for (String bookmark : bookmarks) {

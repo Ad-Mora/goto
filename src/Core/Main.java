@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 import Utils.ArgUtils;
-import org.apache.commons.io.FileUtils;
 
 /**
  * Created by AdrianM on 6/18/15.
@@ -30,16 +29,19 @@ import org.apache.commons.io.FileUtils;
  * All alias and URL pairs are stored in a text file in the user's home directory. Before any actions are taken,
  * it is ensured that the file exists and that it is readable by this program.
  *
- * All constants are also kept in this class.
+ * Strings returned or obtained from either methods or constants do not end with a newline character in this program.
+ * Surrounding newlines are added around the message manually.
+ *
+ * Flag and folder path constants are kept in this class.
  */
 public class Main {
 
-//    TODO: All returned strings do not end with a newline character mention somewhere
-//    TODO: Consider consolidating some messages in Strings
+//    TODO: Consider surroundWithNewlinesAndPrint method
 //    TODO: Update specs
 //    TODO: Update Strings Info message
 //    TODO: Check for warning (yellow) errors
 //    TODO: Update README
+//    TODO: Run all tests final time
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -59,7 +61,7 @@ public class Main {
     // Debug
     public static boolean DEBUG = false;
 
-    public static void main(String[] args) throws URISyntaxException, IOException {
+    public static void main(String[] args) {
 
         String firstArg;
         String alias;
@@ -101,7 +103,17 @@ public class Main {
                     if (DEBUG) {
                         System.out.println(Strings.OPEN_BROWSER_AT + url);
                     } else {
-                        Desktop.getDesktop().browse(new URI(url));
+                        try {
+                            Desktop.getDesktop().browse(new URI(url));
+                        } catch (IOException e) {
+                            System.out.println();
+                            System.out.println(Strings.ERROR_OPENING_BROWSER);
+                            System.out.println();
+                        } catch (URISyntaxException e) {
+                            System.out.println();
+                            System.out.println(Strings.INVALID_URI_SYNTAX);
+                            System.out.println();
+                        }
                     }
             }
         } else {

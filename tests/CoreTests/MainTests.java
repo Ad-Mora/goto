@@ -10,7 +10,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,7 +178,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainGeneralProjectDirectoryDoesNotExist() throws IOException, URISyntaxException {
+    public void testMainGeneralProjectDirectoryDoesNotExist() throws IOException {
         String[] args = {};
         File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
         File gotoDirectory = new File(Main.GOTO_DIR_PATH);
@@ -201,7 +200,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainGeneralProjectDirectoryExistsGotoDirectoryDoesNotExist() throws IOException, URISyntaxException {
+    public void testMainGeneralProjectDirectoryExistsGotoDirectoryDoesNotExist() throws IOException {
         String[] args = {};
         File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
         File gotoDirectory = new File(Main.GOTO_DIR_PATH);
@@ -223,7 +222,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainGeneralProjectDirectoryExistsGotoDirectoryExistsFileDoesNotExist() throws IOException, URISyntaxException {
+    public void testMainGeneralProjectDirectoryExistsGotoDirectoryExistsFileDoesNotExist() {
         String[] args = {};
         File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
         File gotoDirectory = new File(Main.GOTO_DIR_PATH);
@@ -245,7 +244,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFileExistsInvalidlyFormattedData() throws IOException, URISyntaxException {
+    public void testMainFileExistsInvalidlyFormattedData() throws IOException {
         String[] args = {};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -271,7 +270,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFileExistsValidlyFormattedData() throws IOException, URISyntaxException {
+    public void testMainFileExistsValidlyFormattedData() throws IOException {
         String[] args = {};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -300,7 +299,7 @@ public class MainTests {
     // main(String[] args) tests
 
     @Test
-    public void testMainEmptyArgsArray() throws IOException, URISyntaxException {
+    public void testMainEmptyArgsArray() {
         String[] args = {};
         Main.main(args);
 
@@ -310,7 +309,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentNotAnAlias() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentNotAnAlias() {
         String[] args = {"google"};
         Main.main(args);
 
@@ -321,7 +320,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsAnAlias() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsAnAlias() throws IOException {
         String[] args = {"alias2"};
 
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
@@ -342,7 +341,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsUnqualifiedURL() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsUnqualifiedURL() {
         String[] args = {"google"};
         Main.main(args);
 
@@ -353,7 +352,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsQualifiedURL() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsQualifiedURL() {
         String[] args = {"http://www.apple.com"};
         Main.main(args);
 
@@ -364,7 +363,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsNotAValidFlag() {
         String[] args = {"alias1", "secondArg"};
         Main.main(args);
 
@@ -375,7 +374,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsAValidFlag() {
         String[] args = {"alias1", Main.HELP_FLAG};
         Main.main(args);
 
@@ -386,7 +385,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsNotAValidFlagFollowedByAtLeastTwoArguments() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsNotAValidFlagFollowedByAtLeastTwoArguments() {
         String[] args = {"alias1", "secondArg", "thirdArg"};
         Main.main(args);
 
@@ -397,7 +396,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsAValidAliasSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsAValidAliasSecondArgumentIsNotAValidFlag() throws IOException {
         String[] args = {"alias3", "secondArg"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -418,7 +417,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsAValidAliasSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsAValidAliasSecondArgumentIsAValidFlag() throws IOException {
         String[] args = {"alias1", Main.HELP_FLAG};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -439,7 +438,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentContainsNewlineCharacter() {
         String[] args = {"ali" + Strings.NEWLINE + "as1"};
         Main.main(args);
 
@@ -450,7 +449,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagNoFollowingArguments() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsHelpFlagNoFollowingArguments() {
         String[] args = {Main.HELP_FLAG};
         Main.main(args);
 
@@ -461,7 +460,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsValidFlag() {
         String[] args = {Main.HELP_FLAG, Main.BOOKMARK_FLAG};
         Main.main(args);
 
@@ -472,7 +471,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentIsNotAValidFlag() {
         String[] args = {Main.HELP_FLAG, "secondArg"};
         Main.main(args);
 
@@ -483,7 +482,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() {
         String[] args = {Main.HELP_FLAG, "second" + Strings.NEWLINE + "Arg"};
         Main.main(args);
 
@@ -494,7 +493,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArgumentsEmptyFile() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArgumentsEmptyFile() {
         String[] args = {Main.VIEW_BOOKMARKS_FLAG};
         Main.main(args);
 
@@ -505,7 +504,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArgumentsFileContainsBookmarks() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsViewBookmarksFlagNoFollowingArgumentsFileContainsBookmarks() throws IOException {
         String[] args = {Main.VIEW_BOOKMARKS_FLAG};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -538,7 +537,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsAnotherValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsAnotherValidFlag() {
         String[] args = {Main.VIEW_BOOKMARKS_FLAG, Main.HELP_FLAG};
         Main.main(args);
 
@@ -549,7 +548,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsNotValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentIsNotValidFlag() {
         String[] args = {Main.VIEW_BOOKMARKS_FLAG, "secondArg"};
         Main.main(args);
 
@@ -560,7 +559,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsViewBookmarksFlagSecondArgumentContainsNewlineCharacter() {
         String[] args = {Main.VIEW_BOOKMARKS_FLAG, "second" + Strings.NEWLINE + "Arg"};
         Main.main(args);
 
@@ -571,7 +570,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagNoFollowingArguments() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagNoFollowingArguments() {
         String[] args = {Main.DELETE_BOOKMARK_FLAG};
         Main.main(args);
 
@@ -582,7 +581,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAValidFlagOrExistingAlias() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAValidFlagOrExistingAlias() {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondArg"};
         Main.main(args);
 
@@ -593,7 +592,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, Main.BOOKMARK_FLAG};
         Main.main(args);
 
@@ -604,7 +603,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAlias() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAlias() throws IOException {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, "alias3"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -629,7 +628,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAnExistingAliasThirdArgumentIsPresent() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsNotAnExistingAliasThirdArgumentIsPresent() {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondArg", "thirdArg"};
         Main.main(args);
 
@@ -640,7 +639,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAliasThirdArgumentIsPresent() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAnExistingAliasThirdArgumentIsPresent() throws IOException {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, "alias2", "thirdArg"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -661,7 +660,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, "secondA" + Strings.NEWLINE + "rg"};
         Main.main(args);
 
@@ -672,7 +671,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagNoFollowingArguments() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagNoFollowingArguments() {
         String[] args = {Main.BOOKMARK_FLAG};
         Main.main(args);
 
@@ -683,7 +682,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlag() {
         String[] args = {Main.BOOKMARK_FLAG, "secondArg"};
         Main.main(args);
 
@@ -694,7 +693,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidFlag() {
         String[] args = {Main.BOOKMARK_FLAG, Main.DELETE_BOOKMARK_FLAG};
         Main.main(args);
 
@@ -705,7 +704,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidAlias() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsAValidAlias() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "alias1"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -733,7 +732,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURLNoExistingBookmarks() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURLNoExistingBookmarks() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "apl", "apple"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
@@ -748,7 +747,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURLNoExistingBookmarks() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURLNoExistingBookmarks() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "apl", "http://www.apple.com"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
@@ -763,7 +762,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURLExistingBookmarks() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsUnqualifiedURLExistingBookmarks() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "testAlias", "microsoft.com"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -790,7 +789,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURLExistingBookmarks() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsNotValidAliasOrFlagThirdArgumentIsQualifiedURLExistingBookmarks() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "testAlias", "https://www.microsoft.com"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -817,7 +816,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsUnqualifiedURL() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsUnqualifiedURL() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "alias1", "https://www.apple"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -843,7 +842,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsQualifiedURL() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdArgumentIsQualifiedURL() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "alias3", "http://www.stackoverflow.com"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -869,7 +868,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsUnqualifiedURL() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsUnqualifiedURL() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, Main.HELP_FLAG, "google"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
@@ -883,7 +882,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsQualifiedURL() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsQualifiedURL() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, Main.HELP_FLAG, "http://www.google.com"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
@@ -897,7 +896,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentNotValidAliasOrFlagThirdAndFourthArgumentsPresent() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentNotValidAliasOrFlagThirdAndFourthArgumentsPresent() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "secondArg", "thirdArg", "fourthArg"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
@@ -911,7 +910,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdAndFourthArgumentsPresent() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidAliasThirdAndFourthArgumentsPresent() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "alias2", "thirdArg", "fourthArg"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
@@ -939,7 +938,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdAndFourthArgumentsPresent() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdAndFourthArgumentsPresent() {
         String[] args = {Main.BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG, "thirdArg", "fourthArg"};
         Main.main(args);
 
@@ -950,7 +949,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentContainsNewlineCharacter() {
         String[] args = {Main.BOOKMARK_FLAG, "ali" + Strings.NEWLINE + "as1"};
         Main.main(args);
 
@@ -961,7 +960,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() throws IOException, URISyntaxException {
+    public void testMainFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentContainsNewlineCharacter() throws IOException {
         String[] args = {Main.BOOKMARK_FLAG, "alias1", "goo" + Strings.NEWLINE + "gle"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
         Main.main(args);
@@ -975,7 +974,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainBookmarkTwoAliasURLPairsInARow() throws IOException, URISyntaxException {
+    public void testMainBookmarkTwoAliasURLPairsInARow() throws IOException {
         String[] args1 = {Main.BOOKMARK_FLAG, "alias1", "google"};
         String[] args2 = {Main.BOOKMARK_FLAG, "alias2", "facebook"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
@@ -994,7 +993,7 @@ public class MainTests {
     }
 
     @Test
-    public void testMainDeleteTwoBookmarksInARow() throws IOException, URISyntaxException {
+    public void testMainDeleteTwoBookmarksInARow() throws IOException {
         String[] args1 = {Main.DELETE_BOOKMARK_FLAG, "alias2"};
         String[] args2 = {Main.DELETE_BOOKMARK_FLAG, "alias1"};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
