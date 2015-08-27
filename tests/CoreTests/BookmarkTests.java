@@ -140,7 +140,6 @@ import static org.junit.Assert.*;
  * public static String getLineEntry(String alias, String url)
  *
  * - Returns properly formatted entry
- *
  */
 public class BookmarkTests {
 

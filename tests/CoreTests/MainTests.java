@@ -94,7 +94,6 @@ import java.util.List;
  * - Consecutively bookmark two different alias URL paris
  * - Consecutively delete two different bookmarks
  */
-
 public class MainTests {
 
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
