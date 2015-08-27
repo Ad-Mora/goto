@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 import Utils.ArgUtils;
+import org.apache.commons.io.FileUtils;
 
 /**
  * Created by AdrianM on 6/18/15.
@@ -41,6 +42,7 @@ public class Main {
 //    TODO: Ensure newline after new bookmark is placed in file
 //    TODO: All returned strings do not end with a newline character mention somewhere
 //    TODO: Test for Valid flags constant containing all valid flags
+//    TODO: Turn Help class into a Strings file
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -61,61 +63,53 @@ public class Main {
     public static boolean DEBUG = false;
     public static String OPEN_BROWSER_AT_MESSAGE = "Open browser at ";
 
-
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        String test = "Testing";
-        String[] temp = test.split(" ");
+        String firstArg;
+        String alias;
+        String url;
 
-        for (String item : temp) {
-            System.out.println("Line: " + item);
+        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
+
+        Bookmark.createBookmarkFile(bookmarkFile);
+        Bookmark.cleanBookmarkFile(bookmarkFile);
+
+        if (ArgUtils.validateArgs(args)) {
+            firstArg = args[0];
+
+            switch (firstArg) {
+                case HELP_FLAG:
+                    System.out.println();
+                    System.out.println(Help.getHelp());
+                    System.out.println();
+                    break;
+                case BOOKMARK_FLAG:
+                    alias = args[1];
+                    url = args[2]; // format URL? yes TODO
+                    Bookmark.bookmark(bookmarkFile, alias, url);
+                    break;
+                case DELETE_BOOKMARK_FLAG:
+                    alias = args[1];
+                    Bookmark.deleteBookmark(bookmarkFile, alias);
+                    break;
+                case VIEW_BOOKMARKS_FLAG:
+                    System.out.println();
+                    System.out.println(Bookmark.getFormattedBookmarks(bookmarkFile));
+                    System.out.println();
+                    break;
+                default:
+                    url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
+                    if (url == null) {
+                        url = ArgUtils.formatURL(firstArg);
+                    }
+                    if (DEBUG) {
+                        System.out.println(OPEN_BROWSER_AT_MESSAGE + url);
+                    } else {
+                        Desktop.getDesktop().browse(new URI(url));
+                    }
+            }
+        } else {
+            System.out.println(Help.getInvalidArgMessage());
         }
-
-//        String firstArg;
-//        String alias;
-//        String url;
-//
-//        File bookmarkFile = new File(BOOKMARK_FILE_PATH);
-//
-//        Bookmark.createBookmarkFile(bookmarkFile);
-//        Bookmark.cleanBookmarkFile(bookmarkFile);
-//
-//        if (ArgUtils.validateArgs(args)) {
-//            firstArg = args[0];
-//
-//            switch (firstArg) {
-//                case HELP_FLAG:
-//                    System.out.println();
-//                    System.out.println(Help.getHelp());
-//                    System.out.println("\n");
-//                    break;
-//                case BOOKMARK_FLAG:
-//                    alias = args[1];
-//                    url = args[2]; // format URL? yes TODO
-//                    Bookmark.bookmark(bookmarkFile, alias, url);
-//                    break;
-//                case DELETE_BOOKMARK_FLAG:
-//                    alias = args[1];
-//                    Bookmark.deleteBookmark(bookmarkFile, alias);
-//                    break;
-//                case VIEW_BOOKMARKS_FLAG:
-//                    System.out.println();
-//                    System.out.println(Bookmark.getFormattedBookmarks(bookmarkFile));
-//                    System.out.println("\n");
-//                    break;
-//                default:
-//                    url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
-//                    if (url == null) {
-//                        url = ArgUtils.formatURL(firstArg);
-//                    }
-//                    if (DEBUG) {
-//                        System.out.println(OPEN_BROWSER_AT_MESSAGE + url);
-//                    } else {
-//                        Desktop.getDesktop().browse(new URI(url));
-//                    }
-//            }
-//        } else {
-//            System.out.println(Help.getInvalidArgMessage());
-//        }
     }
 }
