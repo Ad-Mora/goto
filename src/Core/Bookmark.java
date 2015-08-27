@@ -1,5 +1,6 @@
 package Core;
 
+import Utils.ArgUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -46,7 +47,6 @@ public class Bookmark {
             aliasesToURLs.put(alias, url);
             updateBookmarkFile(bookmarkFile, aliasesToURLs);
         } else {
-
             try {
                 String entry = getLineEntry(alias, url);
                 FileUtils.writeStringToFile(bookmarkFile, entry, true); // TODO Add newline here after entry
@@ -127,17 +127,36 @@ public class Bookmark {
      *
      * Bookmarks are written to the bookmark file in the following format: the alias, followed by a space, followed
      * by the URL, with no leading or trailing spaces. All bookmark entries are each on a separate line,
-     * with no blank lines in between entries. The file ends with a single newline character.
+     * with no blank lines in between entries.
+     *
+     * The file ends with a single newline character. If it does not, one will be added.
      *
      * @param bookmarkFile the file containing the bookmarks. Must exist
      */
     public static void cleanBookmarkFile(File bookmarkFile) throws IOException {
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
-        String boomarksString = FileUtils.readFileToString(bookmarkFile);
+        Map<String, String> cleanAliasesToURLs = new HashMap<>();
 
+        for (String bookmark : bookmarks) {
+            if (bookmark.endsWith(" ")) {
+                continue;
+            }
+            String[] aliasAndURL = bookmark.split(" ");
+            if (aliasAndURL.length != 2) {
+                continue;
+            }
+            String alias = aliasAndURL[0];
+            String url = aliasAndURL[1];
+            if (!url.equals(ArgUtils.formatURL(url)) ||
+                    alias.contains("\n") ||
+                    url.contains("\n") ||
+                    Main.VALID_FLAGS.contains(alias)) {
 
-
-
+                continue;
+            }
+            cleanAliasesToURLs.put(alias, url);
+        }
+        updateBookmarkFile(bookmarkFile, cleanAliasesToURLs);
     }
 
     /**
@@ -181,7 +200,7 @@ public class Bookmark {
             for (String alias : aliasesToURLs.keySet()) {
                 url = aliasesToURLs.get(alias);
                 entry = getLineEntry(alias, url);
-                FileUtils.writeStringToFile(bookmarkFile, entry, true); // TODO add newline here after entry
+                FileUtils.writeStringToFile(bookmarkFile, entry + System.lineSeparator(), true); // TODO add newline here after entry
             }
         } catch(FileNotFoundException ex) {
             System.out.println("File not found"); // TODO
