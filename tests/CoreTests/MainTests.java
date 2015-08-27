@@ -1,5 +1,6 @@
 package CoreTests;
 
+import Core.Bookmark;
 import Core.Help;
 import Core.Main;
 import org.apache.commons.io.FileUtils;
@@ -157,26 +158,129 @@ public class MainTests {
 
     @Test
     public void testMainBookmarkFilePathHasCorrectForm() {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+        File gotoDirectory = bookmarkFile.getParentFile();
+        File projectDirectory = gotoDirectory.getParentFile();
+        File homeDirectory = projectDirectory.getParentFile();
+
+        assertTrue(bookmarkFile.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(projectDirectory.exists());
+        assertTrue(homeDirectory.getAbsolutePath().equals(System.getProperty("user.home")));
     }
 
     @Test
-    public void testMainGeneralProjectDirectoryDoesNotExist() {
+    public void testMainGeneralProjectDirectoryDoesNotExist() throws IOException, URISyntaxException {
+        String[] args = {};
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        FileUtils.deleteDirectory(generalProjectDirectory);
+
+        assertTrue(!generalProjectDirectory.exists());
+        assertTrue(!gotoDirectory.exists());
+        assertTrue(!bookmarkFile.exists());
+        Main.main(args);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
     }
 
     @Test
-    public void testMainGeneralProjectDirectoryExistsGotoDirectoryDoesNotExist() {
+    public void testMainGeneralProjectDirectoryExistsGotoDirectoryDoesNotExist() throws IOException, URISyntaxException {
+        String[] args = {};
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        FileUtils.deleteDirectory(gotoDirectory);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(!gotoDirectory.exists());
+        assertTrue(!bookmarkFile.exists());
+        Main.main(args);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
     }
 
     @Test
-    public void testMainGeneralProjectDirectoryExistsGotoDirectoryExistsFileDoesNotExist() {
+    public void testMainGeneralProjectDirectoryExistsGotoDirectoryExistsFileDoesNotExist() throws IOException, URISyntaxException {
+        String[] args = {};
+        File generalProjectDirectory = new File(Main.GENERAL_PROJECT_DIR_PATH);
+        File gotoDirectory = new File(Main.GOTO_DIR_PATH);
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
+        bookmarkFile.delete();
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(!bookmarkFile.exists());
+        Main.main(args);
+
+        assertTrue(generalProjectDirectory.exists());
+        assertTrue(gotoDirectory.exists());
+        assertTrue(bookmarkFile.exists());
     }
 
     @Test
-    public void testMainFileExistsInvalidlyFormattedData() {
+    public void testMainFileExistsInvalidlyFormattedData() throws IOException, URISyntaxException {
+        String[] args = {};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com thirdArg";
+        String entry2 = "alias2 http://www.facebook.\ncom";
+        String entry3 = "alias3 youtube";
+        String entry4 = "alias4 http://www.apple.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry4 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias4 http://www.apple.com"));
+        assertTrue(bookmarks.size() == 1);
     }
 
     @Test
-    public void testMainFileExistsValidlyFormattedData() {
+    public void testMainFileExistsValidlyFormattedData() throws IOException, URISyntaxException {
+        String[] args = {};
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
+
+        Main.main(args);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
     }
 
     // ####################################################################################################
@@ -880,30 +984,3 @@ public class MainTests {
         assertTrue(bookmarks.size() == 1);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
