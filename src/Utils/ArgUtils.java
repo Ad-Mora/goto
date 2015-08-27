@@ -1,12 +1,10 @@
 package Utils;
 
-import Core.Main;
-
-import java.util.Set;
-
 /**
  * Created by AdrianM on 6/28/15.
  */
+
+import Core.Main;
 
 /**
  * This class provides helper functions to parse in the arguments given by the user.
@@ -61,7 +59,7 @@ public class ArgUtils {
      * a newline character, if there are an invalid number of arguments, or if the array of arguments as a
      * whole form an invalid command.
      *
-     * For example, the input "goto <bookmark flag> <alias> <URL> extraArgument is an invalid command,
+     * For example, the input "goto <bookmark flag> <alias> <URL> extraArgument" is an invalid command,
      * because the bookmark flag only requires an alias and a URL to follow the bookmark flag, and an
      * extra argument was given.
      *
@@ -70,10 +68,52 @@ public class ArgUtils {
      * invalid command
      */
     public static boolean validateArgs(String[] args) {
-        if (1==1) {
-            return true;
-        } else {
+        String firstArg;
+        String alias;
+        String url;
+
+        if (args.length == 0) {
             return false;
         }
+        firstArg = args[0];
+        switch (firstArg) {
+            case Main.BOOKMARK_FLAG:
+                if (args.length != 3) {
+                    return false;
+                }
+                alias = args[1];
+                url = args[2];
+                if (alias.contains("\n") ||
+                        url.contains("\n") ||
+                        Main.VALID_FLAGS.contains(alias)) {
+                    return false;
+                }
+                break;
+            case Main.DELETE_BOOKMARK_FLAG:
+                if (args.length != 2) {
+                    return false;
+                }
+                alias = args[1];
+                if (alias.contains("\n") || Main.VALID_FLAGS.contains(alias)) {
+                    return false;
+                }
+                break;
+            case Main.VIEW_BOOKMARKS_FLAG:
+                if (args.length != 1) {
+                    return false;
+                }
+                break;
+            case Main.HELP_FLAG:
+                if (args.length != 1) {
+                    return false;
+                }
+                break;
+            default:
+                if (args.length != 1 || firstArg.contains("\n")) {
+                    return false;
+                }
+                break;
+        }
+        return true;
     }
 }

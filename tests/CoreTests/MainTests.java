@@ -26,6 +26,7 @@ import java.util.List;
  *
  * - Check that the bookmark file path is of the form home directory/general project directory/
  * goto directory/bookmark file
+ * - Check that the VALID_FLAGS constant does in fact contain all valid flags
  * - General project directory does not exist
  * - General project directory exists, goto directory does not exist
  * - General project directory exists, goto directory exists, file does not exist
@@ -166,6 +167,15 @@ public class MainTests {
         assertTrue(gotoDirectory.exists());
         assertTrue(projectDirectory.exists());
         assertTrue(homeDirectory.getAbsolutePath().equals(System.getProperty("user.home")));
+    }
+
+    @Test
+    public void testMainValidFlagsConstantContainsAllFlags() {
+        assertTrue(Main.VALID_FLAGS.contains(Main.BOOKMARK_FLAG));
+        assertTrue(Main.VALID_FLAGS.contains(Main.DELETE_BOOKMARK_FLAG));
+        assertTrue(Main.VALID_FLAGS.contains(Main.VIEW_BOOKMARKS_FLAG));
+        assertTrue(Main.VALID_FLAGS.contains(Main.HELP_FLAG));
+        assertTrue(Main.VALID_FLAGS.size() == 4);
     }
 
     @Test

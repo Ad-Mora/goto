@@ -155,7 +155,6 @@ public class Bookmark {
                     alias.contains("\n") ||
                     url.contains("\n") ||
                     Main.VALID_FLAGS.contains(alias)) {
-
                 continue;
             }
             cleanAliasesToURLs.put(alias, url);

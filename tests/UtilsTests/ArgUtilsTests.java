@@ -428,7 +428,7 @@ public class ArgUtilsTests {
     }
 
     @Test
-    public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() { // TODO decide on this case
+    public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() {
         String[] args = {"--delete-bookmark", "--view-bookmarks"};
         assertFalse(ArgUtils.validateArgs(args));
     }
@@ -470,7 +470,7 @@ public class ArgUtilsTests {
     }
 
     @Test
-    public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValidThirdArgumentIsValidFlag() { // TODO decide on this
+    public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValidThirdArgumentIsValidFlag() {
         String[] args = {"--bookmark", "ggl", "--help"};
         assertTrue(ArgUtils.validateArgs(args));
     }

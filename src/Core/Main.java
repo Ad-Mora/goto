@@ -35,13 +35,9 @@ import org.apache.commons.io.FileUtils;
 public class Main {
 
 //    TODO: Update Help messages
-//    TODO: Add newline character to end of all writeStringToFile statements
-//    TODO: Decide on ambiguous test cases in ArgUtils
 //    TODO: Replace flag strings in tests with Main constants
 //    TODO: Replace all newlines in program with generic System.getLineSeparator()
-//    TODO: Ensure newline after new bookmark is placed in file
 //    TODO: All returned strings do not end with a newline character mention somewhere
-//    TODO: Test for Valid flags constant containing all valid flags
 //    TODO: Turn Help class into a Strings file
 
     // Bookmark file location
