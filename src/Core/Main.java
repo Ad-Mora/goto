@@ -90,7 +90,7 @@ public class Main {
                     break;
                 case VIEW_BOOKMARKS_FLAG:
                     System.out.println();
-                    System.out.println(Bookmark.getBookmarks(bookmarkFile));
+                    System.out.println(Bookmark.getFormattedBookmarks(bookmarkFile));
                     System.out.println("\n");
                     break;
                 default:
