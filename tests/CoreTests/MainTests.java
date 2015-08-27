@@ -306,7 +306,7 @@ public class MainTests {
 
         // Begin tests
         String output = outContent.toString();
-        assertTrue(output.equals(Strings.INVALID_ARGS + Strings.NEWLINE));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
     }
 
     @Test
@@ -317,7 +317,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com" + Strings.NEWLINE));
+        assertTrue(output.equals(Strings.OPEN_BROWSER_AT + "http://www.google.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -338,7 +338,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.facebook.com" + Strings.NEWLINE));
+        assertTrue(output.equals(Strings.OPEN_BROWSER_AT + "http://www.facebook.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -349,7 +349,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.google.com" + Strings.NEWLINE));
+        assertTrue(output.equals(Strings.OPEN_BROWSER_AT + "http://www.google.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -360,7 +360,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Main.OPEN_BROWSER_AT_MESSAGE + "http://www.apple.com" + Strings.NEWLINE));
+        assertTrue(output.equals(Strings.OPEN_BROWSER_AT + "http://www.apple.com" + Strings.NEWLINE));
     }
 
     @Test
@@ -864,7 +864,7 @@ public class MainTests {
         assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
-        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.stackoverflow.com"));
         assertTrue(bookmarks.size() == 3);
     }
 

@@ -34,11 +34,12 @@ import org.apache.commons.io.FileUtils;
  */
 public class Main {
 
-//    TODO: Run Main tests
 //    TODO: All returned strings do not end with a newline character mention somewhere
+//    TODO: Consider consolidating some messages in Strings
+//    TODO: Update specs
 //    TODO: Update Strings Info message
-//    TODO: Update README
 //    TODO: Check for warning (yellow) errors
+//    TODO: Update README
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
@@ -57,7 +58,6 @@ public class Main {
 
     // Debug
     public static boolean DEBUG = false;
-    public static String OPEN_BROWSER_AT_MESSAGE = "Open browser at ";
 
     public static void main(String[] args) throws URISyntaxException, IOException {
 
@@ -81,7 +81,7 @@ public class Main {
                     break;
                 case BOOKMARK_FLAG:
                     alias = args[1];
-                    url = args[2]; // format URL? yes TODO
+                    url = ArgUtils.formatURL(args[2]);
                     Bookmark.bookmark(bookmarkFile, alias, url);
                     break;
                 case DELETE_BOOKMARK_FLAG:
@@ -99,13 +99,15 @@ public class Main {
                         url = ArgUtils.formatURL(firstArg);
                     }
                     if (DEBUG) {
-                        System.out.println(OPEN_BROWSER_AT_MESSAGE + url);
+                        System.out.println(Strings.OPEN_BROWSER_AT + url);
                     } else {
                         Desktop.getDesktop().browse(new URI(url));
                     }
             }
         } else {
+            System.out.println();
             System.out.println(Strings.INVALID_ARGS);
+            System.out.println();
         }
     }
 }

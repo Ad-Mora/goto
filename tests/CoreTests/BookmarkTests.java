@@ -383,7 +383,7 @@ public class BookmarkTests {
         String bookmarksString = FileUtils.readFileToString(bookmarkFile);
 
         assertTrue(bookmarksString.endsWith(Strings.NEWLINE));
-        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + "Strings.DOUBLE_NEWLINE"));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + Strings.DOUBLE_NEWLINE));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));

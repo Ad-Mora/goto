@@ -32,8 +32,7 @@ public class Strings {
     public static String ERROR_CREATING_BOOKMARK_FILE = "Error creating bookmark file";
     public static String FILE_NOT_FOUND = "File not found";
     public static String ERROR_READING_FROM_FILE = "Error reading from file";
+    public static String OPEN_BROWSER_AT = "Open browser at ";
     public static String NEWLINE = System.lineSeparator();
     public static String DOUBLE_NEWLINE = System.lineSeparator() + System.lineSeparator();
-
-
 }
