@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ import java.util.Map;
  * All URLs in the bookmark file are fully qualified. No alias in the bookmark file matches any of the program flags.
  *
  * Bookmarks are written to the bookmark file in the following format: the alias, followed by a space, followed
- * by the URL, with no leading or trailing spaces. All bookmark entries are each on a separate line,
+ * by the (fully qualified) URL, with no leading or trailing spaces. All bookmark entries are each on a separate line,
  * with no blank lines in between entries.
  *
  * The aliases and URLs are written to the bookmark file in this specific manner so that data may be easily read from the
@@ -48,7 +49,7 @@ public class Bookmark {
 
             try {
                 String entry = getLineEntry(alias, url);
-                FileUtils.writeStringToFile(bookmarkFile, entry, true);
+                FileUtils.writeStringToFile(bookmarkFile, entry, true); // TODO Add newline here after entry
             } catch (IOException e) {
                 System.out.println("Error writing to file"); // TODO
             }
@@ -80,7 +81,7 @@ public class Bookmark {
      *
      * @param bookmarkFile the file containing the bookmarks. Must exist, and be properly formatted
      */
-    public static String getBookmarks(File bookmarkFile) {
+    public static String getFormattedBookmarks(File bookmarkFile) {
         Map<String, String> aliasesToURLs = getBookmarkFileData(bookmarkFile);
         String bookmarks = "";
 
@@ -115,16 +116,28 @@ public class Bookmark {
     }
 
     /**
-     * Ensures that the bookmark file is formatted properly so that it can be handled from without conflict.
+     * Ensures that the bookmark file is formatted properly so that it can be handled without conflict.
      * This is meant to guard against a user manually editing the file themselves.
      *
      * If a line in the file is found to be improperly formatted, everything on that line is deleted. URLs are
      * also checked for being fully qualified. If a URL is not fully qualified, the entire bookmark is deleted.
      * When performing deletions, no blank lines will be left between correctly formatted bookmarks.
      *
+     * All URLs in the bookmark file are fully qualified. No alias in the bookmark file matches any of the program flags.
+     *
+     * Bookmarks are written to the bookmark file in the following format: the alias, followed by a space, followed
+     * by the URL, with no leading or trailing spaces. All bookmark entries are each on a separate line,
+     * with no blank lines in between entries. The file ends with a single newline character.
+     *
      * @param bookmarkFile the file containing the bookmarks. Must exist
      */
-    public static void cleanBookmarkFile(File bookmarkFile) {
+    public static void cleanBookmarkFile(File bookmarkFile) throws IOException {
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+        String boomarksString = FileUtils.readFileToString(bookmarkFile);
+
+
+
+
     }
 
     /**
@@ -168,7 +181,7 @@ public class Bookmark {
             for (String alias : aliasesToURLs.keySet()) {
                 url = aliasesToURLs.get(alias);
                 entry = getLineEntry(alias, url);
-                FileUtils.writeStringToFile(bookmarkFile, entry, true);
+                FileUtils.writeStringToFile(bookmarkFile, entry, true); // TODO add newline here after entry
             }
         } catch(FileNotFoundException ex) {
             System.out.println("File not found"); // TODO

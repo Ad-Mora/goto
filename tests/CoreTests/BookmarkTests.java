@@ -92,6 +92,7 @@ import static org.junit.Assert.*;
  * - Leading blank lines in a file
  * - Trailing blank lines in a file
  * - Leading and trailing blank lines in file
+ * - No newline after last entry
  * - Multiple types of invalid entries in file
  *
  * ##################################################
@@ -429,7 +430,7 @@ public class BookmarkTests {
     @Test
     public void testGetBookmarksEmptyFile() throws IOException {
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
-        String bookmarks = Bookmark.getBookmarks(bookmarkFile);
+        String bookmarks = Bookmark.getFormattedBookmarks(bookmarkFile);
 
         assertTrue(bookmarks.equals(Help.getNoBookmarksSavedMessage()));
     }
@@ -445,7 +446,7 @@ public class BookmarkTests {
         FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
         FileUtils.writeStringToFile(bookmarkFile, entry3 + System.lineSeparator(), true);
 
-        String bookmarks = Bookmark.getBookmarks(bookmarkFile);
+        String bookmarks = Bookmark.getFormattedBookmarks(bookmarkFile);
 
         // Begin tests
         BufferedReader reader = new BufferedReader(new StringReader(bookmarks));
@@ -603,7 +604,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -629,8 +629,8 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+
         assertTrue(bookmarks.size() == 0);
     }
 
@@ -650,7 +650,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -675,7 +674,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias3 http://www.stackoverflow.com"));
@@ -696,7 +694,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -717,7 +714,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com")
@@ -740,7 +736,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -763,7 +758,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -790,7 +784,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com") ||
@@ -822,7 +815,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com") ||
@@ -853,7 +845,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias3 http://www.microsoft.com"));
@@ -876,7 +867,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias4 http://www.stackoverflow.com"));
@@ -897,7 +887,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -918,7 +907,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
@@ -939,7 +927,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -967,7 +954,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -993,7 +979,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1018,7 +1003,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1045,9 +1029,33 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
+        assertTrue(bookmarks.contains("alias1 http://www.google.com"));
+        assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
+        assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
+        assertTrue(bookmarks.size() == 3);
+    }
+
+    @Test
+    public void testCleanBookmarkFileNoNewlineAfterLastEntry() throws IOException {
+        File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
+
+        String entry1 = "alias1 http://www.google.com";
+        String entry2 = "alias2 http://www.facebook.com";
+        String entry3 = "alias3 http://www.youtube.com";
+
+        FileUtils.writeStringToFile(bookmarkFile, entry1 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry2 + System.lineSeparator(), true);
+        FileUtils.writeStringToFile(bookmarkFile, entry3, true);
+
+        Bookmark.cleanBookmarkFile(bookmarkFile);
+
+        // Begin tests
+        List<String> bookmarks = FileUtils.readLines(bookmarkFile);
+        String bookmarksString = FileUtils.readFileToString(bookmarkFile);
+
+        assertTrue(bookmarksString.endsWith("\n"));
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
         assertTrue(bookmarks.contains("alias2 http://www.facebook.com"));
         assertTrue(bookmarks.contains("alias3 http://www.youtube.com"));
@@ -1076,7 +1084,6 @@ public class BookmarkTests {
         Bookmark.cleanBookmarkFile(bookmarkFile);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.facebook.com")
@@ -1151,7 +1158,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1189,7 +1195,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.stackoverflow.com"));
@@ -1223,7 +1228,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1262,7 +1266,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.apple.com"));
@@ -1283,7 +1286,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1319,7 +1321,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1385,7 +1386,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1427,7 +1427,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1467,7 +1466,6 @@ public class BookmarkTests {
         Bookmark.updateBookmarkFile(bookmarkFile, aliasesToURLs);
 
         // Begin tests
-
         List<String> bookmarks = FileUtils.readLines(bookmarkFile);
 
         assertTrue(bookmarks.contains("alias1 http://www.google.com"));
@@ -1562,5 +1560,4 @@ public class BookmarkTests {
 
         assertTrue(formattedEntry.equals("alias1 http://www.google.com" + System.lineSeparator()));
     }
-
 }
