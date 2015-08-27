@@ -1,5 +1,6 @@
 package UtilsTests;
 
+import Core.Main;
 import Utils.ArgUtils;
 import org.junit.Test;
 
@@ -291,19 +292,19 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsMultipleInvalidArguments() {
-        String[] args = {"--bookmark", "--bookmark", "google"};
+        String[] args = {Main.BOOKMARK_FLAG, Main.BOOKMARK_FLAG, "google"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsMultipleValidArguments() {
-        String[] args = {"--bookmark", "yt", "youtube.com"};
+        String[] args = {Main.BOOKMARK_FLAG, "yt", "youtube.com"};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsNoNewlineCharacters() {
-        String[] args = {"--view-bookmarks"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
@@ -315,7 +316,7 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsOneNewlineCharacterMultipleArguments() {
-        String[] args = {"--bookmark", "google", "http://\nwww.google.com"};
+        String[] args = {Main.BOOKMARK_FLAG, "google", "http://\nwww.google.com"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -333,13 +334,13 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsNewlineCharacterAtBeginningOfArgumentsMultipleArguments() {
-        String[] args = {"\n--delete-bookmark", "apple"};
+        String[] args = {"\n" + Main.DELETE_BOOKMARK_FLAG, "apple"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsNewlineCharacterAtEndOfArgumentsMultipleArguments() {
-        String[] args = {"--delete-bookmark", "stackoverflow\n"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "stackoverflow\n"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -351,7 +352,7 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsMultipleNewlineCharactersMultipleArguments() {
-        String[] args = {"--bookmark", "micro\nsoft\n", "\nmicrosoft.\ncom"};
+        String[] args = {Main.BOOKMARK_FLAG, "micro\nsoft\n", "\nmicrosoft.\ncom"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
@@ -369,139 +370,139 @@ public class ArgUtilsTests {
 
     @Test
     public void testValidateArgsFirstArgumentIsHelpFlagNoFollowingArguments() {
-        String[] args = {"--help"};
+        String[] args = {Main.HELP_FLAG};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsHelpFlagFollowedByNonFlagArgument() {
-        String[] args = {"--help", "secondArg"};
+        String[] args = {Main.HELP_FLAG, "secondArg"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsHelpFlagFollowedByValidFlag() {
-        String[] args = {"--help", "--view-bookmarks"};
+        String[] args = {Main.HELP_FLAG, Main.VIEW_BOOKMARKS_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsHelpFlagFollowedByArgumentWithNewlineCharacter() {
-        String[] args = {"--help", "go\nogle"};
+        String[] args = {Main.HELP_FLAG, "go\nogle"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsViewBookmarksFlagNoFollowingArguments() {
-        String[] args = {"--view-bookmarks"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsViewBookmarksFlagFollowedByNonFlagArgument() {
-        String[] args = {"--view-bookmarks", "secondArg"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "secondArg"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsViewBookmarksFlagFollowedByValidFlag() {
-        String[] args = {"--view-bookmarks", "--delete-bookmark"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, Main.DELETE_BOOKMARK_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsViewBookmarksFollowedByArgumentWithNewline() {
-        String[] args = {"--view-bookmarks", "secondA\nrg"};
+        String[] args = {Main.VIEW_BOOKMARKS_FLAG, "secondA\nrg"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagNoFollowingArguments() {
-        String[] args = {"--delete-bookmark"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsValid() {
-        String[] args = {"--delete-bookmark", "google"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "google"};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() {
-        String[] args = {"--delete-bookmark", "--view-bookmarks"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondAndThirdArgumentsArePresent() {
-        String[] args = {"--delete-bookmark", "arg2", "arg3"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "arg2", "arg3"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentContainsANewlineCharacter() {
-        String[] args = {"--delete-bookmark", "arg\n2"};
+        String[] args = {Main.DELETE_BOOKMARK_FLAG, "arg\n2"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagNoFollowingArguments() {
-        String[] args = {"--bookmark"};
+        String[] args = {Main.BOOKMARK_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValid() {
-        String[] args = {"--bookmark", "ggl"};
+        String[] args = {Main.BOOKMARK_FLAG, "ggl"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsAValidFlag() {
-        String[] args = {"--bookmark", "--view-bookmarks"};
+        String[] args = {Main.BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValidThirdArgumentIsValid() {
-        String[] args = {"--bookmark", "fb", "facebook.com"};
+        String[] args = {Main.BOOKMARK_FLAG, "fb", "facebook.com"};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValidThirdArgumentIsValidFlag() {
-        String[] args = {"--bookmark", "ggl", "--help"};
+        String[] args = {Main.BOOKMARK_FLAG, "ggl", Main.HELP_FLAG};
         assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsValid() {
-        String[] args = {"--bookmark", "--view-bookmarks", "http://www.google.com"};
+        String[] args = {Main.BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG, "http://www.google.com"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentIsValidFlagThirdArgumentIsValidFlag() {
-        String[] args = {"--bookmark", "--view-bookmarks", "--delete-bookmark"};
+        String[] args = {Main.BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG, Main.DELETE_BOOKMARK_FLAG};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondThirdAndFourthArgumentsArePresent() {
-        String[] args = {"--bookmark", "ggl", "http://www.google.com", "extraArg"};
+        String[] args = {Main.BOOKMARK_FLAG, "ggl", "http://www.google.com", "extraArg"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentContainsANewlineCharacter() {
-        String[] args = {"--bookmark", "goo\ngle"};
+        String[] args = {Main.BOOKMARK_FLAG, "goo\ngle"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 
     @Test
     public void testValidateArgsFirstArgumentIsBookmarkFlagSecondArgumentPresentThirdArgumentHasNewlineCharacter() {
-        String[] args = {"--bookmark", "fb", "http://www.face\nbook.com"};
+        String[] args = {Main.BOOKMARK_FLAG, "fb", "http://www.face\nbook.com"};
         assertFalse(ArgUtils.validateArgs(args));
     }
 }

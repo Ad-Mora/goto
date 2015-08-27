@@ -376,7 +376,7 @@ public class MainTests {
 
     @Test
     public void testMainFirstArgumentIsNotAValidFlagSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
-        String[] args = {"alias1", "--help"};
+        String[] args = {"alias1", Main.HELP_FLAG};
         Main.main(args);
 
         // Begin tests
@@ -419,7 +419,7 @@ public class MainTests {
 
     @Test
     public void testMainFirstArgumentIsAValidAliasSecondArgumentIsAValidFlag() throws IOException, URISyntaxException {
-        String[] args = {"alias1", "--help"};
+        String[] args = {"alias1", Main.HELP_FLAG};
         File bookmarkFile = new File(Main.BOOKMARK_FILE_PATH);
 
         String entry1 = "alias1 http://www.google.com";
@@ -451,7 +451,7 @@ public class MainTests {
 
     @Test
     public void testMainFirstArgumentIsHelpFlagNoFollowingArguments() throws IOException, URISyntaxException {
-        String[] args = {"--help"};
+        String[] args = {Main.HELP_FLAG};
         Main.main(args);
 
         // Begin tests
@@ -462,7 +462,7 @@ public class MainTests {
 
     @Test
     public void testMainFirstArgumentIsHelpFlagSecondArgumentIsValidFlag() throws IOException, URISyntaxException {
-        String[] args = {"--help", "--bookmark"};
+        String[] args = {Main.HELP_FLAG, Main.BOOKMARK_FLAG};
         Main.main(args);
 
         // Begin tests
@@ -473,7 +473,7 @@ public class MainTests {
 
     @Test
     public void testMainFirstArgumentIsHelpFlagSecondArgumentIsNotAValidFlag() throws IOException, URISyntaxException {
-        String[] args = {"--help", "secondArg"};
+        String[] args = {Main.HELP_FLAG, "secondArg"};
         Main.main(args);
 
         // Begin tests
@@ -484,7 +484,7 @@ public class MainTests {
 
     @Test
     public void testMainFirstArgumentIsHelpFlagSecondArgumentContainsANewlineCharacter() throws IOException, URISyntaxException {
-        String[] args = {"--help", "second\nArg"};
+        String[] args = {Main.HELP_FLAG, "second\nArg"};
         Main.main(args);
 
         // Begin tests

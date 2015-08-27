@@ -35,11 +35,10 @@ import org.apache.commons.io.FileUtils;
 public class Main {
 
 //    TODO: Update Strings Info message
-//    TODO: Replace flag strings in tests with Main constants
 //    TODO: Replace all newlines in program with generic System.getLineSeparator()
 //    TODO: All returned strings do not end with a newline character mention somewhere
-//    TODO: Turn Help class into a Strings file
-//    TODO: Check for mild errors
+//    TODO: Check for warning (yellow) errors
+//    TODO: Add error messages to Strings file
 //    TODO: Update README
 
     // Bookmark file location
