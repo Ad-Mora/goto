@@ -18,11 +18,12 @@ import Utils.ArgUtils;
  * It is assumed that every element in the args array is an individual argument, rather than there being only one item
  * in the args array containing a single String of all the arguments.
  *
- * If invalid arguments (or no arguments) are given, a help message is output and the program ends.
+ * If invalid arguments (or no arguments) are given, a invalid arguments message is output.
  *
- * If the first argument is a flag, an action corresponding to that flag is executed. Otherwise, the argument is first
- * checked for being an alias for a URL. If it is, the browser navigates to that URL. If not, the browser will navigate
- * to the URL returned after formatting the first argument.
+ * If the first argument is a flag, and it is followed by the appropriate arguments (this can mean no arguments
+ * at all for some flags), an action corresponding to that flag is executed. Otherwise, the argument is first checked
+ * for being an alias for a URL. If it is, the browser navigates to the URL the alias corresponds to. If not, the
+ * browser will navigate to the URL returned after formatting the given URL.
  *
  * An alias can be registered to be used in place of a URL via the bookmark flag.
  *
@@ -32,12 +33,11 @@ import Utils.ArgUtils;
  * Strings returned or obtained from either methods or constants do not end with a newline character in this program.
  * Surrounding newlines are added around the message manually.
  *
- * Flag and folder path constants are kept in this class.
+ * All non-message constants are kept in this class.
  */
 public class Main {
 
-//    TODO: Consider surroundWithNewlinesAndPrint method
-//    TODO: Update specs
+//    TODO: Replace manual newline addictions with MessageUtils method
 //    TODO: Update Strings Info message
 //    TODO: Check for warning (yellow) errors
 //    TODO: Update README

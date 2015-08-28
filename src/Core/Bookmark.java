@@ -25,7 +25,7 @@ import java.util.Map;
  *
  * Bookmarks are written to the bookmark file in the following format: the alias, followed by a space, followed
  * by the (fully qualified) URL, with no leading or trailing spaces. All bookmark entries are each on a separate line,
- * with no blank lines in between entries.
+ * with no blank lines in between entries. The bookmark file ends with a single newline character.
  *
  * The aliases and URLs are written to the bookmark file in this specific manner so that data may be easily read from the
  * file. Cleaning the file ensures that this format is preserved.

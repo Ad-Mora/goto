@@ -5,8 +5,7 @@ package Utils;
  */
 
 /**
- * The purpose of this class is to provide functions to standardize and format the messages output to
- * the user.
+ * This class provides functions used to standardize and format the messages output to the user.
  */
 public class MessageUtils {
 

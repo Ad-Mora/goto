@@ -5,7 +5,7 @@ package Core;
  */
 
 /**
- * This class contains messages to be output by the program. No Strings constants end with a newline character.
+ * This class contains messages to be output by the program. No String constants end with a newline character.
  */
 public class Strings {
 

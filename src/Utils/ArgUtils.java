@@ -8,7 +8,7 @@ import Core.Main;
 import Core.Strings;
 
 /**
- * This class provides helper functions to parse in the arguments given by the user.
+ * This class provides functions to parse in and process the arguments given by the user.
  */
 public class ArgUtils {
 
