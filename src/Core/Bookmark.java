@@ -1,6 +1,7 @@
 package Core;
 
 import Utils.ArgUtils;
+import Utils.MessageUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -52,9 +53,7 @@ public class Bookmark {
                 String entry = getLineEntry(alias, url);
                 FileUtils.writeStringToFile(bookmarkFile, entry + Strings.NEWLINE, true);
             } catch (IOException e) {
-                System.out.println();
-                System.out.println(Strings.ERROR_WRITING_TO_FILE);
-                System.out.println();
+                MessageUtils.surroundWithNewlinesAndPrint(Strings.ERROR_WRITING_TO_FILE);
             }
         }
     }
@@ -72,9 +71,7 @@ public class Bookmark {
             aliasesToURLs.remove(alias);
             updateBookmarkFile(bookmarkFile, aliasesToURLs);
         } else {
-            System.out.println();
-            System.out.println(Strings.ALIAS_DOES_NOT_EXIST);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.ALIAS_DOES_NOT_EXIST);
         }
     }
 
@@ -114,9 +111,7 @@ public class Bookmark {
         try {
             bookmarkFile.createNewFile();
         } catch(IOException ex) {
-            System.out.println();
-            System.out.println(Strings.ERROR_CREATING_BOOKMARK_FILE);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.ERROR_CREATING_BOOKMARK_FILE);
         }
     }
 
@@ -144,9 +139,7 @@ public class Bookmark {
         try {
             bookmarks = FileUtils.readLines(bookmarkFile);
         } catch (IOException e) {
-            System.out.println();
-            System.out.println(Strings.ERROR_READING_FROM_FILE);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.ERROR_READING_FROM_FILE);
             return;
         }
         Map<String, String> cleanAliasesToURLs = new HashMap<>();
@@ -192,13 +185,9 @@ public class Bookmark {
             }
             reader.close();
         } catch(FileNotFoundException ex) {
-            System.out.println();
-            System.out.println(Strings.FILE_NOT_FOUND);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.FILE_NOT_FOUND);
         } catch(IOException ex) {
-            System.out.println();
-            System.out.println(Strings.ERROR_READING_FROM_FILE);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.ERROR_READING_FROM_FILE);
         }
         return aliasesToURLs;
     }
@@ -221,13 +210,9 @@ public class Bookmark {
                 FileUtils.writeStringToFile(bookmarkFile, entry + Strings.NEWLINE, true);
             }
         } catch(FileNotFoundException ex) {
-            System.out.println();
-            System.out.println(Strings.FILE_NOT_FOUND);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.FILE_NOT_FOUND);
         } catch(IOException ex) {
-            System.out.println();
-            System.out.println(Strings.ERROR_WRITING_TO_FILE);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.ERROR_WRITING_TO_FILE);
         }
     }
 

@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 import Utils.ArgUtils;
+import Utils.MessageUtils;
 
 /**
  * Created by AdrianM on 6/18/15.
@@ -36,11 +37,13 @@ import Utils.ArgUtils;
  * All non-message constants are kept in this class.
  */
 public class Main {
-
-//    TODO: Replace manual newline addictions with MessageUtils method
+//    TODO: Clean file after bookmarking if filtering for special symbols not possible
+//    TODO: If filter for special sytmbols possible, add to specs that they are filtered
+//    TODO: Help message newlines
 //    TODO: Update Strings Info message
-//    TODO: Check for warning (yellow) errors
 //    TODO: Update README
+//    TODO: Check for warning (yellow) errors
+//    TODO: Check for remaining TODOs
 //    TODO: Run all tests final time
 
     // Bookmark file location
@@ -77,9 +80,7 @@ public class Main {
 
             switch (firstArg) {
                 case HELP_FLAG:
-                    System.out.println();
-                    System.out.println(Strings.INFO);
-                    System.out.println();
+                    MessageUtils.surroundWithNewlinesAndPrint(Strings.INFO);
                     break;
                 case BOOKMARK_FLAG:
                     alias = args[1];
@@ -91,9 +92,8 @@ public class Main {
                     Bookmark.deleteBookmark(bookmarkFile, alias);
                     break;
                 case VIEW_BOOKMARKS_FLAG:
-                    System.out.println();
-                    System.out.println(Bookmark.getFormattedBookmarks(bookmarkFile));
-                    System.out.println();
+                    String formattedBookmarks = Bookmark.getFormattedBookmarks(bookmarkFile);
+                    MessageUtils.surroundWithNewlinesAndPrint(formattedBookmarks);
                     break;
                 default:
                     url = Bookmark.getURLFromAlias(bookmarkFile, firstArg);
@@ -106,20 +106,14 @@ public class Main {
                         try {
                             Desktop.getDesktop().browse(new URI(url));
                         } catch (IOException e) {
-                            System.out.println();
-                            System.out.println(Strings.ERROR_OPENING_BROWSER);
-                            System.out.println();
+                            MessageUtils.surroundWithNewlinesAndPrint(Strings.ERROR_OPENING_BROWSER);
                         } catch (URISyntaxException e) {
-                            System.out.println();
-                            System.out.println(Strings.INVALID_URI_SYNTAX);
-                            System.out.println();
+                            MessageUtils.surroundWithNewlinesAndPrint(Strings.INVALID_URI_SYNTAX);
                         }
                     }
             }
         } else {
-            System.out.println();
-            System.out.println(Strings.INVALID_ARGS);
-            System.out.println();
+            MessageUtils.surroundWithNewlinesAndPrint(Strings.INVALID_ARGS);
         }
     }
 }
