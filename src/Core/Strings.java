@@ -12,18 +12,61 @@ public class Strings {
     public static String INFO = "Welcome to goto. This is a command line program that enables a user to " +
             "browse the web from the command line." + Strings.DOUBLE_NEWLINE +
 
-            "Enter a command in the format 'goto <site name> <flags>'. This will open your Chrome browser in a new" +
-            "window, and will automatically navigate the browser to the given site." + Strings.DOUBLE_NEWLINE +
+            "Enter a command in the format 'goto <site name>' or 'goto <flag> <...extra arguments...>'." +
+            "Entering a command in the format 'goto <site name>' will open a new tab in your default browser, " +
+            "and you will be automatically navigated the to the given site." + Strings.DOUBLE_NEWLINE +
 
-            "You do not need to type in a fully qualified URL. You can simply type in the site name, and " +
-            "a default prefix (http://www.) and suffix (.com) will automatically be added." + Strings.DOUBLE_NEWLINE +
+            "You do not need to type in a fully qualified URL for the site name. You can simply type " +
+            "in the site name, and a default prefix (http://www.) and suffix (.com) will automatically be added. " +
+            "Any different prefixes or suffixes that you add yourself will override the default " +
+            "prefixes and suffixes." + Strings.DOUBLE_NEWLINE +
 
-            "For example, entering 'goto google' will open up the Chrome browser and navigate to " +
-            "'http://www.google.com'." + Strings.DOUBLE_NEWLINE +
+            "For example, entering 'goto somesite', 'goto somesite.com', www.somesite.com', etc. will " +
+            "open up your default browser and navigate to 'http://www.somesite .com'." + Strings.DOUBLE_NEWLINE +
 
-            "Possible optional flags are as follows:" + Strings.DOUBLE_NEWLINE +
+            "Similarly, entering 'goto somesite.net' will navigate your default browser to " +
+            "'http://www.somesite.net', and entering 'goto https://www.somesite.net' will navigate " +
+            "your default browser to 'https://www.somesite.net'." + Strings.DOUBLE_NEWLINE +
 
-            Main.HELP_FLAG + ": Get help with goto (see this information again)";
+            "NOTE: If any or your arguments contain an special character (such as an ampersand), you must surround " +
+            "the special character (or whole argument )in single quotes so that the program is able to process " +
+            "the character as intended. For example, if your original entry is |goto google.com/exa&mple|, you " +
+            "must instead input |goto 'google.com/exa&mple'| (vertical bars are used here for clarity " +
+            "and should not be to be used in the actual command). This is unavoidable due to the nature of the " +
+            "command line, and must be done for the program to work as intended." + Strings.DOUBLE_NEWLINE +
+
+            "This program also has a bookmarking system, wherein you can register aliases to use in place of a " +
+            "site name or URL. For example, if you have registered 'ggl' as an alias for the " +
+            "URL 'http://www.google.com', you can simply type in 'goto ggl' and the browser will navigate " +
+            "to the corresponding URL, http://www.google.com. Here, alias-URL pairs are " +
+            "referred to as bookmarks." + Strings.DOUBLE_NEWLINE +
+
+            "The saved bookmarks are stored and recorded in a file in your home directory." + Strings.DOUBLE_NEWLINE +
+
+            "You are able to create new bookmarks, and view or delete existing ones " +
+            "through the program flags. These flags are listed below, along with their " +
+            "descriptions and how to use them." + Strings.DOUBLE_NEWLINE +
+
+            "Program flags are as follows:" + Strings.DOUBLE_NEWLINE +
+
+            Main.BOOKMARK_FLAG + ": " +
+            "Usage: goto " + Main.BOOKMARK_FLAG + " <alias> <URL>" + Strings.NEWLINE +
+            "Description: Saves an alias-URL pair to a bookmark file in your home directory. If the alias given " +
+            "already exists, the old URL is overwritten with the new one given. Program flags cannot be registered " +
+            "as aliases." + Strings.DOUBLE_NEWLINE +
+
+            Main.DELETE_BOOKMARK_FLAG + ": " +
+            "Usage: goto " + Main.DELETE_BOOKMARK_FLAG + " <alias>" + Strings.NEWLINE +
+            "Description: Deletes an existing, currently saved alias. If the alias given does not exist, " +
+            "a message will be output saying that the alias does not exist." + Strings.DOUBLE_NEWLINE +
+
+            Main.VIEW_BOOKMARKS_FLAG + ": " +
+            "Usage: goto " + Main.VIEW_BOOKMARKS_FLAG + Strings.NEWLINE +
+            "Description: Display all currently saved bookmarks." + Strings.DOUBLE_NEWLINE +
+
+            Main.HELP_FLAG + ": " +
+            "Usage: " + Strings.NEWLINE +
+            "Description: Get help with goto (see this information again)";
 
     public static String INVALID_ARGS = "Invalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.";
     public static String ALIAS_DOES_NOT_EXIST = "Alias does not exist";

@@ -95,7 +95,7 @@ public class ArgUtils {
                     return false;
                 }
                 alias = args[1];
-                if (alias.contains(Strings.NEWLINE) || Main.VALID_FLAGS.contains(alias)) {
+                if (alias.contains(Strings.NEWLINE)) {
                     return false;
                 }
                 break;

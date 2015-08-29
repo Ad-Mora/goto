@@ -37,11 +37,11 @@ import Utils.MessageUtils;
  * All non-message constants are kept in this class.
  */
 public class Main {
-//    TODO: Clean file after bookmarking if filtering for special symbols not possible
-//    TODO: If filter for special sytmbols possible, add to specs that they are filtered
-//    TODO: Help message newlines
+//    TODO: Uppercase URL
 //    TODO: Update Strings Info message
+//    TODO: Notify in help message to manually escape special characters
 //    TODO: Update README
+//    TODO: Help message newlines not working
 //    TODO: Check for warning (yellow) errors
 //    TODO: Check for remaining TODOs
 //    TODO: Run all tests final time

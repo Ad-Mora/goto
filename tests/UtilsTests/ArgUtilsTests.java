@@ -433,7 +433,7 @@ public class ArgUtilsTests {
     @Test
     public void testValidateArgsFirstArgumentIsDeleteBookmarkFlagSecondArgumentIsAValidFlag() {
         String[] args = {Main.DELETE_BOOKMARK_FLAG, Main.VIEW_BOOKMARKS_FLAG};
-        assertFalse(ArgUtils.validateArgs(args));
+        assertTrue(ArgUtils.validateArgs(args));
     }
 
     @Test
