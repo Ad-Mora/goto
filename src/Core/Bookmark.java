@@ -5,13 +5,12 @@ import Utils.MessageUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by AdrianM on 7/16/15.
+/*
+ * Created by Adrian Mora on 7/16/15.
  */
 
 /**
@@ -172,7 +171,7 @@ public class Bookmark {
      * @return a map that maps existing aliases to the URLs they represent
      */
     public static Map<String, String> getBookmarkFileData(File bookmarkFile) {
-        Map<String, String> aliasesToURLs = new HashMap<String, String>();
+        Map<String, String> aliasesToURLs = new HashMap<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(bookmarkFile));
             String line;

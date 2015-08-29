@@ -1,6 +1,5 @@
 package CoreTests;
 
-
 import Core.Bookmark;
 import Core.Main;
 import Core.Strings;
@@ -12,8 +11,8 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by AdrianM on 7/19/15.
+/*
+ * Created by Adrian Mora on 7/19/15.
  */
 
 /*

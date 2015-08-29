@@ -13,8 +13,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by AdrianM on 8/2/15.
+/*
+ * Created by Adrian Mora on 8/2/15.
  */
 
 /*
@@ -598,7 +598,7 @@ public class MainTests {
         // Begin tests
         String output = outContent.toString();
 
-        assertTrue(output.equals(Strings.NEWLINE + Strings.INVALID_ARGS + Strings.DOUBLE_NEWLINE));
+        assertTrue(output.equals(Strings.NEWLINE + Strings.ALIAS_DOES_NOT_EXIST + Strings.DOUBLE_NEWLINE));
     }
 
     @Test

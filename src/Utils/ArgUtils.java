@@ -1,11 +1,11 @@
 package Utils;
 
-/**
- * Created by AdrianM on 6/28/15.
- */
-
 import Core.Main;
 import Core.Strings;
+
+/*
+ * Created by Adrian Mora on 6/28/15.
+ */
 
 /**
  * This class provides functions to parse in and process the arguments given by the user.

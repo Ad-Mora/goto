@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by AdrianM on 6/28/15.
+/*
+ * Created by Adrian Mora on 6/28/15.
  */
 
 /*

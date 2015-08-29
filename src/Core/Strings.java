@@ -1,7 +1,7 @@
 package Core;
 
-/**
- * Created by AdrianM on 8/27/15.
+/*
+ * Created by Adrian Mora on 8/27/15.
  */
 
 /**

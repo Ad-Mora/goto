@@ -9,8 +9,8 @@ import java.util.*;
 import Utils.ArgUtils;
 import Utils.MessageUtils;
 
-/**
- * Created by AdrianM on 6/18/15.
+/*
+ * Created by Adrian Mora on 6/18/15.
  */
 
 /**
@@ -37,10 +37,6 @@ import Utils.MessageUtils;
  * All non-message constants are kept in this class.
  */
 public class Main {
-//    TODO: One newline at end of all files
-//    TODO: Check for warning (yellow) errors
-//    TODO: Check for remaining TODOs
-//    TODO: Run all tests final time
 
     // Bookmark file location
     public static final String HOME_PATH = System.getProperty("user.home");
