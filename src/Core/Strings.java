@@ -9,10 +9,13 @@ package Core;
  */
 public class Strings {
 
+    public static String NEWLINE = System.lineSeparator();
+    public static String DOUBLE_NEWLINE = System.lineSeparator() + System.lineSeparator();
+
     public static String INFO = "Welcome to goto. This is a command line program that enables a user to " +
             "browse the web from the command line." + Strings.DOUBLE_NEWLINE +
 
-            "Enter a command in the format 'goto <site name>' or 'goto <flag> <...extra arguments...>'." +
+            "Enter a command in the format 'goto <site name>' or 'goto <flag> <...extra arguments...>'. " +
             "Entering a command in the format 'goto <site name>' will open a new tab in your default browser, " +
             "and you will be automatically navigated the to the given site." + Strings.DOUBLE_NEWLINE +
 
@@ -29,7 +32,7 @@ public class Strings {
             "your default browser to 'https://www.somesite.net'." + Strings.DOUBLE_NEWLINE +
 
             "NOTE: If any or your arguments contain an special character (such as an ampersand), you must surround " +
-            "the special character (or whole argument )in single quotes so that the program is able to process " +
+            "the special character (or whole argument) in single quotes so that the program is able to process " +
             "the character as intended. For example, if your original entry is |goto google.com/exa&mple|, you " +
             "must instead input |goto 'google.com/exa&mple'| (vertical bars are used here for clarity " +
             "and should not be to be used in the actual command). This is unavoidable due to the nature of the " +
@@ -49,24 +52,24 @@ public class Strings {
 
             "Program flags are as follows:" + Strings.DOUBLE_NEWLINE +
 
-            Main.BOOKMARK_FLAG + ": " +
+            Main.BOOKMARK_FLAG + ": " + Strings.NEWLINE +
             "Usage: goto " + Main.BOOKMARK_FLAG + " <alias> <URL>" + Strings.NEWLINE +
             "Description: Saves an alias-URL pair to a bookmark file in your home directory. If the alias given " +
             "already exists, the old URL is overwritten with the new one given. Program flags cannot be registered " +
             "as aliases." + Strings.DOUBLE_NEWLINE +
 
-            Main.DELETE_BOOKMARK_FLAG + ": " +
+            Main.DELETE_BOOKMARK_FLAG + ": " + Strings.NEWLINE +
             "Usage: goto " + Main.DELETE_BOOKMARK_FLAG + " <alias>" + Strings.NEWLINE +
             "Description: Deletes an existing, currently saved alias. If the alias given does not exist, " +
             "a message will be output saying that the alias does not exist." + Strings.DOUBLE_NEWLINE +
 
-            Main.VIEW_BOOKMARKS_FLAG + ": " +
+            Main.VIEW_BOOKMARKS_FLAG + ": " + Strings.NEWLINE +
             "Usage: goto " + Main.VIEW_BOOKMARKS_FLAG + Strings.NEWLINE +
             "Description: Display all currently saved bookmarks." + Strings.DOUBLE_NEWLINE +
 
-            Main.HELP_FLAG + ": " +
-            "Usage: " + Strings.NEWLINE +
-            "Description: Get help with goto (see this information again)";
+            Main.HELP_FLAG + ": " + Strings.NEWLINE +
+            "Usage: goto " + Main.HELP_FLAG +  Strings.NEWLINE +
+            "Description: Get help with goto (see this information again).";
 
     public static String INVALID_ARGS = "Invalid argument(s). Enter 'goto " + Main.HELP_FLAG + "' for help.";
     public static String ALIAS_DOES_NOT_EXIST = "Alias does not exist";
@@ -78,6 +81,4 @@ public class Strings {
     public static String OPEN_BROWSER_AT = "Open browser at ";
     public static String ERROR_OPENING_BROWSER = "Error opening browser";
     public static String INVALID_URI_SYNTAX = "Invalid URI syntax";
-    public static String NEWLINE = System.lineSeparator();
-    public static String DOUBLE_NEWLINE = System.lineSeparator() + System.lineSeparator();
 }

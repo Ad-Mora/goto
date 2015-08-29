@@ -26,7 +26,7 @@ public class ArgUtils {
      * If a URL is passed in that does not have a proper suffix, but ends in a dot, the URL suffix will be
      * made to be the default .com suffix.
      *
-     * @param url The url that the user passes in, not necessarily formatted. Not an empty String.
+     * @param url The URL that the user passes in, not necessarily formatted. Not an empty String.
      * @return A fully qualified URL, with an http:// or https:// prefix, and a dot something suffix.
      */
     public static String formatURL(String url) {

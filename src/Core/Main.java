@@ -37,11 +37,8 @@ import Utils.MessageUtils;
  * All non-message constants are kept in this class.
  */
 public class Main {
-//    TODO: Uppercase URL
-//    TODO: Update Strings Info message
-//    TODO: Notify in help message to manually escape special characters
-//    TODO: Update README
 //    TODO: Help message newlines not working
+//    TODO: Update README
 //    TODO: Check for warning (yellow) errors
 //    TODO: Check for remaining TODOs
 //    TODO: Run all tests final time
