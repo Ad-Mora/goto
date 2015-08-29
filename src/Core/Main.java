@@ -37,8 +37,7 @@ import Utils.MessageUtils;
  * All non-message constants are kept in this class.
  */
 public class Main {
-//    TODO: Help message newlines not working
-//    TODO: Update README
+//    TODO: One newline at end of all files
 //    TODO: Check for warning (yellow) errors
 //    TODO: Check for remaining TODOs
 //    TODO: Run all tests final time
