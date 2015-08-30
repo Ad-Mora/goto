@@ -1,5 +1,6 @@
 # goto
 Welcome to goto. This is a command line program that enables a user to browse the web from the command line.
+This program is written in Java and works on Mac and Windows systems.
 
 ## General information
 
